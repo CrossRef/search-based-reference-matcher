@@ -1,6 +1,6 @@
 # Search-based reference matcher
 
-This is a JAVA implementation of the Search-Based Matching with Validation (SBMV) algorithm. It can be used to find the target DOI of the document referenced by a given structured of unstructured reference.
+This is a JAVA implementation of the Search-Based Matching with Validation (SBMV) algorithm. It can be used to find the target DOI of the document referenced by a given reference (structured or unstructured).
 
 To match a single reference string:
 
