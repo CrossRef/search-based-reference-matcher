@@ -95,7 +95,7 @@ public class Arguments {
 
     public void printUsage() {
         HelpFormatter formatter = new HelpFormatter();
-        String syntax = "Matcher -i inputtype [-f input file path] "
+        String syntax = "ReferenceMatcher -i inputtype [-f input file path] "
                 + "[-o output file path] [-s ref string]";
         if (errorMessage() != null) {
             System.out.println(errorMessage());

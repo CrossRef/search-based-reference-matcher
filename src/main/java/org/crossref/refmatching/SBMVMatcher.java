@@ -1,5 +1,6 @@
 package org.crossref.refmatching;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,7 +67,7 @@ public class SBMVMatcher {
         } catch (InterruptedException ex) {
             LOGGER.error("Error waiting", ex);
         }
-        var candidates = selector.findCandidates(reference);
+        List<Candidate> candidates = selector.findCandidates(reference);
         return validator.chooseCandidate(reference, candidates);
     }
     

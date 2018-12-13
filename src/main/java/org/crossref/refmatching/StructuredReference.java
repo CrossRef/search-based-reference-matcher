@@ -33,7 +33,7 @@ public class StructuredReference extends Reference {
             "first-page", "edition", "ISSN"}) {
             string = string + metadata.getOrDefault(key, "") + " ";
         }
-        return string.replaceAll(" +", " ").strip();
+        return string.replaceAll(" +", " ").trim();
     }
     
     @Override

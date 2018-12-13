@@ -9,8 +9,8 @@ import java.util.Map;
  */
 public class GenJaccardSimilarity {
 
-    Map<String, Double> first = new HashMap();
-    Map<String, Double> second = new HashMap();
+    private final Map<String, Double> first = new HashMap();
+    private final Map<String, Double> second = new HashMap();
 
     public Double getMinWeight(String key) {
         if (!first.containsKey(key)) {

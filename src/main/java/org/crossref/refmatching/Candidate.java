@@ -1,11 +1,10 @@
 package org.crossref.refmatching;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -64,7 +63,7 @@ public class Candidate {
         refString = refString.replaceFirst(
                 "(?<!\\d)10\\.\\d{4,9}/[-\\._;\\(\\)/:a-zA-Z0-9]+", "");
         refString = refString.replaceFirst("(?<![a-zA-Z0-9])arXiv:[\\d\\.]+", "");
-        refString = refString.replaceFirst("\\[[^\\[\\]]*\\]", "").strip();
+        refString = refString.replaceFirst("\\[[^\\[\\]]*\\]", "").trim();
 
         // complete last page if abbreviated
         // changes "1425-37" to "1425-1437"
@@ -72,14 +71,21 @@ public class Candidate {
                 "\\d+[\u002D\u00AD\u2010\u2011\u2012\u2013\u2014\u2015\u207B"
                 + "\u208B\u2212-]\\d+")
                 .matcher(refString);
-        refString = pages.replaceAll(m -> Utils.completeLastPage(m.group()));
+        StringBuffer sb = new StringBuffer();
+        while (pages.find()) {
+            pages.appendReplacement(sb, Utils.completeLastPage(pages.group()));
+        }
+        pages.appendTail(sb);
+        refString = sb.toString();
 
         // extract all number appearing in the ref string
         Matcher number = Pattern.compile("(?<!\\d)\\d+(?!\\d)")
                 .matcher(refString.substring(Math.min(5, refString.length())));
-        List<String> numbers = number.results()
-                .map(m -> m.group())
-                .collect(Collectors.toList());
+        List<String> numbers = new ArrayList<String>();
+        while (number.find()) {
+            numbers.add(number.group());
+        }
+        
         if (numbers.isEmpty()) {
             return 0.;
         }
@@ -325,11 +331,11 @@ public class Candidate {
         }
         Matcher number = Pattern.compile("(?<!\\d)\\d+(?!\\d)").matcher(string);
         int i = 0;
-        for (MatchResult mr : number.results().collect(Collectors.toList())) {
+        while (number.find()) {
             similarity.update(key + "_" + i, 1., 0.);
-            if (refNumbers.contains(mr.group())) {
+            if (refNumbers.contains(number.group())) {
                 similarity.update(key + "_" + i, 1., 1.);
-                refNumbers.remove(mr.group());
+                refNumbers.remove(number.group());
             }
             i++;
         }
