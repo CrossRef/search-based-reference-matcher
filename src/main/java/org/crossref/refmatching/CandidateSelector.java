@@ -11,10 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,9 +31,11 @@ public class CandidateSelector {
     
     private final static String CRAPI_KEY_FILE = ".crapi_key";
     private final static String CRAPI_URL = "https://api.crossref.org/";
+    
+    private final static int TIMEOUT = 30*1000;
 
-    public CandidateSelector(double min_score) {
-        this.minScore = min_score;
+    public CandidateSelector(double minScore) {
+        this.minScore = minScore;
         try {
             String home = System.getProperty("user.home");
             String crapiData = FileUtils.readFileToString(
@@ -64,7 +67,13 @@ public class CandidateSelector {
     private JSONArray search(String refString)
             throws MalformedURLException, UnsupportedEncodingException,
             IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
+        RequestConfig.Builder requestBuilder = RequestConfig.custom();
+        requestBuilder = requestBuilder.setConnectTimeout(TIMEOUT);
+        requestBuilder = requestBuilder.setConnectionRequestTimeout(TIMEOUT);
+
+        HttpClientBuilder builder = HttpClientBuilder.create();     
+        builder.setDefaultRequestConfig(requestBuilder.build());
+        HttpClient httpclient = builder.build();
         HttpGet httpget = new HttpGet(
                 CRAPI_URL + "/works?query.bibliographic="
                 + URLEncoder.encode(refString, "UTF-8"));
@@ -74,7 +83,7 @@ public class CandidateSelector {
         if (mailto != null) {
             httpget.setHeader("Mailto", mailto);
         }
-        CloseableHttpResponse response = httpclient.execute(httpget);
+        HttpResponse response = httpclient.execute(httpget);
         response.getEntity().getContent();
         JSONObject json = new JSONObject(IOUtils.toString(
                 response.getEntity().getContent(), "UTF-8"));
