@@ -19,6 +19,8 @@ import org.json.JSONObject;
 public class ReferenceMatcher {
 
     public static void main(String[] args) throws ParseException, IOException {
+	System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
+
         Arguments arguments = new Arguments(args);
         if (!arguments.valid()) {
             arguments.printUsage();

@@ -18,6 +18,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONException;
 
 /**
  *
@@ -85,13 +86,20 @@ public class CandidateSelector {
         }
         HttpResponse response = httpclient.execute(httpget);
         response.getEntity().getContent();
-        JSONObject json = new JSONObject(IOUtils.toString(
+        try {
+	    JSONObject json = new JSONObject(IOUtils.toString(
                 response.getEntity().getContent(), "UTF-8"));
-        return json.getJSONObject("message").getJSONArray("items");
+            return json.getJSONObject("message").optJSONArray("items");
+	} catch (JSONException e) {
+	    return new JSONArray();
+	}
     }
 
     private List<Candidate> selectCandidates(String refString, JSONArray items) {
         List<Candidate> candidates = new ArrayList<>();
+	if (items == null) {
+	    return candidates;
+	}
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
             if (candidates.isEmpty()) {
