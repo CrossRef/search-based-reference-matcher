@@ -7,8 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -16,6 +14,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -35,6 +35,9 @@ public class CandidateSelector {
     
     private final static int TIMEOUT = 30*1000;
 
+    private static final Logger LOGGER =
+            LogManager.getLogger(CandidateSelector.class.getName());
+    
     public CandidateSelector(double minScore) {
         this.minScore = minScore;
         try {
@@ -56,11 +59,9 @@ public class CandidateSelector {
             JSONArray candidates = search(reference.getString());
             return selectCandidates(reference.getString(), candidates);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(CandidateSelector.class.getName())
-                    .log(Level.SEVERE, null, ex);
+            LOGGER.fatal(ex);
         } catch (IOException ex) {
-            Logger.getLogger(CandidateSelector.class.getName())
-                    .log(Level.SEVERE, null, ex);
+            LOGGER.fatal(ex);
         }
         return new ArrayList<>();
     }
@@ -76,7 +77,7 @@ public class CandidateSelector {
         builder.setDefaultRequestConfig(requestBuilder.build());
         HttpClient httpclient = builder.build();
         HttpGet httpget = new HttpGet(
-                CRAPI_URL + "/works?query.bibliographic="
+                CRAPI_URL + "/works?rows=100&query.bibliographic="
                 + URLEncoder.encode(refString, "UTF-8"));
         if (authorization != null) {
             httpget.setHeader("Authorization", authorization);

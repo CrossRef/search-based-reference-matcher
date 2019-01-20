@@ -15,12 +15,15 @@ public class Utils {
     }
 
     public static double stringSimilarity(String string1, String string2,
-            boolean normalize) {
+            boolean normalize, boolean partial) {
         if (normalize) {
             string1 = normalize(string1);
             string2 = normalize(string2);
         }
-        return (double) FuzzySearch.partialRatio(string1, string2) / 100;
+        if (partial) {
+            return (double) FuzzySearch.partialRatio(string1, string2) / 100;
+        }
+        return (double) FuzzySearch.ratio(string1, string2) / 100;
     }
 
     public static String completeLastPage(String pages) {

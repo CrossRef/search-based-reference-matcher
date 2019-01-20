@@ -39,8 +39,9 @@ public class ReferenceMatcher {
         if (arguments.get("st") != null) {
             structuredMinScore = Double.valueOf(arguments.get("st"));
         }
-        SBMVMatcher matcher = new SBMVMatcher(candidateMinScore, unstructuredMinScore,
-                structuredMinScore);
+        SBMVMatcher matcher = new SBMVMatcher(candidateMinScore,
+                                              unstructuredMinScore,
+                                              structuredMinScore);
 
         switch (arguments.get("i").toLowerCase()) {
             case "json": {

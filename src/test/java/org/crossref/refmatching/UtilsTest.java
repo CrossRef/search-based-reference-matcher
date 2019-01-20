@@ -54,30 +54,59 @@ public class UtilsTest {
 
     @Test
     public void testStringSimilarity() {
-        assertEquals(1.,
-                Utils.stringSimilarity("Dire Straits", "Dire Straits", false),
-                0.01);
-        assertEquals(0.58,
-                Utils.stringSimilarity("Dire Straits", "Straits Dire", false),
-                0.01);
-        assertEquals(0.73,
-                Utils.stringSimilarity("Dire Straits", "Dear Strats", false),
-                0.01);
-        assertEquals(0.33,
-                Utils.stringSimilarity("Dire Straits", "Slayer", false),
-                0.01);
+        assertEquals(1., Utils.stringSimilarity("rest Dire Straits",
+                                                "Dire Straits", false, true),
+                     0.01);
+        assertEquals(0.78, Utils.stringSimilarity("rDire Straits est",
+                                                  "Straits Dire",
+                                                   false, true),
+                     0.01);
+        assertEquals(0.69, Utils.stringSimilarity("ree Dire Straits",
+                                                  "Dear Stratssts", false, true),
+                     0.01);
+        assertEquals(0.2, Utils.stringSimilarity("Dire Straits", "Slayerwfqw",
+                                                 false, true),
+                     0.01);
 
-        assertEquals(1.,
-                Utils.stringSimilarity("Dirę Stráits", "DIre Straîtś", true),
-                0.01);
-        assertEquals(0.58,
-                Utils.stringSimilarity("Dire StráîtS", "Straits Dirę", true),
-                0.01);
-        assertEquals(0.73,
-                Utils.stringSimilarity("DIRe Sträitś", "DęaR Stráts", true),
-                0.01);
-        assertEquals(0.33,
-                Utils.stringSimilarity("Dire Straitś", "Sláyer", true), 0.01);
+        assertEquals(1., Utils.stringSimilarity("apiDirę Stráits",
+                                                "DIre Straîtś", true, true),
+                     0.01);
+        assertEquals(0.83, Utils.stringSimilarity("Dire StráîtS rest",
+                                                  "Straits Dirę", true, true),
+                     0.01);
+        assertEquals(0.75, Utils.stringSimilarity("DIRe Sträitś",
+                                                  "rest DęaR Stráts rest", true,
+                                                  true),
+                     0.01);
+        assertEquals(0.45, Utils.stringSimilarity("Dire Straitśno",
+                                                  "rest Sláyer", true, true),
+                     0.01);
+        
+        assertEquals(1., Utils.stringSimilarity("Dire Straits", "Dire Straits",
+                                                false, false),
+                     0.01);
+        assertEquals(0.58, Utils.stringSimilarity("Dire Straits", "Straits Dire",
+                                                  false, false),
+                     0.01);
+        assertEquals(0.78, Utils.stringSimilarity("Dire Straits", "Dear Strats",
+                                                  false, false),
+                     0.01);
+        assertEquals(0.22, Utils.stringSimilarity("Dire Straits", "Slayer",
+                                                  false, false),
+                     0.01);
+
+        assertEquals(1., Utils.stringSimilarity("Dirę Stráits", "DIre Straîtś",
+                                                true, false),
+                     0.01);
+        assertEquals(0.58, Utils.stringSimilarity("Dire StráîtS", "Straits Dirę",
+                                                  true, false),
+                     0.01);
+        assertEquals(0.78, Utils.stringSimilarity("DIRe Sträitś", "DęaR Stráts",
+                                                  true, false),
+                     0.01);
+        assertEquals(0.22, Utils.stringSimilarity("Dire Straitś", "Sláyer", true,
+                                                  false),
+                     0.01);
     }
 
     @Test

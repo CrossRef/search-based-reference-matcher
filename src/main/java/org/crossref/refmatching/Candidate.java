@@ -81,7 +81,7 @@ public class Candidate {
         // extract all number appearing in the ref string
         Matcher number = Pattern.compile("(?<!\\d)\\d+(?!\\d)")
                 .matcher(refString.substring(Math.min(5, refString.length())));
-        List<String> numbers = new ArrayList<String>();
+        List<String> numbers = new ArrayList<>();
         while (number.find()) {
             numbers.add(number.group());
         }
@@ -132,12 +132,14 @@ public class Candidate {
             String a = Utils.normalize(getAuthor());
             String b = Utils.normalize(refString)
                     .substring(0, Math.min(3 * a.length(), refString.length()));
-            similarity.update("author", 1., Utils.stringSimilarity(a, b, false));
+            similarity.update("author", 1.,
+                              Utils.stringSimilarity(a, b, false, true));
         } else if (getEditor() != null) {
             String a = Utils.normalize(getEditor());
             String b = Utils.normalize(refString)
                     .substring(0, Math.min(3 * a.length(), refString.length()));
-            similarity.update("author", 1., Utils.stringSimilarity(a, b, false));
+            similarity.update("author", 1.,
+                              Utils.stringSimilarity(a, b, false, true));
         }
 
         // if year wasn't found, try with year +- 1
@@ -158,7 +160,7 @@ public class Candidate {
         if (getTitle() != null) {
             String a = getTitle();
             String b = refString;
-            if (Utils.stringSimilarity(a, b, true) > 0.7) {
+            if (Utils.stringSimilarity(a, b, true, true) > 0.7) {
                 support++;
             }
         }
@@ -193,15 +195,6 @@ public class Candidate {
     public double getStructuredValidationSimilarity(
             StructuredReference reference) {
         GenJaccardSimilarity similarity = new GenJaccardSimilarity();
-
-        // weights for relevance score
-        similarity.update("score", getScore() / 100,
-                Math.max(1., getScore() / 100));
-
-        // weights for normalized relevance score
-        similarity.update("score_norm",
-                getScore() / reference.getString().length(),
-                Math.max(1., getScore() / reference.getString().length()));
 
         // weights for volume
         if (reference.getField("volume") != null
@@ -240,7 +233,8 @@ public class Candidate {
                 && !"".equals(reference.getField("article-title"))) {
             String a = (getTitle() == null) ? "" : getTitle();
             String b = reference.getField("article-title");
-            similarity.update("title", 1., Utils.stringSimilarity(a, b, true));
+            similarity.update("title", 1.,
+                              Utils.stringSimilarity(a, b, true, false));
         }
 
         // weights for container title
@@ -248,7 +242,17 @@ public class Candidate {
                 && !"".equals(reference.getField("journal-title"))) {
             String a = (getContainerTitle() == null) ? "" : getContainerTitle();
             String b = reference.getField("journal-title");
-            similarity.update("ctitle", 1., Utils.stringSimilarity(a, b, true));
+            similarity.update("ctitle", 1.,
+                              Utils.stringSimilarity(a, b, true, false));
+        }
+        
+        // weights for volume title
+        if (reference.getField("volume-title") != null
+                && !"".equals(reference.getField("volume-title"))) {
+            String a = (getTitle() == null) ? "" : getTitle();
+            String b = reference.getField("volume-title");
+            similarity.update("vtitle", 1.,
+                              Utils.stringSimilarity(a, b, true, false));
         }
 
         // weights for author
@@ -256,7 +260,10 @@ public class Candidate {
                 && !"".equals(reference.getField("author"))) {
             String a = (getAuthor() == null) ? "" : getAuthor();
             String b = reference.getField("author");
-            similarity.update("author", 1., Utils.stringSimilarity(a, b, true));
+            double authorSim = Utils.stringSimilarity(a, b, true, false);
+            a = (getEditor() == null) ? "" : getEditor();
+            double editorSim = Utils.stringSimilarity(a, b, true, false);
+            similarity.update("author", 1., Math.max(authorSim, editorSim));
         }
 
         int support = 0;
@@ -265,7 +272,11 @@ public class Candidate {
             support++;
         }
         if (similarity.getMinWeight("ctitle") != null
-                && similarity.getMinWeight("ctitle") > 0.3) {
+                && similarity.getMinWeight("ctitle") > 0.7) {
+            support++;
+        }
+        if (similarity.getMinWeight("vtitle") != null
+                && similarity.getMinWeight("vtitle") > 0.7) {
             support++;
         }
         if (similarity.getMinWeight("author") != null
@@ -290,7 +301,11 @@ public class Candidate {
             support++;
         }
         if (similarity.getMinWeight("ctitle") != null
-                && similarity.getMinWeight("ctitle") > 0.3) {
+                && similarity.getMinWeight("ctitle") > 0.7) {
+            support++;
+        }
+        if (similarity.getMinWeight("vtitle") != null
+                && similarity.getMinWeight("vtitle") > 0.7) {
             support++;
         }
         if (similarity.getMinWeight("author") != null
@@ -301,7 +316,14 @@ public class Candidate {
                 && similarity.getMinWeight("page") > 0) {
             support++;
         }
-        if (support < 4) {
+        if (support < 3) {
+            return 0.;
+        }
+        if (item.getString("type").equals("book-chapter")
+                && reference.getField("first-page") == null) {
+            return 0.;
+        }
+        if (item.getString("type").equals("journal-issue")) {
             return 0.;
         }
 
@@ -320,7 +342,11 @@ public class Candidate {
                 if (number1.group().equals(number2.group())) {
                     similarity.update(key, 1., 1.);
                 }
+            } else {
+                similarity.update(key, .5, 0.);
             }
+        } else {
+            similarity.update(key, .5, 0.);
         }
     }
 

@@ -10,6 +10,15 @@ import org.junit.Test;
  * @author Dominika Tkaczyk
  */
 public class SBMVMatcherTest {
+    
+    @Test
+    public void testJournals() {
+        SBMVMatcher matcher = new SBMVMatcher();
+        
+        assertEquals(6187, matcher.journals.size());
+        assertEquals("monthly notices of the royal astronomical society",
+                     matcher.journals.get("mnras"));
+    }
 
     @Test
     public void testMatchString() throws IOException {
