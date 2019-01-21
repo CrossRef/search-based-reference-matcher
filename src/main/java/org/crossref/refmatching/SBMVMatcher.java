@@ -22,9 +22,13 @@ public class SBMVMatcher {
     private static final double DEFAULT_UNSTR_MIN_SCORE = 0.34;
     private static final double DEFAULT_STR_MIN_SCORE = 0.76;
 
-    private CandidateSelector selector;
+    private CandidateSelector selectorStructured;
+    private CandidateSelector selectorUnstructured;
     private CandidateValidator validatorUnstructured;
     private CandidateValidator validatorStructured;
+    
+    private static final int STR_ROWS = 100;
+    private static final int UNSTR_ROWS = 20;
 
     protected Map<String, String> journals = new HashMap<>();
 
@@ -46,7 +50,9 @@ public class SBMVMatcher {
         if (structuredMinScore == null) {
             structuredMinScore = DEFAULT_STR_MIN_SCORE;
         }
-        selector = new CandidateSelector(candidateMinScore);
+        selectorUnstructured = new CandidateSelector(candidateMinScore,
+                                                     UNSTR_ROWS);
+        selectorStructured = new CandidateSelector(candidateMinScore, STR_ROWS);
         validatorUnstructured = new CandidateValidator(unstructuredMinScore);
         validatorStructured = new CandidateValidator(structuredMinScore);
 
@@ -64,7 +70,7 @@ public class SBMVMatcher {
     public Candidate match(String refString) {
         LOGGER.debug(String.format("Matching reference: %s", refString));
         Candidate candidate = match(new UnstructuredReference(refString),
-                validatorUnstructured);
+                validatorUnstructured, selectorUnstructured);
         LOGGER.debug(String.format("Reference %s matched to %s", refString,
                 (candidate == null) ? "null" : "DOI " + candidate.getDOI()));
         return candidate;
@@ -73,19 +79,21 @@ public class SBMVMatcher {
     public Candidate match(JSONObject reference) {
         LOGGER.debug(String.format("Matching reference: %s", reference));
         Candidate candidate = match(new StructuredReference(reference),
-                validatorStructured);
-        String journalNorm = reference.optString("journal-title").toLowerCase().replaceAll("[^a-z]", "");
+                validatorStructured, selectorStructured);
+        String journalNorm = reference.optString("journal-title")
+                .toLowerCase().replaceAll("[^a-z]", "");
         if (journals.containsKey(journalNorm)) {
             reference.put("journal-title", journals.get(journalNorm));
             Candidate candidate2 = match(new StructuredReference(reference),
-                    validatorStructured);
+                    validatorStructured, selectorStructured);
             if (candidate == null) {
                 return candidate2;
             }
             if (candidate2 == null) {
                 return candidate;
             }
-            if (candidate2.getValidationScore() > candidate.getValidationScore()) {
+            if (candidate2.getValidationScore() 
+                    > candidate.getValidationScore()) {
                 return candidate2;
             }
         }
@@ -94,7 +102,8 @@ public class SBMVMatcher {
         return candidate;
     }
 
-    private Candidate match(Reference reference, CandidateValidator validator) {
+    private Candidate match(Reference reference, CandidateValidator validator,
+            CandidateSelector selector) {
         try {
             TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {

@@ -27,6 +27,8 @@ import org.json.JSONException;
 public class CandidateSelector {
 
     private final double minScore;
+    private final int rows;
+    
     private String authorization;
     private String mailto;
     
@@ -38,8 +40,9 @@ public class CandidateSelector {
     private static final Logger LOGGER =
             LogManager.getLogger(CandidateSelector.class.getName());
     
-    public CandidateSelector(double minScore) {
+    public CandidateSelector(double minScore, int rows) {
         this.minScore = minScore;
+        this.rows = rows;
         try {
             String home = System.getProperty("user.home");
             String crapiData = FileUtils.readFileToString(
@@ -77,8 +80,9 @@ public class CandidateSelector {
         builder.setDefaultRequestConfig(requestBuilder.build());
         HttpClient httpclient = builder.build();
         HttpGet httpget = new HttpGet(
-                CRAPI_URL + "/works?rows=100&query.bibliographic="
-                + URLEncoder.encode(refString, "UTF-8"));
+                String.format("%s/works?rows=%d&query.bibliographic=%s",
+                              CRAPI_URL, rows,
+                              URLEncoder.encode(refString, "UTF-8")));
         if (authorization != null) {
             httpget.setHeader("Authorization", authorization);
         }
