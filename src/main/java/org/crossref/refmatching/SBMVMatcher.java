@@ -1,14 +1,13 @@
 package org.crossref.refmatching;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
@@ -52,13 +51,12 @@ public class SBMVMatcher {
         validatorStructured = new CandidateValidator(structuredMinScore);
 
         try {
-            URL url = SBMVMatcher.class.getResource("journal-abbreviations.txt");
-            File file = new File(url.toURI());
-            List<String> lines = FileUtils.readLines(file, "utf-8");
-            lines.stream()
+            InputStream is = SBMVMatcher.class.getResourceAsStream(
+                    "journal-abbreviations.txt");  
+            new BufferedReader(new InputStreamReader(is, "utf-8")).lines()
                     .map(l -> l.trim().split("\t"))
                     .forEach(a -> {journals.put(a[0], a[1]);});
-        } catch (URISyntaxException | IOException ex) {
+        } catch (IOException ex) {
             LOGGER.warn(ex);
         }
     }
