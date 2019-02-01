@@ -251,8 +251,10 @@ public class Candidate {
                 && !"".equals(reference.getField("volume-title"))) {
             String a = (getTitle() == null) ? "" : getTitle();
             String b = reference.getField("volume-title");
-            similarity.update("vtitle", 1.,
-                              Utils.stringSimilarity(a, b, true, false));
+            double titleSim = Utils.stringSimilarity(a, b, true, false);
+            a = (getContainerTitle() == null) ? "" : getContainerTitle();
+            double ctitleSim = Utils.stringSimilarity(a, b, true, false);
+            similarity.update("vtitle", 1., Math.max(titleSim, ctitleSim));
         }
 
         // weights for author
@@ -260,9 +262,11 @@ public class Candidate {
                 && !"".equals(reference.getField("author"))) {
             String a = (getAuthor() == null) ? "" : getAuthor();
             String b = reference.getField("author");
-            double authorSim = Utils.stringSimilarity(a, b, true, false);
+            double authorSim = Utils.stringSimilarity(a, b, true,
+                                                      b.contains(" "));
             a = (getEditor() == null) ? "" : getEditor();
-            double editorSim = Utils.stringSimilarity(a, b, true, false);
+            double editorSim = Utils.stringSimilarity(a, b, true,
+                                                      b.contains(" "));
             similarity.update("author", 1., Math.max(authorSim, editorSim));
         }
 
