@@ -21,7 +21,7 @@ public class StructuredReferenceTest {
         reference.put("journal-title", "J. Amer. chem. Soc.");
         
         assertEquals("West J. Amer. chem. Soc. 1962 84 1763",
-                     new StructuredReference(reference).getString());
+                     new StructuredReference(reference).toString());
     }
 
     @Test
@@ -41,5 +41,4 @@ public class StructuredReferenceTest {
             assertEquals(reference.get(key), sr.getField(key));
         });
     }
-    
 }

@@ -8,7 +8,7 @@ import org.json.JSONObject;
  *
  * @author Dominika Tkaczyk
  */
-public class StructuredReference extends Reference {
+public class StructuredReference {
     
     private final Map<String, String> metadata;
 
@@ -26,7 +26,7 @@ public class StructuredReference extends Reference {
     }
 
     @Override
-    public String getString() {
+    public String toString() {
         String string = "";
         for (String key : new String[]{"author", "article-title", "journal-title",
             "series-title", "volume-title", "year", "volume", "issue",
@@ -35,10 +35,8 @@ public class StructuredReference extends Reference {
         }
         return string.replaceAll(" +", " ").trim();
     }
-    
-    @Override
+
     public String getField(String key) {
         return metadata.get(key);
     }
-
 }

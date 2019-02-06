@@ -39,11 +39,10 @@ public class Candidate {
         this.validationScore = validationScore;
     }
 
-    public double getValidationSimilarity(Reference reference) {
-        return (reference instanceof UnstructuredReference)
-                ? getStringValidationSimilarity(reference.getString())
-                : getStructuredValidationSimilarity(
-                        (StructuredReference) reference);
+    public double getValidationSimilarity(Object reference) {
+        return (reference instanceof StructuredReference)
+            ? getStructuredValidationSimilarity((StructuredReference) reference)
+            : getStringValidationSimilarity(reference.toString());
     }
 
     public double getStringValidationSimilarity(String refString) {
@@ -367,23 +366,23 @@ public class Candidate {
         }
     }
 
-    private Double getScore() {
+    public Double getScore() {
         return item.getDouble("score");
     }
 
-    private String getVolume() {
+    public String getVolume() {
         return item.optString("volume", null);
     }
 
-    private String getIssue() {
+    public String getIssue() {
         return item.optString("issue", null);
     }
 
-    private String getPage() {
+    public String getPage() {
         return item.optString("page", null);
     }
 
-    private String getYear() {
+    public String getYear() {
         JSONArray issued = item.getJSONObject("issued")
                 .getJSONArray("date-parts");
         if (issued == null || issued.isEmpty()) {
@@ -392,14 +391,14 @@ public class Candidate {
         return issued.getJSONArray(0).optString(0, null);
     }
 
-    private String getTitle() {
+    public String getTitle() {
         if (!item.has("title") || item.getJSONArray("title").isEmpty()) {
             return null;
         }
         return item.getJSONArray("title").optString(0, null);
     }
 
-    private String getContainerTitle() {
+    public String getContainerTitle() {
         if (!item.has("container-title")
                 || item.getJSONArray("container-title").isEmpty()) {
             return null;
@@ -407,7 +406,7 @@ public class Candidate {
         return item.getJSONArray("container-title").optString(0, null);
     }
 
-    private String getAuthor() {
+    public String getAuthor() {
         if (!item.has("author") || item.getJSONArray("author").isEmpty()) {
             return null;
         }
@@ -415,7 +414,7 @@ public class Candidate {
                 .optString("family", null);
     }
 
-    private String getEditor() {
+    public String getEditor() {
         if (!item.has("editor") || item.getJSONArray("editor").isEmpty()) {
             return null;
         }

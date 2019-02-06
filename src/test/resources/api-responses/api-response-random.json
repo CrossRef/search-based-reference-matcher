@@ -1,0 +1,1977 @@
+{
+    "status": "ok",
+    "message-type": "work-list",
+    "message-version": "1.0.0",
+    "message": {
+        "facets": {},
+        "total-results": 8069538,
+        "items": [
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            12,
+                            12
+                        ]
+                    ],
+                    "date-time": "2018-12-12T01:22:54Z",
+                    "timestamp": 1544577774153
+                },
+                "reference-count": 0,
+                "publisher": "Asociacion Argentina de Ortopedia y Traumatologia",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.15417/1881",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            10,
+                            24
+                        ]
+                    ],
+                    "date-time": "2015-10-24T18:49:55Z",
+                    "timestamp": 1445712595000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 2,
+                "title": [
+                    "2C"
+                ],
+                "prefix": "10.15417",
+                "member": "6883",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            3,
+                            10
+                        ]
+                    ],
+                    "date-time": "2017-03-10T11:27:35Z",
+                    "timestamp": 1489145255000
+                },
+                "score": 232.40265,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.15417/1881"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            4,
+                            15
+                        ]
+                    ],
+                    "date-time": "2018-04-15T02:16:46Z",
+                    "timestamp": 1523758606454
+                },
+                "reference-count": 0,
+                "publisher": "The Endocrine Society",
+                "issue": "5",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "Endocrinology"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5
+                        ]
+                    ]
+                },
+                "DOI": "10.1210/endo.2015.156.issue-5.edboard",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            4,
+                            17
+                        ]
+                    ],
+                    "date-time": "2015-04-17T18:04:47Z",
+                    "timestamp": 1429293887000
+                },
+                "page": "2C-2C",
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Editorial Board"
+                ],
+                "prefix": "10.1210",
+                "volume": "156",
+                "member": "80",
+                "container-title": [
+                    "Endocrinology"
+                ],
+                "language": "en",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2015,
+                            4,
+                            17
+                        ]
+                    ],
+                    "date-time": "2015-04-17T18:05:02Z",
+                    "timestamp": 1429293902000
+                },
+                "score": 225.72426,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                2015,
+                                5
+                            ]
+                        ]
+                    },
+                    "issue": "5"
+                },
+                "alternative-id": [
+                    "10.1210/endo.2015.156.issue-5.edboard"
+                ],
+                "URL": "http://dx.doi.org/10.1210/endo.2015.156.issue-5.edboard",
+                "ISSN": [
+                    "0013-7227",
+                    "1945-7170"
+                ],
+                "issn-type": [
+                    {
+                        "value": "0013-7227",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1945-7170",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            5
+                        ]
+                    ],
+                    "date-time": "2018-05-05T01:40:31Z",
+                    "timestamp": 1525484431718
+                },
+                "reference-count": 0,
+                "publisher": "Elsevier BV",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "SSRN Journal"
+                ],
+                "DOI": "10.2139/ssrn.1988201",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2012,
+                            1,
+                            26
+                        ]
+                    ],
+                    "date-time": "2012-01-26T01:34:07Z",
+                    "timestamp": 1327541647000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "2C or Not 2C?"
+                ],
+                "prefix": "10.2139",
+                "author": [
+                    {
+                        "given": "Céline",
+                        "family": "Guivarch",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Stephane",
+                        "family": "Hallegatte",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "78",
+                "container-title": [
+                    "SSRN Electronic Journal"
+                ],
+                "language": "en",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2012,
+                            7,
+                            6
+                        ]
+                    ],
+                    "date-time": "2012-07-06T04:04:46Z",
+                    "timestamp": 1341547486000
+                },
+                "score": 225.72426,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2012
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.2139/ssrn.1988201",
+                "ISSN": [
+                    "1556-5068"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1556-5068",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            8
+                        ]
+                    ],
+                    "date-time": "2018-05-08T16:00:55Z",
+                    "timestamp": 1525795255564
+                },
+                "publisher-location": "Stuttgart",
+                "edition-number": "4",
+                "reference-count": 0,
+                "publisher": "Georg Thieme Verlag",
+                "isbn-type": [
+                    {
+                        "value": "9783131180346",
+                        "type": "print"
+                    },
+                    {
+                        "value": "9783131893543",
+                        "type": "electronic"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2005
+                        ]
+                    ]
+                },
+                "DOI": "10.1055/b-0034-4967",
+                "type": "book-chapter",
+                "created": {
+                    "date-parts": [
+                        [
+                            2014,
+                            6,
+                            17
+                        ]
+                    ],
+                    "date-time": "2014-06-17T06:52:28Z",
+                    "timestamp": 1402987948000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "4 2C-T-2, 2C-T-7"
+                ],
+                "prefix": "10.1055",
+                "member": "194",
+                "container-title": [
+                    "Das Drogentaschenbuch"
+                ],
+                "link": [
+                    {
+                        "URL": "http://www.thieme-connect.de/products/ebooks/pdf/10.1055/b-0034-4967.pdf",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            5,
+                            22
+                        ]
+                    ],
+                    "date-time": "2017-05-22T15:00:38Z",
+                    "timestamp": 1495465238000
+                },
+                "score": 225.72426,
+                "editor": [
+                    {
+                        "given": "Ralph",
+                        "family": "Parnefjord",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "issued": {
+                    "date-parts": [
+                        [
+                            2005
+                        ]
+                    ]
+                },
+                "ISBN": [
+                    "9783131180346",
+                    "9783131893543"
+                ],
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.1055/b-0034-4967"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            7
+                        ]
+                    ],
+                    "date-time": "2018-05-07T22:15:23Z",
+                    "timestamp": 1525731323651
+                },
+                "reference-count": 0,
+                "publisher": "Joint Implant Surgery and Research Foundation",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.15438/rr.5.3.106",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            11,
+                            5
+                        ]
+                    ],
+                    "date-time": "2015-11-05T17:32:09Z",
+                    "timestamp": 1446744729000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Figure 2c"
+                ],
+                "prefix": "10.15438",
+                "member": "6115",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            3,
+                            10
+                        ]
+                    ],
+                    "date-time": "2017-03-10T12:28:29Z",
+                    "timestamp": 1489148909000
+                },
+                "score": 225.24353,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.15438/rr.5.3.106"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            7
+                        ]
+                    ],
+                    "date-time": "2018-05-07T21:37:15Z",
+                    "timestamp": 1525729035342
+                },
+                "reference-count": 0,
+                "publisher": "Asociacion Argentina de Ortopedia y Traumatologia",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.15417/940",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            10,
+                            24
+                        ]
+                    ],
+                    "date-time": "2015-10-24T18:49:55Z",
+                    "timestamp": 1445712595000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Figura 2C"
+                ],
+                "prefix": "10.15417",
+                "member": "6883",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            3,
+                            10
+                        ]
+                    ],
+                    "date-time": "2017-03-10T11:27:35Z",
+                    "timestamp": 1489145255000
+                },
+                "score": 225.24353,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.15417/940"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            7
+                        ]
+                    ],
+                    "date-time": "2018-05-07T21:37:15Z",
+                    "timestamp": 1525729035661
+                },
+                "reference-count": 0,
+                "publisher": "Asociacion Argentina de Ortopedia y Traumatologia",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.15417/1204",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            10,
+                            24
+                        ]
+                    ],
+                    "date-time": "2015-10-24T18:50:26Z",
+                    "timestamp": 1445712626000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Figura 2C"
+                ],
+                "prefix": "10.15417",
+                "member": "6883",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            3,
+                            10
+                        ]
+                    ],
+                    "date-time": "2017-03-10T11:27:36Z",
+                    "timestamp": 1489145256000
+                },
+                "score": 225.24353,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.15417/1204"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            3
+                        ]
+                    ],
+                    "date-time": "2018-09-03T12:10:15Z",
+                    "timestamp": 1535976615976
+                },
+                "publisher-location": "Hoboken, NJ, USA",
+                "reference-count": 11,
+                "publisher": "John Wiley & Sons, Inc.",
+                "isbn-type": [
+                    {
+                        "value": "9780471203070",
+                        "type": "electronic"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.1002/0471203076.emm0743",
+                "type": "reference-entry",
+                "created": {
+                    "date-parts": [
+                        [
+                            2003,
+                            10,
+                            31
+                        ]
+                    ],
+                    "date-time": "2003-10-31T01:28:07Z",
+                    "timestamp": 1067563687000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Myocyte Enhancer Factor 2C (MEF-2C)"
+                ],
+                "prefix": "10.1002",
+                "author": [
+                    {
+                        "given": "Huibin",
+                        "family": "Tang",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Daniel",
+                        "family": "Goldman",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "311",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2002,
+                            1,
+                            15
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB1|cit1",
+                        "author": "Hobson",
+                        "volume": "29",
+                        "first-page": "704",
+                        "year": "1995",
+                        "journal-title": "Genomics",
+                        "DOI": "10.1006/geno.1995.9007",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB2|cit2",
+                        "author": "Leffer",
+                        "volume": "90",
+                        "first-page": "1546",
+                        "year": "1993",
+                        "journal-title": "Proc. Natl. Acad. Sci. U.S.A.",
+                        "DOI": "10.1073/pnas.90.4.1546",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB3|cit3",
+                        "author": "Martin",
+                        "volume": "90",
+                        "first-page": "5282",
+                        "year": "1993",
+                        "journal-title": "Proc. Natl. Acad. Sci. U.S.A.",
+                        "DOI": "10.1073/pnas.90.11.5282",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB4|cit4",
+                        "author": "Molkentin",
+                        "volume": "16",
+                        "first-page": "2627",
+                        "year": "1996",
+                        "journal-title": "Mol. Cell. Biol.",
+                        "DOI": "10.1128/MCB.16.6.2627",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB5|cit5",
+                        "author": "Yu",
+                        "volume": "271",
+                        "first-page": "24675",
+                        "year": "1996",
+                        "journal-title": "J. Biol. Chem."
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB6|cit6",
+                        "author": "Meierhans",
+                        "volume": "25",
+                        "first-page": "4537",
+                        "year": "1997",
+                        "journal-title": "Nucleic Acids Res.",
+                        "DOI": "10.1093/nar/25.22.4537",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB7|cit7",
+                        "author": "Lim",
+                        "volume": "125",
+                        "first-page": "4565",
+                        "year": "1998",
+                        "journal-title": "Development"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB8|cit8",
+                        "author": "Leifer",
+                        "volume": "8",
+                        "first-page": "131",
+                        "year": "1997",
+                        "journal-title": "J. Mol. Neurosci.",
+                        "DOI": "10.1007/BF02736778",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB9|cit9",
+                        "author": "Lin",
+                        "volume": "276",
+                        "first-page": "1404",
+                        "year": "1997",
+                        "journal-title": "Science",
+                        "DOI": "10.1126/science.276.5317.1404",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB10|cit10",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "167",
+                        "DOI": "10.1146/annurev.cellbio.14.1.167",
+                        "article-title": "Transcriptional control of muscle development by myocyte enhancer factor-2 (MEF2) proteins",
+                        "volume": "14",
+                        "author": "Black",
+                        "year": "1998",
+                        "journal-title": "Annu. Rev. Cell Dev. Biol."
+                    },
+                    {
+                        "key": "10.1002/0471203076.emm0743-BIB11|cit11",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "683",
+                        "DOI": "10.1016/S0955-0674(99)00036-8",
+                        "article-title": "MEF2: a transcriptional target for signaling pathways controlling skeletal muscle growth and differentiation",
+                        "volume": "11",
+                        "author": "Francisco",
+                        "year": "1999",
+                        "journal-title": "Curr. Opin. Cell. Biol."
+                    }
+                ],
+                "container-title": [
+                    "Wiley Encyclopedia of Molecular Medicine"
+                ],
+                "link": [
+                    {
+                        "URL": "https://onlinelibrary.wiley.com/doi/full/10.1002/0471203076.emm0743",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2018,
+                            8,
+                            1
+                        ]
+                    ],
+                    "date-time": "2018-08-01T04:35:56Z",
+                    "timestamp": 1533098156000
+                },
+                "score": 215.29074,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2002,
+                            1,
+                            15
+                        ]
+                    ]
+                },
+                "ISBN": [
+                    "0471203076",
+                    "9780471203070"
+                ],
+                "references-count": 11,
+                "URL": "http://dx.doi.org/10.1002/0471203076.emm0743",
+                "relation": {
+                    "cites": []
+                }
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            4,
+                            18
+                        ]
+                    ],
+                    "date-time": "2018-04-18T08:22:31Z",
+                    "timestamp": 1524039751526
+                },
+                "reference-count": 0,
+                "publisher": "PeerJ",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.7717/peerj.3032/supp-2",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2017,
+                            2,
+                            23
+                        ]
+                    ],
+                    "date-time": "2017-02-23T09:29:55Z",
+                    "timestamp": 1487842195000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Supplemental Information 1: Figure 2C"
+                ],
+                "prefix": "10.7717",
+                "member": "4443",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            3,
+                            12
+                        ]
+                    ],
+                    "date-time": "2017-03-12T13:29:41Z",
+                    "timestamp": 1489325381000
+                },
+                "score": 213.98477,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.7717/peerj.3032/supp-2"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            4
+                        ]
+                    ],
+                    "date-time": "2018-05-04T15:22:38Z",
+                    "timestamp": 1525447358433
+                },
+                "reference-count": 0,
+                "publisher": "American Chemical Society (ACS)",
+                "issue": "8",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "Inorg. Chem."
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            1967,
+                            8
+                        ]
+                    ]
+                },
+                "DOI": "10.1021/ic50054a003",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2005,
+                            3,
+                            10
+                        ]
+                    ],
+                    "date-time": "2005-03-10T10:09:01Z",
+                    "timestamp": 1110449341000
+                },
+                "page": "1448-1450",
+                "source": "Crossref",
+                "is-referenced-by-count": 14,
+                "title": [
+                    "The .mu.-oxo-difluorophosphines (CF3)2C(OPF2)I, (CF3)-2C(OPF2)Br, and (CF3)2C(OPF2)H"
+                ],
+                "prefix": "10.1021",
+                "volume": "6",
+                "author": [
+                    {
+                        "given": "Max",
+                        "family": "Lustig",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "William Evan",
+                        "family": "Hill",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "316",
+                "container-title": [
+                    "Inorganic Chemistry"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "http://pubs.acs.org/doi/pdf/10.1021/ic50054a003",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2016,
+                            9,
+                            7
+                        ]
+                    ],
+                    "date-time": "2016-09-07T13:06:41Z",
+                    "timestamp": 1473253601000
+                },
+                "score": 209.92181,
+                "issued": {
+                    "date-parts": [
+                        [
+                            1967,
+                            8
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                1967,
+                                8
+                            ]
+                        ]
+                    },
+                    "issue": "8"
+                },
+                "alternative-id": [
+                    "10.1021/ic50054a003"
+                ],
+                "URL": "http://dx.doi.org/10.1021/ic50054a003",
+                "ISSN": [
+                    "0020-1669",
+                    "1520-510X"
+                ],
+                "issn-type": [
+                    {
+                        "value": "0020-1669",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1520-510X",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            8
+                        ]
+                    ],
+                    "date-time": "2018-05-08T10:33:00Z",
+                    "timestamp": 1525775580711
+                },
+                "publisher-location": "Cambridge, MA and London, England",
+                "reference-count": 0,
+                "publisher": "Harvard University Press",
+                "isbn-type": [
+                    {
+                        "value": "9780674429147",
+                        "type": "electronic"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.4159/harvard.9780674429147.c29",
+                "type": "book-chapter",
+                "created": {
+                    "date-parts": [
+                        [
+                            2014,
+                            4,
+                            2
+                        ]
+                    ],
+                    "date-time": "2014-04-02T20:24:50Z",
+                    "timestamp": 1396470290000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Appendix 2C"
+                ],
+                "prefix": "10.4159",
+                "member": "2652",
+                "container-title": [
+                    "The Changing American Voter"
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2014,
+                            5,
+                            21
+                        ]
+                    ],
+                    "date-time": "2014-05-21T13:31:45Z",
+                    "timestamp": 1400679105000
+                },
+                "score": 206.6702,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "ISBN": [
+                    "9780674429147"
+                ],
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.4159/harvard.9780674429147.c29"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            4,
+                            17
+                        ]
+                    ],
+                    "date-time": "2018-04-17T05:45:04Z",
+                    "timestamp": 1523943904270
+                },
+                "reference-count": 0,
+                "publisher": "PeerJ",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.7717/peerj.2286/supp-4",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2016,
+                            7,
+                            28
+                        ]
+                    ],
+                    "date-time": "2016-07-28T07:56:06Z",
+                    "timestamp": 1469692566000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Supplemental Information 4: Data for Fig. 2C."
+                ],
+                "prefix": "10.7717",
+                "member": "4443",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            3,
+                            11
+                        ]
+                    ],
+                    "date-time": "2017-03-11T17:27:19Z",
+                    "timestamp": 1489253239000
+                },
+                "score": 206.6702,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.7717/peerj.2286/supp-4"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            4,
+                            18
+                        ]
+                    ],
+                    "date-time": "2018-04-18T03:43:34Z",
+                    "timestamp": 1524023014667
+                },
+                "reference-count": 0,
+                "publisher": "PeerJ",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.7717/peerj.2889/fig-6",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2017,
+                            1,
+                            24
+                        ]
+                    ],
+                    "date-time": "2017-01-24T09:19:49Z",
+                    "timestamp": 1485249589000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Figure 6: 2C DNA nuclear content (pg)."
+                ],
+                "prefix": "10.7717",
+                "member": "4443",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            3,
+                            12
+                        ]
+                    ],
+                    "date-time": "2017-03-12T11:27:21Z",
+                    "timestamp": 1489318041000
+                },
+                "score": 206.6702,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.7717/peerj.2889/fig-6"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            8,
+                            23
+                        ]
+                    ],
+                    "date-time": "2018-08-23T17:40:38Z",
+                    "timestamp": 1535046038825
+                },
+                "reference-count": 0,
+                "publisher": "eLife Sciences Publications, Ltd",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.7554/elife.15204.011",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2016,
+                            6,
+                            8
+                        ]
+                    ],
+                    "date-time": "2016-06-08T11:46:25Z",
+                    "timestamp": 1465386385000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Video 5. This video accompanies Figure 2C."
+                ],
+                "prefix": "10.7554",
+                "member": "4374",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2018,
+                            8,
+                            23
+                        ]
+                    ],
+                    "date-time": "2018-08-23T17:17:07Z",
+                    "timestamp": 1535044627000
+                },
+                "score": 206.6702,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.7554/elife.15204.011"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            17
+                        ]
+                    ],
+                    "date-time": "2018-09-17T09:11:43Z",
+                    "timestamp": 1537175503837
+                },
+                "reference-count": 0,
+                "publisher": "PeerJ",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.7717/peerj.5620/supp-4",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            17
+                        ]
+                    ],
+                    "date-time": "2018-09-17T08:39:02Z",
+                    "timestamp": 1537173542000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Supplemental Information 4: Fig. 2C raw data."
+                ],
+                "prefix": "10.7717",
+                "member": "4443",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            17
+                        ]
+                    ],
+                    "date-time": "2018-09-17T08:39:05Z",
+                    "timestamp": 1537173545000
+                },
+                "score": 206.6702,
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.7717/peerj.5620/supp-4"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            8,
+                            23
+                        ]
+                    ],
+                    "date-time": "2018-08-23T16:11:12Z",
+                    "timestamp": 1535040672526
+                },
+                "reference-count": 0,
+                "publisher": "eLife Sciences Publications, Ltd",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "DOI": "10.7554/elife.08848.010",
+                "type": "component",
+                "created": {
+                    "date-parts": [
+                        [
+                            2016,
+                            4,
+                            5
+                        ]
+                    ],
+                    "date-time": "2016-04-05T15:09:11Z",
+                    "timestamp": 1459868951000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Figure 3—source data 2. Gene Table comparison of Kdm1aZp3 M+Z+ 2C and Kdm1aZp3 M-Z+ 2C embryos."
+                ],
+                "prefix": "10.7554",
+                "member": "4374",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2018,
+                            8,
+                            23
+                        ]
+                    ],
+                    "date-time": "2018-08-23T15:31:38Z",
+                    "timestamp": 1535038298000
+                },
+                "score": 204.56825,
+                "subtitle": [
+                    "Deseq output for expression of genes used for pairwise comparisons. Column labeled a represents average normalized expression of Kdm1aZp3 M+Z+ 2C embryos and b represents average normalized expression of Kdm1aZp3 M-Z+ 2C embryos."
+                ],
+                "issued": {
+                    "date-parts": [
+                        [
+                            null
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.7554/elife.08848.010"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            14
+                        ]
+                    ],
+                    "date-time": "2018-09-14T07:23:11Z",
+                    "timestamp": 1536909791388
+                },
+                "reference-count": 31,
+                "publisher": "Wiley",
+                "issue": "16",
+                "license": [
+                    {
+                        "URL": "http://doi.wiley.com/10.1002/tdm_license_1.1",
+                        "start": {
+                            "date-parts": [
+                                [
+                                    2015,
+                                    9,
+                                    1
+                                ]
+                            ],
+                            "date-time": "2015-09-01T00:00:00Z",
+                            "timestamp": 1441065600000
+                        },
+                        "delay-in-days": 1874,
+                        "content-version": "tdm"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "Rapid Commun. Mass Spectrom."
+                ],
+                "DOI": "10.1002/rcm.4656",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2010,
+                            7,
+                            16
+                        ]
+                    ],
+                    "date-time": "2010-07-16T16:48:44Z",
+                    "timestamp": 1279298924000
+                },
+                "page": "2357-2362",
+                "source": "Crossref",
+                "is-referenced-by-count": 14,
+                "title": [
+                    "Determination of four thiophenethylamine designer drugs (2C-T-4, 2C-T-8, 2C-T-13, 2C-T-17) in human urine by capillary electrophoresis/mass spectrometry"
+                ],
+                "prefix": "10.1002",
+                "volume": "24",
+                "author": [
+                    {
+                        "given": "Maria",
+                        "family": "Nieddu",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Gianpiero",
+                        "family": "Boatto",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Maria Antonietta",
+                        "family": "Pirisi",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Giuseppina",
+                        "family": "Dessì",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "311",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2010,
+                            7,
+                            15
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "key": "10.1002/rcm.4656-BIB1|cit1",
+                        "author": "de Boer",
+                        "volume": "26",
+                        "first-page": "110",
+                        "year": "2004",
+                        "journal-title": "Pharm. World Sci"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB2|cit2",
+                        "author": "Theobald",
+                        "volume": "40",
+                        "first-page": "105",
+                        "year": "2005",
+                        "journal-title": "J. Mass Spectrom"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB3|cit3",
+                        "author": "Vorce",
+                        "volume": "28",
+                        "first-page": "407",
+                        "year": "2004",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/28.6.407",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB4|cit4",
+                        "author": "Habrdova",
+                        "volume": "40",
+                        "first-page": "785",
+                        "year": "2005",
+                        "journal-title": "J. Mass Spectrom"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB5|cit5",
+                        "author": "Boatto",
+                        "volume": "21",
+                        "first-page": "3716",
+                        "year": "2007",
+                        "journal-title": "Rapid Commun. Mass Spectrom"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB6|cit6",
+                        "author": "Boatto",
+                        "volume": "1159",
+                        "first-page": "198",
+                        "year": "2007",
+                        "journal-title": "J. Chromatogr. A"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB7|cit7",
+                        "author": "Drummer",
+                        "year": "2001",
+                        "volume-title": "The Forensic Pharmacology of Drugs of Abuse"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB8|cit8",
+                        "author": "Verstraete",
+                        "volume": "29",
+                        "first-page": "359",
+                        "year": "2005",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/29.5.359",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB9|cit9",
+                        "author": "Ensslin",
+                        "volume": "683",
+                        "first-page": "189",
+                        "year": "1996",
+                        "journal-title": "J. Chromatogr. B"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB10|cit10",
+                        "author": "Kronstrand",
+                        "volume": "20",
+                        "first-page": "512",
+                        "year": "1996",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/20.6.512",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB11|cit11",
+                        "author": "Centini",
+                        "volume": "83",
+                        "first-page": "161",
+                        "year": "1996",
+                        "journal-title": "Forensic Sci. Int"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB12|cit12",
+                        "author": "Hensley",
+                        "volume": "23",
+                        "first-page": "518",
+                        "year": "1999",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/23.6.518",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB13|cit13",
+                        "author": "Ugland",
+                        "volume": "19",
+                        "first-page": "463",
+                        "year": "1999",
+                        "journal-title": "J. Pharm. Biomed. Anal"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB14|cit14",
+                        "author": "Jurado",
+                        "volume": "24",
+                        "first-page": "11",
+                        "year": "2000",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/24.1.11",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB15|cit15",
+                        "author": "Pizarro",
+                        "volume": "26",
+                        "first-page": "157",
+                        "year": "2002",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/26.3.157",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB16|cit16",
+                        "author": "Pellegrini",
+                        "volume": "769",
+                        "first-page": "243",
+                        "year": "2002",
+                        "journal-title": "J. Chromatogr. B"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB17|cit17",
+                        "author": "Stout",
+                        "volume": "26",
+                        "first-page": "253",
+                        "year": "2002",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/26.5.253",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB18|cit18",
+                        "author": "Huang",
+                        "volume": "792",
+                        "first-page": "241",
+                        "year": "2003",
+                        "journal-title": "J. Chromatogr. B"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB19|cit19",
+                        "author": "Klette",
+                        "volume": "29",
+                        "first-page": "669",
+                        "year": "2005",
+                        "journal-title": "J. Anal. Toxicol",
+                        "DOI": "10.1093/jat/29.7.669",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB20|cit20",
+                        "author": "Tsai",
+                        "volume": "21",
+                        "first-page": "1580",
+                        "year": "2000",
+                        "journal-title": "Electrophoresis"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB21|cit21",
+                        "author": "Iio",
+                        "volume": "128",
+                        "first-page": "646",
+                        "year": "2003",
+                        "journal-title": "Analyst"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB22|cit22",
+                        "author": "Ramseier",
+                        "volume": "21",
+                        "first-page": "380",
+                        "year": "2000",
+                        "journal-title": "Electrophoresis"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB23|cit23",
+                        "author": "Boatto",
+                        "volume": "814",
+                        "first-page": "93",
+                        "year": "2005",
+                        "journal-title": "J. Chromatogr. B"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB24|cit24",
+                        "author": "Nieddu",
+                        "volume": "852",
+                        "first-page": "578",
+                        "year": "2007",
+                        "journal-title": "J. Chromatogr. B"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB25|cit25",
+                        "author": "Shulgin",
+                        "year": "1998",
+                        "volume-title": "PIKHAL, A Chemical Love Story"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB26|cit26",
+                        "author": "Nieddu",
+                        "volume": "30",
+                        "first-page": "431",
+                        "year": "2007",
+                        "journal-title": "J. Liq. Chromatogr. Relat. Technol"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB27|cit27",
+                        "author": "Nieddu",
+                        "volume": "867",
+                        "first-page": "126",
+                        "year": "2008",
+                        "journal-title": "J. Chromatogr. B"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB28|cit28",
+                        "author": "Peters",
+                        "volume": "165",
+                        "first-page": "216",
+                        "year": "2007",
+                        "journal-title": "Forensic Sci. Int"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB29|cit29",
+                        "author": "Peters",
+                        "volume": "7",
+                        "first-page": "441",
+                        "year": "2002",
+                        "journal-title": "Accred. Qual. Assur"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB30|cit30",
+                        "author": "Taveniers",
+                        "volume": "23",
+                        "first-page": "535",
+                        "year": "2004",
+                        "journal-title": "Trends Anal. Chem"
+                    },
+                    {
+                        "key": "10.1002/rcm.4656-BIB31|cit31",
+                        "author": "Annesley",
+                        "volume": "49",
+                        "first-page": "1041",
+                        "year": "2003",
+                        "journal-title": "Clin. Chem"
+                    }
+                ],
+                "container-title": [
+                    "Rapid Communications in Mass Spectrometry"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002%2Frcm.4656",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "text-mining"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            6,
+                            19
+                        ]
+                    ],
+                    "date-time": "2017-06-19T10:57:07Z",
+                    "timestamp": 1497869827000
+                },
+                "score": 204.56825,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2010,
+                            7,
+                            15
+                        ]
+                    ]
+                },
+                "references-count": 31,
+                "journal-issue": {
+                    "issue": "16"
+                },
+                "URL": "http://dx.doi.org/10.1002/rcm.4656",
+                "relation": {
+                    "cites": []
+                },
+                "ISSN": [
+                    "0951-4198",
+                    "1097-0231"
+                ],
+                "issn-type": [
+                    {
+                        "value": "0951-4198",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1097-0231",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2019,
+                            1,
+                            21
+                        ]
+                    ],
+                    "date-time": "2019-01-21T20:11:03Z",
+                    "timestamp": 1548101463092
+                },
+                "reference-count": 0,
+                "publisher": "Natural Resources Canada/ESS/Scientific and Technical Publishing Services",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "published-print": {
+                    "date-parts": [
+                        [
+                            1969
+                        ]
+                    ]
+                },
+                "DOI": "10.4095/124329",
+                "type": "report",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            4,
+                            22
+                        ]
+                    ],
+                    "date-time": "2015-04-22T15:58:30Z",
+                    "timestamp": 1429718310000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Newfoundland [2c/14]"
+                ],
+                "prefix": "10.4095",
+                "author": [
+                    {
+                        "name": "Geological Survey of Canada",
+                        "sequence": "first",
+                        "affiliation": []
+                    }
+                ],
+                "member": "2571",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2019,
+                            1,
+                            21
+                        ]
+                    ],
+                    "date-time": "2019-01-21T19:48:29Z",
+                    "timestamp": 1548100109000
+                },
+                "score": 204.48625,
+                "issued": {
+                    "date-parts": [
+                        [
+                            1969
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.4095/124329"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2019,
+                            1,
+                            21
+                        ]
+                    ],
+                    "date-time": "2019-01-21T20:11:03Z",
+                    "timestamp": 1548101463093
+                },
+                "reference-count": 0,
+                "publisher": "Natural Resources Canada/ESS/Scientific and Technical Publishing Services",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "published-print": {
+                    "date-parts": [
+                        [
+                            1969
+                        ]
+                    ]
+                },
+                "DOI": "10.4095/124330",
+                "type": "report",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            4,
+                            22
+                        ]
+                    ],
+                    "date-time": "2015-04-22T15:58:30Z",
+                    "timestamp": 1429718310000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Newfoundland [2c/15]"
+                ],
+                "prefix": "10.4095",
+                "author": [
+                    {
+                        "name": "Geological Survey of Canada",
+                        "sequence": "first",
+                        "affiliation": []
+                    }
+                ],
+                "member": "2571",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2019,
+                            1,
+                            21
+                        ]
+                    ],
+                    "date-time": "2019-01-21T19:48:30Z",
+                    "timestamp": 1548100110000
+                },
+                "score": 204.48625,
+                "issued": {
+                    "date-parts": [
+                        [
+                            1969
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.4095/124330"
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2019,
+                            1,
+                            21
+                        ]
+                    ],
+                    "date-time": "2019-01-21T20:11:03Z",
+                    "timestamp": 1548101463098
+                },
+                "reference-count": 0,
+                "publisher": "Natural Resources Canada/ESS/Scientific and Technical Publishing Services",
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "published-print": {
+                    "date-parts": [
+                        [
+                            1969
+                        ]
+                    ]
+                },
+                "DOI": "10.4095/124333",
+                "type": "report",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            4,
+                            22
+                        ]
+                    ],
+                    "date-time": "2015-04-22T15:58:30Z",
+                    "timestamp": 1429718310000
+                },
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Newfoundland [2c/10]"
+                ],
+                "prefix": "10.4095",
+                "author": [
+                    {
+                        "name": "Geological Survey of Canada",
+                        "sequence": "first",
+                        "affiliation": []
+                    }
+                ],
+                "member": "2571",
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2019,
+                            1,
+                            21
+                        ]
+                    ],
+                    "date-time": "2019-01-21T19:48:32Z",
+                    "timestamp": 1548100112000
+                },
+                "score": 204.48625,
+                "issued": {
+                    "date-parts": [
+                        [
+                            1969
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "URL": "http://dx.doi.org/10.4095/124333"
+            }
+        ],
+        "items-per-page": 20,
+        "query": {
+            "start-index": 0,
+            "search-terms": null
+        }
+    }
+}

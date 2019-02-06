@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- *
+ * Class for selecting a single reference candidate from a list based on best score.
+ * 
  * @author Dominika Tkaczyk
  */
 public class CandidateValidator {
@@ -16,17 +17,20 @@ public class CandidateValidator {
         this.minScore = minScore;
     }
 
-    public Candidate chooseCandidate(Reference reference,
-            List<Candidate> candidates) {
+    public Candidate chooseCandidate(Object reference, List<Candidate> candidates) {
         if (candidates.isEmpty()) {
             return null;
         }
+        
         List<Double> scores = candidates.stream()
                 .map(c -> c.getValidationSimilarity(reference))
                 .collect(Collectors.toList());
+        
         int bestIndex = IntStream.range(0, scores.size())
                 .reduce(0, (a, b) -> (scores.get(a) >= scores.get(b)) ? a : b);
+        
         candidates.get(bestIndex).setValidationScore(scores.get(bestIndex));
+        
         return (scores.get(bestIndex) >= minScore)
                 ? candidates.get(bestIndex) : null;
     }
