@@ -117,7 +117,7 @@ public class ReferenceMatcher {
                     request.getUnstructuredMinScore(), UNSTR_ROWS);
                 
                 response.addMatch(new Match(
-                    request.getRefString(), m == null ? "null" : m.getDOI(), 
+                    request.getRefString(), m == null ? null : m.getDOI(), 
                     m == null ? 0.0 : m.getValidationScore()));
             }
         }

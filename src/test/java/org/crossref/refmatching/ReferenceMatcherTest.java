@@ -47,7 +47,9 @@ public class ReferenceMatcherTest {
             request.setRefString("van Staal, C. R., Ravenhurst, C. E., Winchester, J. A., Roddick, J. C., and Langton, J. P., 1990, Post-Taconic blueschist suture in the northern Appalachians of northern New Brunswick, Canada: Geology, v. 18, p. 1073-1077.");
             MatchResponse response = matcher.match(request);
             
-            Assert.assertTrue(response.getMatches().size() == 0);
+            Assert.assertTrue(response.getMatches().size() == 1);
+            Assert.assertTrue(response.getMatches().get(0).getDoi() == null);
+
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
