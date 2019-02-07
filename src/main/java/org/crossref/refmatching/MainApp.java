@@ -16,8 +16,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.crossref.common.rest.api.ICrossRefApiClient;
+import org.crossref.common.rest.api.IHttpClient;
 import org.crossref.common.rest.impl.CrossRefApiHttpClient;
 import org.crossref.common.utils.LogUtils;
+import org.crossref.common.utils.ManagedHttpClient;
 import org.json.JSONObject;
 
 /**
@@ -33,24 +35,24 @@ public class MainApp {
     private static String apiHost = ReferenceMatcher.DEFAULT_API_HOST;
     private static int apiPort = ReferenceMatcher.DEFAULT_API_PORT;
     private static String apiKeyFile = System.getProperty("user.home") + "/" + CRAPI_KEY_FILE;
-    private static MatchRequest matchRequest;
     
     public static void main(String[] args) {
         try {
-            processArgs(args);
+            MatchRequest request = processArgs(args);
 
-            // Initialize API client
-            ICrossRefApiClient apiClient = 
-                new CrossRefApiHttpClient(apiScheme, apiHost, apiPort, createStdHeaders());
+            // Initialize API client connector
+            IHttpClient httpClient = new ManagedHttpClient(apiScheme, apiHost, apiPort, createStdHeaders());
+            ICrossRefApiClient apiClient = new CrossRefApiHttpClient(httpClient);
             
-            // Get results
+            // Initialize matcher object
             ReferenceMatcher matcher = new ReferenceMatcher(apiClient);
             matcher.setCacheJournals(true);
             matcher.initialize();
             
-            MatchResponse response = matcher.match(matchRequest);
+            // Get match results
+            MatchResponse response = matcher.match(request);
             
-            // Wite results to stdout
+            // Display result
             System.out.println(new JSONObject(response.getMatches()));
         } catch (IOException ex) {
             logger.error("Error performing matching process: " + ex.getMessage(), ex);
@@ -78,7 +80,7 @@ public class MainApp {
         String authorization = crapiJson.optString("Authorization", null);
         String mailTo = crapiJson.optString("Mailto", null);
         
-        Map<String, String> stdHeaders = new HashMap<String, String>();
+        Map<String, String> stdHeaders = new HashMap();
         
         if (!StringUtils.isEmpty(authorization)) {
             stdHeaders.put("Authorization", authorization);
@@ -98,7 +100,7 @@ public class MainApp {
      * 
      * @param args The arguments to process
      */
-    private static void processArgs(String[] args) {
+    private static MatchRequest processArgs(String[] args) {
         
         // Define acceptable options
         Options options = new Options();
@@ -211,13 +213,14 @@ public class MainApp {
             } 
             
             // Return initialized request
-            matchRequest = new MatchRequest(
+            return new MatchRequest(
                 inputType, candidateMinScore, unstructuredMinScore, 
                 structuredMinScore, inputFile, refString);
             
         } catch (RuntimeException | ParseException ex) {
             logger.error("Error processing input arguments: " + ex.getMessage());
             printHelp(options);
+            return null;
         }
     }
     
