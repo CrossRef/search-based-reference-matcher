@@ -17,18 +17,23 @@ import org.crossref.common.utils.LogUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.crossref.common.rest.api.ICrossRefApiClient;
+import org.json.JSONException;
 
 /**
- *
+ * Main point of entry for performing a reference match. Its logic
+ * relies on calling the CrossRef service API. This is made possible by
+ * providing an instance of a client interface for that service during the
+ * construction of an instance of this class.
+ * 
  * @author Dominika Tkaczyk
  */
 public class ReferenceMatcher {
     /** Default API service scheme. Should be "http" or "https" */
     public static final String DEFAULT_API_SCHEME = "https";
      /** Default API service host name or IP */
-   public static final String DEFAULT_API_HOST = "api.crossref.org";
+    public static final String DEFAULT_API_HOST = "api.crossref.org";
      /** Default API service port. A value of 0 signifies no port, i.e. the default for the scheme */
-   public static final int DEFAULT_API_PORT = 0; // assume no port
+    public static final int DEFAULT_API_PORT = 0; // assume no port
     
     private static final int STR_ROWS = 100;
     private static final int UNSTR_ROWS = 20;
@@ -112,9 +117,23 @@ public class ReferenceMatcher {
                 break;
             }
             default: { // STRING
-                Candidate m = match(
-                    request.getRefString(), request.getCandidateMinScore(), 
-                    request.getUnstructuredMinScore(), UNSTR_ROWS);
+                // Attempt to interpret given string as JSON
+                JSONObject refObject = null;
+                
+                try {
+                    refObject = new JSONObject(request.getRefString());
+                } catch (JSONException ex) {
+                    
+                }
+                
+                Candidate m = (refObject != null) ? 
+                    match(
+                        refObject, request.getCandidateMinScore(), 
+                        request.getStructuredMinScore(), STR_ROWS)
+                    :
+                    match(
+                        request.getRefString(), request.getCandidateMinScore(), 
+                        request.getUnstructuredMinScore(), UNSTR_ROWS);
                 
                 response.addMatch(new Match(
                     request.getRefString(), m == null ? null : m.getDOI(), 
@@ -150,8 +169,8 @@ public class ReferenceMatcher {
         List<Candidate> candidates = selector.findCandidates(reference.toString());
         Candidate candidate = validator.chooseCandidate(new StructuredReference(reference), candidates);        
         
-        String journalNorm = reference.optString("journal-title")
-            .toLowerCase().replaceAll("[^a-z]", "");
+        String journalNorm = 
+            reference.optString("journal-title").toLowerCase().replaceAll("[^a-z]", "");
         
         if (journals.containsKey(journalNorm)) {
             reference.put("journal-title", journals.get(journalNorm));
