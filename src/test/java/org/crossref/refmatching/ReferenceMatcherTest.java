@@ -22,11 +22,11 @@ import org.mockito.MockitoAnnotations;
  * @author joe.aparo
  */
 public class ReferenceMatcherTest {
-    private static double STRING_VALID_TH = 0.34;
-    private static double STRUCTURED_VALID_TH = 0.65;
+    private static final double STRING_VALID_TH = 0.34;
+    private static final double STRUCTURED_VALID_TH = 0.65;
     
-    private MatchRequest request = new MatchRequest();
-    private Map<String, String> mockResponseMap = new HashMap<String, String>();
+    private final MatchRequest request = new MatchRequest();
+    private final Map<String, String> mockResponseMap = new HashMap<>();
     
     @Mock
     ICrossRefApiClient apiTestClient;
