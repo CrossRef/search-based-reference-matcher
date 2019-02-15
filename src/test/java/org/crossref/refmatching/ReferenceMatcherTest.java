@@ -57,7 +57,7 @@ public class ReferenceMatcherTest {
         MatchResponse response = invokeMockStringRequest(reference, "structured-ref-response-1.json");
         
         Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDoi().equals("10.1007/s10032-015-0249-8"));
+        Assert.assertTrue(response.getMatches().get(0).getDOI().equals("10.1007/s10032-015-0249-8"));
     }
     
     @Test
@@ -72,7 +72,7 @@ public class ReferenceMatcherTest {
         MatchResponse response = invokeMockStringRequest(reference, "structured-ref-response-2.json");
         
         Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDoi() == null);
+        Assert.assertTrue(response.getMatches().get(0).getDOI() == null);
     }
     
     @Test
@@ -89,7 +89,7 @@ public class ReferenceMatcherTest {
             invokeMockStringRequest(reference, "unstructured-ref-response-1.json");
         
         Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDoi().equals("10.1007/s10032-015-0249-8"));
+        Assert.assertTrue(response.getMatches().get(0).getDOI().equals("10.1007/s10032-015-0249-8"));
     }
     
     @Test
@@ -105,7 +105,7 @@ public class ReferenceMatcherTest {
             invokeMockStringRequest(reference, "unstructured-ref-response-2.json");
         
         Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDoi() == null);
+        Assert.assertTrue(response.getMatches().get(0).getDOI() == null);
     }
 
     public void candidatePropertiesShouldMatch_whenComparedToThoseGiven() {

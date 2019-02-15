@@ -33,7 +33,7 @@ public class Match {
      * Get the DOI of the matched item.
      * @return A DOI
      */
-    public String getDoi() {
+    public String getDOI() {
         return doi;
     }
 

@@ -41,7 +41,8 @@ public class MainApp {
             MatchRequest request = processArgs(args);
 
             // Initialize API client connector
-            IHttpClient httpClient = new ManagedHttpClient(apiScheme, apiHost, apiPort, createStdHeaders());
+            IHttpClient httpClient = new ManagedHttpClient(apiScheme, apiHost, apiPort);
+            ((ManagedHttpClient) httpClient).setCommonHeaders(createStdHeaders());
             ICrossRefApiClient apiClient = new CrossRefApiHttpClient(httpClient);
             
             // Initialize matcher object
@@ -112,7 +113,8 @@ public class MainApp {
         options.addOption("f", "file", true,
             "input file path, used with \"txt\" and \"json\" input types");
         options.addOption("s", "string", true,
-            "reference string, used with \"refstr\" file type");
+            "reference string, used with \"refstr\" file type. The value may " +
+            "be free-form, or structured JSON");
         options.addOption("ct", true, "candidate selection normalized threshold");
         options.addOption("ut", true, "unstructured validation threshold");
         options.addOption("st", true, "structured validation threshold");
