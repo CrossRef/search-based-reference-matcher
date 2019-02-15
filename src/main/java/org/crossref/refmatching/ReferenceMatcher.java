@@ -34,7 +34,7 @@ public class ReferenceMatcher {
     private final Map<String, String> journals = new HashMap<>();
     private final Logger logger = LogUtils.getLogger();
     
-    private boolean cacheJournals = false;
+    private boolean cacheJournals = true;
     public void setCacheJournals(boolean cacheJournals) {
         this.cacheJournals = cacheJournals;
     }
