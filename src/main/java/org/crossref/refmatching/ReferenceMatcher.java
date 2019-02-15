@@ -28,13 +28,6 @@ import org.json.JSONException;
  * @author Dominika Tkaczyk
  */
 public class ReferenceMatcher {
-    /** Default API service scheme. Should be "http" or "https" */
-    public static final String DEFAULT_API_SCHEME = "https";
-     /** Default API service host name or IP */
-    public static final String DEFAULT_API_HOST = "api.crossref.org";
-     /** Default API service port. A value of 0 signifies no port, i.e. the default for the scheme */
-    public static final int DEFAULT_API_PORT = 0; // assume no port
-    
     private static final int STR_ROWS = 100;
     private static final int UNSTR_ROWS = 20;
     

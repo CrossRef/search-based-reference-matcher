@@ -28,12 +28,15 @@ import org.json.JSONObject;
  * @author joe.aparo
  */
 public class MainApp {
+    private static final String DEFAULT_API_SCHEME = "https";
+    private static final String DEFAULT_API_HOST = "api.crossref.org";
+    private static final int DEFAULT_API_PORT = 0; // assume no port
     private final static String CRAPI_KEY_FILE = ".crapi_key";
     private static final Logger logger = LogUtils.getLogger();
     
-    private static String apiScheme = ReferenceMatcher.DEFAULT_API_SCHEME;
-    private static String apiHost = ReferenceMatcher.DEFAULT_API_HOST;
-    private static int apiPort = ReferenceMatcher.DEFAULT_API_PORT;
+    private static String apiScheme = DEFAULT_API_SCHEME;
+    private static String apiHost = DEFAULT_API_HOST;
+    private static int apiPort = DEFAULT_API_PORT;
     private static String apiKeyFile = System.getProperty("user.home") + "/" + CRAPI_KEY_FILE;
     
     public static void main(String[] args) {
