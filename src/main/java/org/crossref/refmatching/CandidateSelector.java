@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.utils.EncodeUtils;
 import org.crossref.common.utils.LogUtils;

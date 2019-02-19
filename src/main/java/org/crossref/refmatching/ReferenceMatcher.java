@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.crossref.common.utils.LogUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;

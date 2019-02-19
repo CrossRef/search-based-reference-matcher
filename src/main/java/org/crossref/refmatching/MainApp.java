@@ -14,7 +14,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.rest.api.IHttpClient;
 import org.crossref.common.rest.impl.CrossRefApiHttpClient;
