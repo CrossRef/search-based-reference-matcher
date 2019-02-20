@@ -55,7 +55,7 @@ public class CandidateSelector {
         
             Map<String, Object> args = new LinkedHashMap<String, Object>();
             args.put("rows", rows);
-            args.put("query.bibliographic", EncodeUtils.urlEncode(refString));
+            args.put("query.bibliographic", refString);
             
             worksJson = apiClient.getWorks(args);
         } catch (IOException ex) {
