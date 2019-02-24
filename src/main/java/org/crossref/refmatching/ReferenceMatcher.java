@@ -5,12 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.StreamSupport;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.crossref.common.utils.LogUtils;
@@ -20,31 +20,41 @@ import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.json.JSONException;
 
 /**
- * Main point of entry for performing a reference match. Its logic
- * relies on calling the CrossRef service API. This is made possible by
- * providing an instance of a client interface for that service during the
- * construction of an instance of this class.
+ * Main point of entry for performing reference matching. Its logic
+ * relies on calling the CrossRef service API to retrieve candidates to
+ * consider for a match. An instance of an API client is specified in the
+ * constructor of this class.
  * 
  * @author Dominika Tkaczyk
+ * @author Joe Aparo
  */
 public class ReferenceMatcher {
-    private static final int STR_ROWS = 100;
-    private static final int UNSTR_ROWS = 20;
-    
     private final Map<String, String> journals = new HashMap<>();
     private final Logger logger = LogUtils.getLogger();
     
     private boolean cacheJournals = true;
-    public void setCacheJournals(boolean cacheJournals) {
-        this.cacheJournals = cacheJournals;
-    }
-
     private ICrossRefApiClient apiClient;
     
     public ReferenceMatcher(ICrossRefApiClient apiClient) {
          this.apiClient = apiClient;       
     }
+        
+    /**
+     * Set flag indicating whether or not to cache journals.
+     * @param cacheJournals A flag
+     */
+    public void setCacheJournals(boolean cacheJournals) {
+        this.cacheJournals = cacheJournals;
+    }
     
+    /**
+     * Get the list of cached journals.
+     * @return A map of journal entries
+     */
+    public Map<String, String> getJournals() {
+        return journals;
+    }
+        
     /**
      * Initialize the instance based on current state. Currently
      * this just caches the journals depending on a flag.
@@ -71,73 +81,77 @@ public class ReferenceMatcher {
      * @throws IOException 
      */
     public MatchResponse match(MatchRequest request) throws IOException {
-        MatchResponse response = new MatchResponse(request);
         
+        String data = null;
+            
         switch(request.getInputType()) {
-            case JSON_FILE: {
-                String inputData = FileUtils.readFileToString(
-                    new File(request.getInputFileName()), "UTF-8");
-                
-                JSONArray dataset = new JSONArray(inputData);
-
-                List<Candidate> matched = StreamSupport.stream(dataset.spliterator(), true)
-                    .map(s -> (s instanceof String)
-                    ? match((String) s, request.getCandidateMinScore(), 
-                    request.getUnstructuredMinScore(), UNSTR_ROWS)
-                    : match((JSONObject) s, request.getCandidateMinScore(), request.getStructuredMinScore(), STR_ROWS))
-                    .collect(Collectors.toList());
-
-                IntStream.range(0, dataset.length()).mapToObj(i -> new Match(
-                    dataset.get(i), 
-                    (matched.get(i) == null ? null : matched.get(i).getDOI()), 
-                    (matched.get(i) == null ? 0.0 : matched.get(i).getValidationScore()))).forEach(m -> response.addMatch(m));
+            case FILE: { // Contained in a text file
+                data = FileUtils.readFileToString(new File(request.getInputValue()), "UTF-8");
                 break;
             }
-            case TEXT_FILE: {
-                List<String> references = FileUtils.readLines(
-                    new File(request.getInputFileName()), "UTF-8");
-                
-                List<Candidate> matched = references.parallelStream()
-                    .map(s -> match((String) s, request.getCandidateMinScore(), 
-                    request.getUnstructuredMinScore(), UNSTR_ROWS))
-                    .collect(Collectors.toList());
-                
-                IntStream.range(0, references.size()).mapToObj(i -> new Match(
-                    references.get(i), 
-                    (matched.get(i) == null ? null : matched.get(i).getDOI()), 
-                    (matched.get(i) == null ? 0.0 : matched.get(i).getValidationScore()))).forEach(m -> response.addMatch(m));
-                
-                break;
-            }
-            default: { // STRING
-                // Attempt to interpret given string as JSON
-                JSONObject refObject = null;
-                
-                try {
-                    refObject = new JSONObject(request.getRefString());
-                } catch (JSONException ex) {
-                    
-                }
-                
-                Candidate m = (refObject != null) ? 
-                    match(
-                        refObject, request.getCandidateMinScore(), 
-                        request.getStructuredMinScore(), STR_ROWS)
-                    :
-                    match(
-                        request.getRefString(), request.getCandidateMinScore(), 
-                        request.getUnstructuredMinScore(), UNSTR_ROWS);
-                
-                response.addMatch(new Match(
-                    request.getRefString(), m == null ? null : m.getDOI(), 
-                    m == null ? 0.0 : m.getValidationScore()));
-            }
+            default: { // Specified directly as a string
+                data = request.getInputValue();
+           }
         }
+
+        MatchResponse response = new MatchResponse(request);
+        List<ReferenceLink> refs = null;
+        
+        // Try to interpret data as a JSON array. If it can't be, assume it
+        // one or more delimited reference strings.
+        try {
+            refs = processJsonArray(
+                new JSONArray(data), request.getCandidateMinScore(), 
+                request.getStructuredMinScore());           
+        } catch (JSONException ex) {
+            refs = processReferenceStringList(
+                Arrays.asList(data.split(request.getDataDelimiter())), 
+                request.getCandidateMinScore(), request.getStructuredMinScore(), 
+                request.getUnstructuredMinScore());           
+        }
+        
+        refs.forEach(r -> response.addMatch(r));
         
         return response;
     }
     
-    private Candidate match(String refString, double candidateMinScore, double unstructuredMinScore, int rows) {
+    private List<ReferenceLink> processJsonArray(
+        JSONArray refArray, double candidateMinScore, double structuredMinScore) {
+        List<JSONObject> refList = new ArrayList<>();
+        refArray.forEach(idx -> {
+            refList.add((JSONObject) refArray.get((Integer) idx));
+        });
+
+        return refList.parallelStream().map(ref -> {
+            return match(ref, candidateMinScore, structuredMinScore, MatchRequest.STR_ROWS);
+        }).collect(Collectors.toList());
+    }
+    
+    private List<ReferenceLink> processReferenceStringList(
+        List<String> refStrings, double candidateMinScore, 
+        double structuredMinScore, double unstructuredMinScore) {
+        
+        return refStrings.parallelStream().map(s -> {
+            try {
+                JSONObject refObject = new JSONObject(s);
+                return match(refObject, candidateMinScore, structuredMinScore, MatchRequest.STR_ROWS);
+            } catch (JSONException ex) {
+                // OK, not JSON object - assume string
+                return match(s, candidateMinScore, unstructuredMinScore, MatchRequest.UNSTR_ROWS);
+            }
+        }).collect(Collectors.toList());
+    }
+
+    /**
+     * Perform a match given an unstructured reference string.
+     * 
+     * @param refString The unstructured reference string
+     * @param candidateMinScore Minimum selection score
+     * @param unstructuredMinScore Minimum validation score
+     * @param rows Number of rows to select for consideration
+     * @return A match object
+     */
+    private ReferenceLink match(String refString, double candidateMinScore, double unstructuredMinScore, int rows) {
         logger.debug(String.format("Matching reference: %s", refString));
         
         CandidateSelector selector = new CandidateSelector(apiClient, candidateMinScore, rows);
@@ -146,12 +160,21 @@ public class ReferenceMatcher {
         List<Candidate> candidates = selector.findCandidates(refString);
         Candidate candidate = validator.chooseCandidate(refString, candidates);       
          
-        logMatch(candidate);
-
-        return candidate;
+        return new ReferenceLink(
+            refString, candidate == null ? null : candidate.getDOI(), 
+            candidate == null ? 0.0 : candidate.getValidationScore());
     }
 
-    private Candidate match(
+    /**
+     *  Perform a match given a structured JSON object reference.
+     * 
+     * @param reference The structured reference to match
+     * @param candidateMinScore Minimum selection score
+     * @param structuredMinScore Minimum validation score
+     * @param rows Number of rows to select for consideration
+     * @return A match object
+     */
+    private ReferenceLink match(
         JSONObject reference, double candidateMinScore, double structuredMinScore, int rows) {
         
         logger.debug(String.format("Matching reference: %s", reference));
@@ -170,35 +193,23 @@ public class ReferenceMatcher {
             candidates = selector.findCandidates(reference.toString());
             Candidate candidate2 = validator.chooseCandidate(new StructuredReference(reference), candidates);
             if (candidate == null) {
-                return candidate2;
-            }
-            if (candidate2 == null) {
-                return candidate;
+                candidate = candidate2;
             }
             if (candidate2.getValidationScore() > candidate.getValidationScore()) {
-                return candidate2;
+                candidate = candidate2;
             }
         }
         
-        logMatch(candidate);
-        
-        return candidate;
-    }
-
-    /**
-     * Get the list of cached journals.
-     * @return A map of journal entries
-     */
-    public Map<String, String> getJournals() {
-        return journals;
+        return new ReferenceLink(
+            reference.toString(), candidate == null ? null : candidate.getDOI(), 
+            candidate == null ? 0.0 : candidate.getValidationScore());
     }
     
     private void logMatch(Candidate candidate) {
-        
         if (candidate != null) {
             logger.debug(String.format("Reference matched to DOI: %s", candidate.getDOI()));
         } else {
             logger.debug("No matching reference.");
         }        
-    }
+    }    
 }

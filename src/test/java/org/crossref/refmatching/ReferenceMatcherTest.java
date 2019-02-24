@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.utils.ResourceUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,7 +26,6 @@ public class ReferenceMatcherTest {
     private static final double STRING_VALID_TH = 0.34;
     private static final double STRUCTURED_VALID_TH = 0.65;
     
-    private final MatchRequest request = new MatchRequest();
     private final Map<String, String> mockResponseMap = new HashMap<>();
     
     @Mock
@@ -108,8 +108,9 @@ public class ReferenceMatcherTest {
         Assert.assertTrue(response.getMatches().get(0).getDOI() == null);
     }
 
+    @Test
     public void candidatePropertiesShouldMatch_whenComparedToThoseGiven() {
-        JSONObject item = new JSONObject(mockResponseMap.get("single-doi-response-1.json"));       
+        JSONObject item = extractFirstMockItem("single-doi-response-1.json");
         Candidate candidate = new Candidate(item);
         
         candidate.setValidationScore(0.8);
@@ -119,8 +120,9 @@ public class ReferenceMatcherTest {
         Assert.assertEquals(0.8, candidate.getValidationScore(), 0.0001);
     }
     
-    public void similarityShouldCorrespondToScore_whenUnstructuredRefsGiven() {
-        JSONObject item = new JSONObject(mockResponseMap.get("single-doi-response-1.json"));       
+    @Test
+    public void similarityShouldCorrespondToScore_whenUnstructuredRefsGiven() {   
+        JSONObject item = extractFirstMockItem("single-doi-response-1.json");
         item.put("score", 50);
         Candidate candidate = new Candidate(item);
 
@@ -162,8 +164,9 @@ public class ReferenceMatcherTest {
             + "Information Science (2015) 93.") < STRING_VALID_TH);
     }
     
+    @Test
     public void similarityShouldCorrespondToScore_whenStructuredRefsGiven() {
-        JSONObject item = new JSONObject(mockResponseMap.get("single-doi-response-1.json"));       
+        JSONObject item = extractFirstMockItem("single-doi-response-1.json");    
         item.put("score", 50);
         Candidate candidate = new Candidate(item);
 
@@ -193,16 +196,28 @@ public class ReferenceMatcherTest {
             candidate.getValidationSimilarity(reference) < STRUCTURED_VALID_TH);
     }
     
-    private MatchResponse invokeMockStringRequest(Object reference, String mockJsonFileNane) {
+    private MatchResponse invokeMockStringRequest(Object reference, String mockJsonFileName) {
          try {
-            when(apiTestClient.getWorks(any())).thenReturn(mockResponseMap.get(mockJsonFileNane));
-            MatchRequest request = new MatchRequest(RequestInputType.STRING, null, reference.toString());
- 
+            when(apiTestClient.getWorks(any())).thenReturn(extractMockItems(mockJsonFileName));
+            
+            MatchRequest request = new MatchRequest(InputType.STRING, reference.toString());
+            
             return matcher.match(request);
 
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+    }
+    
+    private JSONArray extractMockItems(String mockJsonFileName) {
+        JSONObject json = new JSONObject(mockResponseMap.get(mockJsonFileName));
+        return json.getJSONObject("message").optJSONArray("items");        
+    }
+    
+    private JSONObject extractFirstMockItem(String mockJsonFileName) {
+        JSONArray items = extractMockItems(mockJsonFileName);
+
+        return items.getJSONObject(0);
     }
     
     private void loadMockResponseMap() {

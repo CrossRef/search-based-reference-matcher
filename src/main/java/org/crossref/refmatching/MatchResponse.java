@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class MatchResponse {
     private MatchRequest request;
-    List<Match> matches = new ArrayList<Match>();
+    List<ReferenceLink> matches = new ArrayList<ReferenceLink>();
     
     public MatchResponse(MatchRequest request) {
         this.request = request;
@@ -20,7 +20,7 @@ public class MatchResponse {
      * Add a match to the result.
      * @param match The match to add
      */
-    public void addMatch(Match match) {
+    public void addMatch(ReferenceLink match) {
         matches.add(match);
     }
 
@@ -36,7 +36,7 @@ public class MatchResponse {
      * Get the list of matches.
      * @return A match list
      */
-    public List<Match> getMatches() {
+    public List<ReferenceLink> getMatches() {
         return matches.subList(0, matches.size());
     }
 }

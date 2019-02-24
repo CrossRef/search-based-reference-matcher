@@ -54,10 +54,7 @@ public class MainApp {
             matcher.initialize();
             
             // Get match results
-            MatchResponse response = matcher.match(request);
-            
-            // Display result
-            System.out.println(new JSONObject(response.getMatches()));
+            outputResults(matcher.match(request));
         } catch (IOException ex) {
             logger.error("Error performing matching process: " + ex.getMessage(), ex);
         }
@@ -108,23 +105,25 @@ public class MainApp {
         
         // Define acceptable options
         Options options = new Options();
-        options.addOption("i", "inputtype", true,
-            "input type; valid values are: \"refstr\" (a single unstructured "
-            + "reference), \"txt\" (a file with unstructured reference "
-            + "strings, one per line), \"json\" (JSON file with a list of "
-            + "reference strings and/or structured references)");
-        options.addOption("f", "file", true,
-            "input file path, used with \"txt\" and \"json\" input types");
-        options.addOption("s", "string", true,
-            "reference string, used with \"refstr\" file type. The value may " +
-            "be free-form, or structured JSON");
-        options.addOption("ct", true, "candidate selection normalized threshold");
-        options.addOption("ut", true, "unstructured validation threshold");
-        options.addOption("st", true, "structured validation threshold");
+        options.addOption("i", "input", true,
+            "This option affects how the -v option is interpreted. Valid values for this option are "
+            + "\"string\" and \"file\". If \"string\", the value of the -v option is the actual data "
+            + "to perform a match on. If \"file\", the value of the -v option is interprereted as "
+            + "the name of a file from which to read the data to perform a match on. In either case, "
+            + "the data can be in one of two string forms, 1) A JSON Array of structured "
+            + "references, or 2) A delmited string of reference strings. See the -d option regarding "
+            + "the delimiter. In the 2nd case, strings can be either unstructured, or structured JSON"
+            + "references.");
+        options.addOption("v", "value", true,
+            "A string value to be interpreted based on the value of the -i option");
+        options.addOption("ct", "cand-min", true, "Candidate selection normalized threshold");
+        options.addOption("ut", "unstr-min", true, "Unstructured validation threshold");
+        options.addOption("st", "str-min", true, "Structured validation threshold");
         options.addOption("as", "api-scheme", true, "CR API http scheme (http or https)");
         options.addOption("ah", "api-host", true, "CR API host)");
         options.addOption("ap", "api-port", true, "CR API port");
         options.addOption("ak", "key-file", true, "CR API key file");
+        options.addOption("d", "delim", true, "Textual data delimiter");
         options.addOption("h", "help", false, "Print help");
       
        // Parse/validate given arguments against defined options
@@ -139,47 +138,35 @@ public class MainApp {
                 printHelp(options);
             }
             
-            // Check required input type
+            // Check required input type option
             if (!cmd.hasOption("i")) {
-               throw new RuntimeException("Input type not given");
+               throw new RuntimeException("Input type not specified");
             }
 
-            // Validate given input type
+             // Check required input value option
+            if (!cmd.hasOption("v")) {
+               throw new RuntimeException("Input value not specified");
+            }
+
+           // Validate given input type
             String typeCode = cmd.getOptionValue("i");
-            RequestInputType inputType = RequestInputType.getByCode(typeCode);
+            InputType inputType = InputType.getByCode(typeCode);
             if (inputType == null) {
                 List<String> okVals = Arrays.asList(
-                    RequestInputType.values()).stream().map(o-> {return o.getCode();}).collect(Collectors.toList());
+                    InputType.values()).stream().map(o-> {return o.getCode();}).collect(Collectors.toList());
  
                 throw new RuntimeException("Invalid input type specified: " + typeCode + ". Valid types are: " + okVals);
             }
             
-            // Validate input/output files
-            String inputFile = null;
-            if (inputType == RequestInputType.TEXT_FILE || inputType == RequestInputType.JSON_FILE) {
-                if (!cmd.hasOption("f")) {
-                    throw new RuntimeException("Input file path has to be provided for this input type.");
-                }
-             
-                inputFile = cmd.getOptionValue("f");
-                
-                // Check existence of input file
-                File file = new File(inputFile);
+            String inputValue = cmd.getOptionValue("v");
+            if (inputType == InputType.FILE) {
+                // Check for input file
+                File file = new File(cmd.getOptionValue(inputValue));
                 if (!file.exists()) {
-                    throw new RuntimeException("The specified input file does not exist: " + inputFile);
+                    throw new RuntimeException("The specified input file does not exist: " + inputValue);
                 }
             }
 
-            // Unstructured string citation query
-            String refString = null;
-            if (inputType == RequestInputType.STRING) {
-               if (!cmd.hasOption("s")) {
-                   throw new RuntimeException("A reference string has to be provided for this input type.");
-               }
-               
-               refString = cmd.getOptionValue("s");
-            }
-            
             // Minimum candidate score
             double candidateMinScore = MatchRequest.DEFAULT_CAND_MIN_SCORE;
             if (cmd.hasOption("ct")) {
@@ -218,9 +205,8 @@ public class MainApp {
             } 
             
             // Return initialized request
-            return new MatchRequest(
-                inputType, candidateMinScore, unstructuredMinScore, 
-                structuredMinScore, inputFile, refString);
+            return new MatchRequest(inputType, inputValue, 
+                candidateMinScore, unstructuredMinScore, structuredMinScore);
             
         } catch (RuntimeException | ParseException ex) {
             logger.error("Error processing input arguments: " + ex.getMessage());
@@ -229,6 +215,10 @@ public class MainApp {
         }
     }
     
+    /**
+     * Display command line option help text.
+     * @param options Available options
+     */
     private static void printHelp(Options options) {
         
         System.out.println("\nUsage: MainApp [options]");
@@ -245,5 +235,25 @@ public class MainApp {
         });
                 
         System.exit(0);
+    }
+    
+    /**
+     * Output results.
+     * @param response The response containing results
+     */
+    private static void outputResults(MatchResponse response) {
+                    
+        String fmt1 = "%-30s%-10s%s";
+        String fmt2 = "%-30s%-10.2f%s";
+        
+        System.out.println("\n");
+        System.out.println(String.format(fmt1, "DOI", "Score", "Reference"));
+        System.out.println(String.format(fmt1, "---", "-----", "---------"));
+        
+        response.getMatches().forEach(m -> {
+            System.out.println(String.format(fmt2, m.getDOI(), m.getScore(), m.getReference()));
+        });
+        
+        System.out.println("\n");
     }
 }

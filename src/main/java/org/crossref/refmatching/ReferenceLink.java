@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.crossref.refmatching;
 
 /**
@@ -10,12 +5,12 @@ package org.crossref.refmatching;
  * 
  * @author joe.aparo
  */
-public class Match {
-    private Object reference;
+public class ReferenceLink {
+    private String reference;
     private String doi;
     private double score;
 
-    public Match(Object reference, String doi, double score) {
+    public ReferenceLink(String reference, String doi, double score) {
         this.reference = reference;
         this.doi = doi;
         this.score = score;
@@ -23,9 +18,9 @@ public class Match {
 
     /**
      * Get the original reference that the item matched on.
-     * @return A String, or a JSONObject
+     * @return A String representing the reference
      */
-    public Object getReference() {
+    public String getReference() {
         return reference;
     }
 

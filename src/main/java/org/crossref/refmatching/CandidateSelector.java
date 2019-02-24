@@ -8,11 +8,9 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.crossref.common.rest.api.ICrossRefApiClient;
-import org.crossref.common.utils.EncodeUtils;
 import org.crossref.common.utils.LogUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
 
 /**
  * Class for identifying reference candidates for matching.
@@ -53,24 +51,15 @@ public class CandidateSelector {
         try {
             log.debug("API search for: " + refString);
         
-            Map<String, Object> args = new LinkedHashMap<String, Object>();
+            Map<String, Object> args = new LinkedHashMap<>();
             args.put("rows", rows);
             args.put("query.bibliographic", refString);
             
-            worksJson = apiClient.getWorks(args);
+            return apiClient.getWorks(args);
         } catch (IOException ex) {
             log.error("Error calling api client: " + ex.getMessage(), ex);
             return new JSONArray();
         }
-        
-        // Parse the response
-        try {
-	    JSONObject json = new JSONObject(worksJson);
-            return json.getJSONObject("message").optJSONArray("items");
-	} catch (JSONException ex) {
-            log.error("Error parsing json string: " + worksJson, ex);
-	    return new JSONArray();
-	}
     }
 
     private List<Candidate> selectCandidates(String refString, JSONArray items) {

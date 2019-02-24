@@ -20,7 +20,7 @@ public class Candidate {
 
     public Candidate(JSONObject item) {
         this.item = item;
-        this.searchScore = item.getDouble("score");
+        this.searchScore = item.optDouble("score");
     }
 
     public JSONObject getItem() {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.crossref.refmatching;
 
 /**
@@ -14,43 +9,39 @@ public class MatchRequest {
     public static final double DEFAULT_CAND_MIN_SCORE = 0.4;
     public static final double DEFAULT_UNSTR_MIN_SCORE = 0.34;
     public static final double DEFAULT_STR_MIN_SCORE = 0.76;
+    public static final int STR_ROWS = 100;
+    public static final int UNSTR_ROWS = 20;
     
-    private RequestInputType inputType = null;
+    private static final String DEFAULT_DELIMITER = "\r?\n";
+
+    private InputType inputType = null;
     private double candidateMinScore = DEFAULT_CAND_MIN_SCORE;
     private double unstructuredMinScore = DEFAULT_UNSTR_MIN_SCORE;
     private double structuredMinScore = DEFAULT_STR_MIN_SCORE;
-    private String inputFileName;
-    private String refString;
+    private String inputValue;
+    private String dataDelimiter = DEFAULT_DELIMITER;
     
-    public MatchRequest() {}
-    
-    public MatchRequest(
-        RequestInputType inputType,
-        String inputFileName, String refString) {
-        
+    public MatchRequest(InputType inputType, String inputValue) {
         this.inputType = inputType;
-        this.inputFileName = inputFileName;
-        this.refString = refString;
+        this.inputValue = inputValue;
     }
 
     public MatchRequest(
-        RequestInputType inputType, double candidateMinScore, 
-        double unstructuredMinScore, double structuredMinScore,
-        String inputFileName, String refString) {
+        InputType inputType, String inputValue, double candidateMinScore, 
+        double unstructuredMinScore, double structuredMinScore) {
         
         this.inputType = inputType;
         this.candidateMinScore = candidateMinScore;
         this.unstructuredMinScore = unstructuredMinScore;
         this.structuredMinScore = structuredMinScore;
-        this.inputFileName = inputFileName;
-        this.refString = refString;
+        this.inputValue = inputValue;
     }
 
-    public RequestInputType getInputType() {
+    public InputType getInputType() {
         return inputType;
     }
 
-    public void setInputType(RequestInputType inputType) {
+    public void setInputType(InputType inputType) {
         this.inputType = inputType;
     }
 
@@ -78,19 +69,19 @@ public class MatchRequest {
         this.structuredMinScore = structuredMinScore;
     }
 
-    public String getInputFileName() {
-        return inputFileName;
+    public String getInputValue() {
+        return inputValue;
     }
 
-    public void setInputFileName(String inputFileName) {
-        this.inputFileName = inputFileName;
+    public void setInputValue(String inputValue) {
+        this.inputValue = inputValue;
     }
 
-    public String getRefString() {
-        return refString;
+    public String getDataDelimiter() {
+        return dataDelimiter;
     }
 
-    public void setRefString(String refString) {
-        this.refString = refString;
+    public void setDataDelimiter(String dataDelimiter) {
+        this.dataDelimiter = dataDelimiter;
     }
 }

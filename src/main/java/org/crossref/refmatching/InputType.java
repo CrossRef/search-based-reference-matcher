@@ -4,19 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents the kinds of input the user may provide for a match request.
+ * Represents the ways in which textual content to be matched may be provided.
+ * 
+ * FILE - content to match is specified as the name of a file to read
+ * STRING - content to match is provided directly
  */
-public enum RequestInputType {
-    JSON_FILE("json"),
-    TEXT_FILE("txt"),
-    STRING("refstr");
+public enum InputType {
+    FILE("file"),
+    STRING("string"); 
     
-    private static Map<String, RequestInputType> typesByCode = new HashMap<>();
-    private String code;
+    private static final Map<String, InputType> typesByCode = new HashMap<>();
+    private final String code;
     
     static {
-        typesByCode.put(JSON_FILE.getCode(), JSON_FILE);
-        typesByCode.put(TEXT_FILE.getCode(), TEXT_FILE);
+        typesByCode.put(FILE.getCode(), FILE);
         typesByCode.put(STRING.getCode(), STRING);
     }
     
@@ -24,7 +25,7 @@ public enum RequestInputType {
      * Construct the enum.
      * @param code User specified code
      */
-    RequestInputType(String code) {
+    InputType(String code) {
         this.code = code;
     }
     
@@ -34,7 +35,7 @@ public enum RequestInputType {
      * @param code Code to find
      * @return Found type, or null if not found
      */
-    public static RequestInputType getByCode(String code) {
+    public static InputType getByCode(String code) {
         return typesByCode.get(code);
     }
     
