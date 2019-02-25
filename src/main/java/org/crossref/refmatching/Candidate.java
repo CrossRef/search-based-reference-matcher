@@ -366,23 +366,23 @@ public class Candidate {
         }
     }
 
-    public Double getScore() {
+    private Double getScore() {
         return item.getDouble("score");
     }
 
-    public String getVolume() {
+    private String getVolume() {
         return item.optString("volume", null);
     }
 
-    public String getIssue() {
+    private String getIssue() {
         return item.optString("issue", null);
     }
 
-    public String getPage() {
+    private String getPage() {
         return item.optString("page", null);
     }
 
-    public String getYear() {
+    private String getYear() {
         JSONArray issued = item.getJSONObject("issued")
                 .getJSONArray("date-parts");
         if (issued == null || issued.isEmpty()) {
@@ -391,14 +391,14 @@ public class Candidate {
         return issued.getJSONArray(0).optString(0, null);
     }
 
-    public String getTitle() {
+    private String getTitle() {
         if (!item.has("title") || item.getJSONArray("title").isEmpty()) {
             return null;
         }
         return item.getJSONArray("title").optString(0, null);
     }
 
-    public String getContainerTitle() {
+    private String getContainerTitle() {
         if (!item.has("container-title")
                 || item.getJSONArray("container-title").isEmpty()) {
             return null;
@@ -406,7 +406,7 @@ public class Candidate {
         return item.getJSONArray("container-title").optString(0, null);
     }
 
-    public String getAuthor() {
+    private String getAuthor() {
         if (!item.has("author") || item.getJSONArray("author").isEmpty()) {
             return null;
         }
@@ -414,7 +414,7 @@ public class Candidate {
                 .optString("family", null);
     }
 
-    public String getEditor() {
+    private String getEditor() {
         if (!item.has("editor") || item.getJSONArray("editor").isEmpty()) {
             return null;
         }

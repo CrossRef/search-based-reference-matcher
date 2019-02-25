@@ -207,12 +207,4 @@ public class ReferenceMatcher {
             reference.toString(), candidate == null ? null : candidate.getDOI(), 
             candidate == null ? 0.0 : candidate.getValidationScore());
     }
-    
-    private void logMatch(Candidate candidate) {
-        if (candidate != null) {
-            logger.debug(String.format("Reference matched to DOI: %s", candidate.getDOI()));
-        } else {
-            logger.debug("No matching reference.");
-        }        
-    }    
 }
