@@ -110,7 +110,7 @@ public class MainApp {
             + "\"string\" and \"file\". If \"string\", the value of the -v option is the actual data "
             + "to perform a match on. If \"file\", the value of the -v option is interprereted as "
             + "the name of a file from which to read the data to perform a match on. In either case, "
-            + "the data can be in one of two string forms, 1) A JSON Array of structured "
+            + "textual input is assumed to be in one of two textual formats, either 1) A JSON Array of structured "
             + "references, or 2) A delmited string of reference strings. See the -d option regarding "
             + "the delimiter. In the 2nd case, strings can be either unstructured, or structured JSON"
             + "references.");

@@ -31,10 +31,13 @@ import org.json.JSONException;
 public class ReferenceMatcher {
     private final Map<String, String> journals = new HashMap<>();
     private final Logger logger = LogUtils.getLogger();
-    
+    private final ICrossRefApiClient apiClient;
     private boolean cacheJournals = true;
-    private ICrossRefApiClient apiClient;
     
+    /**
+     * Constructor sets apiClient.
+     * @param apiClient CR API client implementation
+     */
     public ReferenceMatcher(ICrossRefApiClient apiClient) {
          this.apiClient = apiClient;       
     }
