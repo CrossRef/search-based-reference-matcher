@@ -11,13 +11,7 @@ import java.util.stream.IntStream;
  */
 public class CandidateValidator {
 
-    private final double minScore;
-
-    public CandidateValidator(double minScore) {
-        this.minScore = minScore;
-    }
-
-    public Candidate chooseCandidate(Object reference, List<Candidate> candidates) {
+    public Candidate chooseCandidate(Reference reference, List<Candidate> candidates, double minScore) {
         if (candidates.isEmpty()) {
             return null;
         }

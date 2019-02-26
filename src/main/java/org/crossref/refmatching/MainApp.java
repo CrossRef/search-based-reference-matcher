@@ -105,20 +105,22 @@ public class MainApp {
         
         // Define acceptable options
         Options options = new Options();
-        options.addOption("i", "input", true,
-            "This option affects how the -v option is interpreted. Valid values for this option are "
-            + "\"string\" and \"file\". If \"string\", the value of the -v option is the actual data "
-            + "to perform a match on. If \"file\", the value of the -v option is interprereted as "
+        options.addOption("it", "input-type", true,
+            "This option affects how the -i option is interpreted. Valid values for this option are "
+            + "\"string\" and \"file\". If \"string\", the value of the -i option is the actual data "
+            + "to perform a match on. If \"file\", the value of the -i option is interprereted as "
             + "the name of a file from which to read the data to perform a match on. In either case, "
-            + "textual input is assumed to be in one of two textual formats, either 1) A JSON Array of structured "
+            + "textual input is assumed to be in one of two formats, either 1) A JSON Array of structured "
             + "references, or 2) A delmited string of reference strings. See the -d option regarding "
             + "the delimiter. In the 2nd case, strings can be either unstructured, or structured JSON"
             + "references.");
-        options.addOption("v", "value", true,
-            "A string value to be interpreted based on the value of the -i option");
+        options.addOption("i", "input", true,
+            "A string value to be interpreted based on the value of the -it option");
         options.addOption("ct", "cand-min", true, "Candidate selection normalized threshold");
         options.addOption("ut", "unstr-min", true, "Unstructured validation threshold");
         options.addOption("st", "str-min", true, "Structured validation threshold");
+        options.addOption("ur", "unstr-rows", true, "Number of candidates to consider for an unstructured match");
+        options.addOption("sr", "str-rows", true, "Number of candidates to consider for an structured match");
         options.addOption("as", "api-scheme", true, "CR API http scheme (http or https)");
         options.addOption("ah", "api-host", true, "CR API host)");
         options.addOption("ap", "api-port", true, "CR API port");
@@ -139,17 +141,17 @@ public class MainApp {
             }
             
             // Check required input type option
-            if (!cmd.hasOption("i")) {
+            if (!cmd.hasOption("it")) {
                throw new RuntimeException("Input type not specified");
             }
 
              // Check required input value option
-            if (!cmd.hasOption("v")) {
+            if (!cmd.hasOption("i")) {
                throw new RuntimeException("Input value not specified");
             }
 
            // Validate given input type
-            String typeCode = cmd.getOptionValue("i");
+            String typeCode = cmd.getOptionValue("it");
             InputType inputType = InputType.getByCode(typeCode);
             if (inputType == null) {
                 List<String> okVals = Arrays.asList(
@@ -158,7 +160,7 @@ public class MainApp {
                 throw new RuntimeException("Invalid input type specified: " + typeCode + ". Valid types are: " + okVals);
             }
             
-            String inputValue = cmd.getOptionValue("v");
+            String inputValue = cmd.getOptionValue("i");
             if (inputType == InputType.FILE) {
                 // Check for input file
                 File file = new File(cmd.getOptionValue(inputValue));
@@ -191,6 +193,18 @@ public class MainApp {
                    throw new RuntimeException("Invalid http scheme: " + apiScheme);
                }
             }
+            
+            // Minimum structured matching score
+            int structuredRows = MatchRequest.DEFAULT_STR_ROWS;
+            if (cmd.hasOption("sr")) {
+               structuredRows = Integer.valueOf(cmd.getOptionValue("sr"));
+            }
+            
+            // Minimum structured matching score
+            int unstructuredRows = MatchRequest.DEFAULT_UNSTR_ROWS;
+            if (cmd.hasOption("ur")) {
+               unstructuredRows = Integer.valueOf(cmd.getOptionValue("ur"));
+            }
 
             if (cmd.hasOption("ah")) {
                apiHost = cmd.getOptionValue("ah");
@@ -206,7 +220,8 @@ public class MainApp {
             
             // Return initialized request
             return new MatchRequest(inputType, inputValue, 
-                candidateMinScore, unstructuredMinScore, structuredMinScore);
+                candidateMinScore, unstructuredMinScore, structuredMinScore,
+                unstructuredRows, structuredRows);
             
         } catch (RuntimeException | ParseException ex) {
             logger.error("Error processing input arguments: " + ex.getMessage());
@@ -220,7 +235,6 @@ public class MainApp {
      * @param options Available options
      */
     private static void printHelp(Options options) {
-        
         System.out.println("\nUsage: MainApp [options]");
         
         System.out.println("\nOptions:");
@@ -242,7 +256,6 @@ public class MainApp {
      * @param response The response containing results
      */
     private static void outputResults(MatchResponse response) {
-                    
         String fmt1 = "%-30s%-10s%s";
         String fmt2 = "%-30s%-10.2f%s";
         

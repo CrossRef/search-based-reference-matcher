@@ -31,15 +31,16 @@ import org.json.JSONException;
 public class ReferenceMatcher {
     private final Map<String, String> journals = new HashMap<>();
     private final Logger logger = LogUtils.getLogger();
-    private final ICrossRefApiClient apiClient;
+    private final CandidateSelector selector;
+    private final CandidateValidator validator = new CandidateValidator();
     private boolean cacheJournals = true;
-    
+   
     /**
      * Constructor sets apiClient.
      * @param apiClient CR API client implementation
      */
     public ReferenceMatcher(ICrossRefApiClient apiClient) {
-         this.apiClient = apiClient;       
+         this.selector = new CandidateSelector(apiClient);
     }
         
     /**
@@ -104,13 +105,10 @@ public class ReferenceMatcher {
         // one or more delimited reference strings.
         try {
             refs = processJsonArray(
-                new JSONArray(data), request.getCandidateMinScore(), 
-                request.getStructuredMinScore());           
+                new JSONArray(data), request);           
         } catch (JSONException ex) {
             refs = processReferenceStringList(
-                Arrays.asList(data.split(request.getDataDelimiter())), 
-                request.getCandidateMinScore(), request.getStructuredMinScore(), 
-                request.getUnstructuredMinScore());           
+                Arrays.asList(data.split(request.getDataDelimiter())),request);           
         }
         
         refs.forEach(r -> response.addMatch(r));
@@ -118,29 +116,44 @@ public class ReferenceMatcher {
         return response;
     }
     
+    /**
+     * Process an array of structured references
+     * @param refArray An array JSON objects
+     * @param request Request details
+     * @return A list of reference matches
+     */
     private List<ReferenceLink> processJsonArray(
-        JSONArray refArray, double candidateMinScore, double structuredMinScore) {
+        JSONArray refArray, MatchRequest request) {
         List<JSONObject> refList = new ArrayList<>();
         refArray.forEach(idx -> {
             refList.add((JSONObject) refArray.get((Integer) idx));
         });
 
         return refList.parallelStream().map(ref -> {
-            return match(ref, candidateMinScore, structuredMinScore, MatchRequest.STR_ROWS);
+            return match(ref, request.getCandidateMinScore(), 
+                request.getStructuredMinScore(), request.getStructuredRows());
         }).collect(Collectors.toList());
     }
     
+    /**
+     * Process a list of reference strings, some unstructured, some structured.
+     * 
+     * @param refStrings List of strings to process
+     * @param request Request details
+     * @return A list of reference matches
+     */
     private List<ReferenceLink> processReferenceStringList(
-        List<String> refStrings, double candidateMinScore, 
-        double structuredMinScore, double unstructuredMinScore) {
+        List<String> refStrings, MatchRequest request) {
         
         return refStrings.parallelStream().map(s -> {
             try {
                 JSONObject refObject = new JSONObject(s);
-                return match(refObject, candidateMinScore, structuredMinScore, MatchRequest.STR_ROWS);
+                return match(refObject, request.getCandidateMinScore(), 
+                    request.getStructuredMinScore(), request.getStructuredRows());
             } catch (JSONException ex) {
                 // OK, not JSON object - assume string
-                return match(s, candidateMinScore, unstructuredMinScore, MatchRequest.UNSTR_ROWS);
+                return match(new UnstructuredReference(s), request.getCandidateMinScore(), 
+                    request.getUnstructuredMinScore(), request.getUnstructuredRows());
             }
         }).collect(Collectors.toList());
     }
@@ -154,14 +167,14 @@ public class ReferenceMatcher {
      * @param rows Number of rows to select for consideration
      * @return A match object
      */
-    private ReferenceLink match(String refString, double candidateMinScore, double unstructuredMinScore, int rows) {
-        logger.debug(String.format("Matching reference: %s", refString));
+    private ReferenceLink match(
+        UnstructuredReference reference, double candidateMinScore, 
+        double unstructuredMinScore, int rows) {
         
-        CandidateSelector selector = new CandidateSelector(apiClient, candidateMinScore, rows);
-        CandidateValidator validator = new CandidateValidator(unstructuredMinScore);
+        String refString = reference.getString();
         
-        List<Candidate> candidates = selector.findCandidates(refString);
-        Candidate candidate = validator.chooseCandidate(refString, candidates);       
+        List<Candidate> candidates = selector.findCandidates(refString, rows, candidateMinScore);
+        Candidate candidate = validator.chooseCandidate(reference, candidates, unstructuredMinScore);       
          
         return new ReferenceLink(
             refString, candidate == null ? null : candidate.getDOI(), 
@@ -178,23 +191,20 @@ public class ReferenceMatcher {
      * @return A match object
      */
     private ReferenceLink match(
-        JSONObject reference, double candidateMinScore, double structuredMinScore, int rows) {
+        JSONObject reference, double candidateMinScore, 
+        double structuredMinScore, int rows) {
         
-        logger.debug(String.format("Matching reference: %s", reference));
-        
-        CandidateSelector selector = new CandidateSelector(apiClient, candidateMinScore, rows);
-        CandidateValidator validator = new CandidateValidator(structuredMinScore);
-        
-        List<Candidate> candidates = selector.findCandidates(reference.toString());
-        Candidate candidate = validator.chooseCandidate(new StructuredReference(reference), candidates);        
+        List<Candidate> candidates = selector.findCandidates(reference.toString(), rows, candidateMinScore);
+            
+        Candidate candidate = validator.chooseCandidate(new StructuredReference(reference), candidates, structuredMinScore);        
         
         String journalNorm = 
             reference.optString("journal-title").toLowerCase().replaceAll("[^a-z]", "");
         
         if (journals.containsKey(journalNorm)) {
             reference.put("journal-title", journals.get(journalNorm));
-            candidates = selector.findCandidates(reference.toString());
-            Candidate candidate2 = validator.chooseCandidate(new StructuredReference(reference), candidates);
+            candidates = selector.findCandidates(reference.toString(), rows, candidateMinScore);
+            Candidate candidate2 = validator.chooseCandidate(new StructuredReference(reference), candidates, structuredMinScore);
             if (candidate == null) {
                 candidate = candidate2;
             }

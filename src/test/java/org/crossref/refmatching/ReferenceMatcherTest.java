@@ -126,42 +126,42 @@ public class ReferenceMatcherTest {
         item.put("score", 50);
         Candidate candidate = new Candidate(item);
 
-        Assert.assertTrue(candidate.getStringValidationSimilarity(
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
             "[1]D. Tkaczyk, P. Szostek, M. Fedoryszak, P. J. Dendek, and Ł. "
             + "Bolikowski, “CERMINE: automatic extraction of structured "
             + "metadata from scientific literature,” International Journal "
             + "on Document Analysis and Recognition (IJDAR), vol. 18, no. 4, "
-            + "pp. 317–335, 2015.") > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getStringValidationSimilarity(
+            + "pp. 317–335, 2015.")) > STRING_VALID_TH);
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
             "[1] D. Tkaczyk, P. Szostek, M. Fedoryszak, P.J. Dendek, Ł. "
             + "Bolikowski, International Journal on Document Analysis and "
-            + "Recognition (IJDAR) 18 (2015) 317.") > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getStringValidationSimilarity(
+            + "Recognition (IJDAR) 18 (2015) 317.")) > STRING_VALID_TH);
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
             "[1]D. Tkaczyk and Ł. Bolikowski, “Extracting Contextual "
             + "Information from Scientific Literature Using CERMINE System,” "
             + "Communications in Computer and Information Science, pp. "
-            + "93–104, 2015.") < STRING_VALID_TH);
-        Assert.assertTrue(candidate.getStringValidationSimilarity(
+            + "93–104, 2015.")) < STRING_VALID_TH);
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
             "[1] D. Tkaczyk, Ł. Bolikowski, Communications in Computer and "
-            + "Information Science (2015) 93.") < STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(
+            + "Information Science (2015) 93.")) < STRING_VALID_TH);
+        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
             "[1]D. Tkaczyk, P. Szostek, M. Fedoryszak, P. J. Dendek, and Ł. "
             + "Bolikowski,“CERMINE: automatic extraction of structured "
             + "metadata from scientific literature,” International Journal "
             + "on Document Analysis and Recognition (IJDAR), vol. 18, no. 4, "
-            + "pp. 317–335, 2015.") > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(
+            + "pp. 317–335, 2015.")) > STRING_VALID_TH);
+        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
             "[1] D. Tkaczyk, P. Szostek, M. Fedoryszak, P.J. Dendek, Ł. "
             + "Bolikowski, International Journal on Document Analysis and "
-            + "Recognition (IJDAR) 18 (2015) 317.") > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(
+            + "Recognition (IJDAR) 18 (2015) 317.")) > STRING_VALID_TH);
+        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
             "[1]D. Tkaczyk and Ł. Bolikowski, “Extracting Contextual "
             + "Information from Scientific Literature Using CERMINE System,” "
             + "Communications in Computer and Information Science, pp. "
-            + "93–104, 2015.") < STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(
+            + "93–104, 2015.")) < STRING_VALID_TH);
+        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
             "[1] D. Tkaczyk, Ł. Bolikowski, Communications in Computer and "
-            + "Information Science (2015) 93.") < STRING_VALID_TH);
+            + "Information Science (2015) 93.")) < STRING_VALID_TH);
     }
     
     @Test

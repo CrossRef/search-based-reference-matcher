@@ -39,13 +39,14 @@ public class Candidate {
         this.validationScore = validationScore;
     }
 
-    public double getValidationSimilarity(Object reference) {
+    public double getValidationSimilarity(Reference reference) {
         return (reference instanceof StructuredReference)
             ? getStructuredValidationSimilarity((StructuredReference) reference)
-            : getStringValidationSimilarity(reference.toString());
+            : getStringValidationSimilarity(reference);
     }
 
-    public double getStringValidationSimilarity(String refString) {
+    public double getStringValidationSimilarity(Reference reference) {
+        String refString = reference.getString();
         GenJaccardSimilarity similarity = new GenJaccardSimilarity();
 
         // weights for relevance score
