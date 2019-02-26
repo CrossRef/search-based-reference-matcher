@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.log4j.Logger;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.utils.LogUtils;
@@ -56,16 +55,18 @@ public class CandidateSelector {
             args.put("rows", rows);
             args.put("query.bibliographic", refString);
             
+            // Invoke client for items
             Timer timer = new Timer();
             timer.start();
-
-            // Invoke client for items
-            JSONArray items = apiClient.getWorks(args);
+            
+            JSONArray arr = apiClient.getWorks(args);
             
             timer.stop();
-            log.debug("Works API invoked. Elapsed time: " + timer.elapsedTime() + ", Query: " + args.toString());
-
-            return items;
+            
+            log.debug("apiClient.getWorks: " + timer.elapsedMs()); 
+            
+            return arr;
+            
         } catch (IOException ex) {
             log.error("Error calling api client: " + ex.getMessage(), ex);
             return new JSONArray();

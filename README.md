@@ -5,13 +5,13 @@ This is a JAVA implementation of the Search-Based Matching with Validation (SBMV
 To match a single reference string:
 
 ```
-org.crossref.refmatching.ReferenceMatcher -i refstr -s "Jen CK, Foner SN, Cochran EL, Bowers VA (1958) Phys Rev 112:1169"
+org.crossref.refmatching.ReferenceMatcher -it string -i "Jen CK, Foner SN, Cochran EL, Bowers VA (1958) Phys Rev 112:1169"
 ```
 
-To match multiple reference strings:
+To match references from a file:
 
 ```
-org.crossref.refmatching.ReferenceMatcher -i txt -f /file/path/with/ref/strings/one/per/line -o /output/file/path
+org.crossref.refmatching.ReferenceMatcher -it file -i /file/path/with/ref/strings/one/per/line -o /output/file/path
 ```
 
 Output file is in JSON format.

@@ -256,16 +256,22 @@ public class MainApp {
      * @param response The response containing results
      */
     private static void outputResults(MatchResponse response) {
-        String fmt1 = "%-30s%-10s%s";
-        String fmt2 = "%-30s%-10.2f%s";
+        JSONObject outputItem = new JSONObject();
         
-        System.out.println("\n");
-        System.out.println(String.format(fmt1, "DOI", "Score", "Reference"));
-        System.out.println(String.format(fmt1, "---", "-----", "---------"));
+        System.out.println("[");
+        Integer x = new Integer(0);
         
-        response.getMatches().forEach(m -> {
-            System.out.println(String.format(fmt2, m.getDOI(), m.getScore(), m.getReference()));
-        });
+        for (ReferenceLink m : response.getMatches()) {
+            outputItem.put("doi", m.getDOI());
+            outputItem.put("score", m.getScore());
+            outputItem.put("reference", m.getReference());
+            
+            System.out.println(outputItem.toString());
+            
+            if (x++ > 0) {
+                System.out.println(',');
+            }
+        }
         
         System.out.println("\n");
     }
