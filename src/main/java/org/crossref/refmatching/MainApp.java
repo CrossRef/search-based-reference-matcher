@@ -262,17 +262,19 @@ public class MainApp {
         Integer x = new Integer(0);
         
         for (ReferenceLink m : response.getMatches()) {
+             
+            if (x++ > 0) {
+                System.out.println(',');
+            }
+            
             outputItem.put("doi", m.getDOI());
             outputItem.put("score", m.getScore());
             outputItem.put("reference", m.getReference());
             
-            System.out.println(outputItem.toString());
-            
-            if (x++ > 0) {
-                System.out.println(',');
-            }
+            System.out.print(outputItem.toString());
+
         }
         
-        System.out.println("\n");
+        System.out.println("\n]");
     }
 }
