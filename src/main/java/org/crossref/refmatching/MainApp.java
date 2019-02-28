@@ -1,11 +1,16 @@
 package org.crossref.refmatching;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -38,6 +43,7 @@ public class MainApp {
     private static String apiHost = DEFAULT_API_HOST;
     private static int apiPort = DEFAULT_API_PORT;
     private static String apiKeyFile = System.getProperty("user.home") + "/" + CRAPI_KEY_FILE;
+    private static String outputFileName = null;
     
     public static void main(String[] args) {
         try {
@@ -126,6 +132,7 @@ public class MainApp {
         options.addOption("ap", "api-port", true, "CR API port");
         options.addOption("ak", "key-file", true, "CR API key file");
         options.addOption("d", "delim", true, "Textual data delimiter");
+        options.addOption("o", "out-file", true, "File to direct console output to");
         options.addOption("h", "help", false, "Print help");
       
        // Parse/validate given arguments against defined options
@@ -217,6 +224,10 @@ public class MainApp {
             if (cmd.hasOption("ak")) {
                apiKeyFile = cmd.getOptionValue("ak");
             } 
+
+            if (cmd.hasOption("o")) {
+               outputFileName = cmd.getOptionValue("o");
+            } 
             
             // Return initialized request
             return new MatchRequest(inputType, inputValue, 
@@ -258,23 +269,40 @@ public class MainApp {
     private static void outputResults(MatchResponse response) {
         JSONObject outputItem = new JSONObject();
         
-        System.out.println("[");
+        // Assume console
+        OutputStream out = System.out;
+        
+        // Check for redirect to file
+        if (outputFileName != null) {
+            try {
+                out = new FileOutputStream(new File(outputFileName));
+            } catch (FileNotFoundException ex) {
+                java.util.logging.Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        // set up writer
+        PrintWriter writer = new PrintWriter(out);
+        
+        writer.println("[");
         Integer x = new Integer(0);
         
         for (ReferenceLink m : response.getMatches()) {
              
             if (x++ > 0) {
-                System.out.println(',');
+                writer.println(',');
             }
             
             outputItem.put("doi", m.getDOI());
             outputItem.put("score", m.getScore());
             outputItem.put("reference", m.getReference());
             
-            System.out.print(outputItem.toString());
+            writer.print(outputItem.toString());
 
         }
         
-        System.out.println("\n]");
+        writer.println("\n]");
+        writer.flush();
+        writer.close();
     }
 }
