@@ -63,7 +63,6 @@ public class ReferenceMatcherTest {
     @Test
     public void shouldNotMatch_whenNoStructuredRefIsNotFound() {
         JSONObject reference = new JSONObject();
-        reference = new JSONObject();
         reference.put("author", "Tkaczyk");
         reference.put("volume", "93");
         reference.put("year", "2015");
