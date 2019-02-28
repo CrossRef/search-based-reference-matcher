@@ -17,6 +17,7 @@ import org.crossref.common.utils.LogUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.crossref.common.rest.api.ICrossRefApiClient;
+import org.crossref.common.utils.JsonUtils;
 import org.json.JSONException;
 
 /**
@@ -105,7 +106,7 @@ public class ReferenceMatcher {
         // one or more delimited reference strings.
         try {
             refs = processJsonArray(
-                new JSONArray(data), request);           
+                JsonUtils.createJSONArray(data), request);           
         } catch (JSONException ex) {
             refs = processReferenceStringList(
                 Arrays.asList(data.split(request.getDataDelimiter())),request);           
