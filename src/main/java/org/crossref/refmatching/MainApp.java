@@ -281,12 +281,12 @@ public class MainApp {
             }
         }
         
-        // set up writer
+        // Set up writer
         PrintWriter writer = new PrintWriter(out);
         
+        // Generate output
+        int x = new Integer(0); // for commas
         writer.println("[");
-        Integer x = new Integer(0);
-        
         for (ReferenceLink m : response.getMatches()) {
              
             if (x++ > 0) {
@@ -301,6 +301,7 @@ public class MainApp {
 
         }
         
+        // Close the writer
         writer.println("\n]");
         writer.flush();
         writer.close();
