@@ -35,16 +35,16 @@ public class CandidateSelector {
      * 
      * @return A list of reference candidates
      */
-    public List<Candidate> findCandidates(String refString, int rows, double minScore) {
+    public List<Candidate> findCandidates(String refString, int rows, double minScore, String mailTo) {
         if (StringUtils.isEmpty(refString)) {
             return new ArrayList<>();
         }
 
-        JSONArray candidates = searchWorks(refString, rows);
+        JSONArray candidates = searchWorks(refString, rows, mailTo);
         return selectCandidates(refString, candidates, minScore);
     }
 
-    private JSONArray searchWorks(String refString, int rows) {
+    private JSONArray searchWorks(String refString, int rows, String mailTo) {
         
         // Invoke the client
         String worksJson;
@@ -54,6 +54,9 @@ public class CandidateSelector {
             Map<String, Object> args = new LinkedHashMap<>();
             args.put("rows", rows);
             args.put("query.bibliographic", refString);
+            if (!StringUtils.isEmpty(mailTo)) { // polite support
+                args.put("mailto", mailTo);
+            }
             
             // Invoke client for items
             Timer timer = new Timer();

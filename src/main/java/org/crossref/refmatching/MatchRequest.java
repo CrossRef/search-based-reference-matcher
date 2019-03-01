@@ -21,6 +21,7 @@ public class MatchRequest {
     private String dataDelimiter = DEFAULT_DELIMITER;
     private int unstructuredRows = DEFAULT_UNSTR_ROWS;
     private int structuredRows = DEFAULT_STR_ROWS;
+    private String mailTo = null;
     
     public MatchRequest(InputType inputType, String inputValue) {
         this.inputType = inputType;
@@ -95,6 +96,14 @@ public class MatchRequest {
 
     public void setStructuredRows(int structuredRows) {
         this.structuredRows = structuredRows;
+    }
+
+    public String getMailTo() {
+        return mailTo;
+    }
+
+    public void setMailTo(String mailTo) {
+        this.mailTo = mailTo;
     }
 }
 

@@ -132,7 +132,7 @@ public class ReferenceMatcher {
 
         return refList.parallelStream().map(ref -> {
             return match(ref, request.getCandidateMinScore(), 
-                request.getStructuredMinScore(), request.getStructuredRows());
+                request.getStructuredMinScore(), request.getStructuredRows(), request.getMailTo());
         }).collect(Collectors.toList());
     }
     
@@ -150,11 +150,11 @@ public class ReferenceMatcher {
             try {
                 JSONObject refObject = new JSONObject(s);
                 return match(refObject, request.getCandidateMinScore(), 
-                    request.getStructuredMinScore(), request.getStructuredRows());
+                    request.getStructuredMinScore(), request.getStructuredRows(), request.getMailTo());
             } catch (JSONException ex) {
                 // OK, not JSON object - assume string
                 return match(new UnstructuredReference(s), request.getCandidateMinScore(), 
-                    request.getUnstructuredMinScore(), request.getUnstructuredRows());
+                    request.getUnstructuredMinScore(), request.getUnstructuredRows(), request.getMailTo());
             }
         }).collect(Collectors.toList());
     }
@@ -170,11 +170,11 @@ public class ReferenceMatcher {
      */
     private ReferenceLink match(
         UnstructuredReference reference, double candidateMinScore, 
-        double unstructuredMinScore, int rows) {
+        double unstructuredMinScore, int rows, String emailTo) {
         
         String refString = reference.getString();
         
-        List<Candidate> candidates = selector.findCandidates(refString, rows, candidateMinScore);
+        List<Candidate> candidates = selector.findCandidates(refString, rows, candidateMinScore, emailTo);
         Candidate candidate = validator.chooseCandidate(reference, candidates, unstructuredMinScore);       
          
         return new ReferenceLink(
@@ -193,9 +193,9 @@ public class ReferenceMatcher {
      */
     private ReferenceLink match(
         JSONObject reference, double candidateMinScore, 
-        double structuredMinScore, int rows) {
+        double structuredMinScore, int rows, String emailTo) {
         
-        List<Candidate> candidates = selector.findCandidates(reference.toString(), rows, candidateMinScore);
+        List<Candidate> candidates = selector.findCandidates(reference.toString(), rows, candidateMinScore, emailTo);
             
         Candidate candidate = validator.chooseCandidate(new StructuredReference(reference), candidates, structuredMinScore);        
         
@@ -204,7 +204,7 @@ public class ReferenceMatcher {
         
         if (journals.containsKey(journalNorm)) {
             reference.put("journal-title", journals.get(journalNorm));
-            candidates = selector.findCandidates(reference.toString(), rows, candidateMinScore);
+            candidates = selector.findCandidates(reference.toString(), rows, candidateMinScore, emailTo);
             Candidate candidate2 = validator.chooseCandidate(new StructuredReference(reference), candidates, structuredMinScore);
             if (candidate == null) {
                 candidate = candidate2;

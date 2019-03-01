@@ -44,7 +44,7 @@ public class MainApp {
     private static int apiPort = DEFAULT_API_PORT;
     private static String apiKeyFile = System.getProperty("user.home") + "/" + CRAPI_KEY_FILE;
     private static String outputFileName = null;
-    
+
     public static void main(String[] args) {
         try {
             MatchRequest request = processArgs(args);
@@ -133,6 +133,7 @@ public class MainApp {
         options.addOption("ak", "key-file", true, "CR API key file");
         options.addOption("d", "delim", true, "Textual data delimiter");
         options.addOption("o", "out-file", true, "File to direct console output to");
+        options.addOption("m", "mail-to", true, "Mail-To option for 'polite' API call");
         options.addOption("h", "help", false, "Print help");
       
        // Parse/validate given arguments against defined options
@@ -228,11 +229,23 @@ public class MainApp {
             if (cmd.hasOption("o")) {
                outputFileName = cmd.getOptionValue("o");
             } 
-            
+
+            String mailTo = null;
+            if (cmd.hasOption("m")) {
+               mailTo = cmd.getOptionValue("m");
+            }
+
             // Return initialized request
-            return new MatchRequest(inputType, inputValue, 
-                candidateMinScore, unstructuredMinScore, structuredMinScore,
-                unstructuredRows, structuredRows);
+            MatchRequest request = new MatchRequest(inputType, inputValue);
+            
+            request.setCandidateMinScore(candidateMinScore);
+            request.setUnstructuredMinScore(unstructuredMinScore);
+            request.setStructuredMinScore(structuredMinScore);
+            request.setUnstructuredRows(unstructuredRows);
+            request.setStructuredRows(structuredRows);
+            request.setMailTo(mailTo);
+            
+            return request;
             
         } catch (RuntimeException | ParseException ex) {
             logger.error("Error processing input arguments: " + ex.getMessage());
