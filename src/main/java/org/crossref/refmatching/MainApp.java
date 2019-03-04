@@ -21,10 +21,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.crossref.common.rest.api.ICrossRefApiClient;
-import org.crossref.common.rest.api.IHttpClient;
 import org.crossref.common.rest.impl.CrossRefApiHttpClient;
 import org.crossref.common.utils.LogUtils;
-import org.crossref.common.utils.ManagedHttpClient;
+import org.crossref.common.utils.UnmanagedHttpClient;
 import org.json.JSONObject;
 
 /**
@@ -50,8 +49,8 @@ public class MainApp {
             MatchRequest request = processArgs(args);
 
             // Initialize API client connector
-            IHttpClient httpClient = new ManagedHttpClient(apiScheme, apiHost, apiPort);
-            ((ManagedHttpClient) httpClient).setCommonHeaders(createStdHeaders());
+            UnmanagedHttpClient httpClient = new UnmanagedHttpClient(apiScheme, apiHost, apiPort);
+            httpClient.setCommonHeaders(createStdHeaders());
             ICrossRefApiClient apiClient = new CrossRefApiHttpClient(httpClient);
             
             // Initialize matcher object
@@ -294,29 +293,26 @@ public class MainApp {
             }
         }
         
-        // Set up writer
-        PrintWriter writer = new PrintWriter(out);
-        
         // Generate output
-        int x = new Integer(0); // for commas
-        writer.println("[");
-        for (ReferenceLink m : response.getMatches()) {
-             
-            if (x++ > 0) {
-                writer.println(',');
+        try (PrintWriter writer = new PrintWriter(out)) {
+            int x = 0; // for commas
+            
+            writer.println("[");
+            for (ReferenceLink m : response.getMatches()) {
+                if (x++ > 0) {
+                    writer.println(',');
+                }
+                
+                outputItem.put("doi", m.getDOI());
+                outputItem.put("score", m.getScore());
+                outputItem.put("reference", m.getReference());
+                
+                writer.print(outputItem.toString());
             }
             
-            outputItem.put("doi", m.getDOI());
-            outputItem.put("score", m.getScore());
-            outputItem.put("reference", m.getReference());
-            
-            writer.print(outputItem.toString());
-
+            // Close the writer
+            writer.println("\n]");
+            writer.flush();
         }
-        
-        // Close the writer
-        writer.println("\n]");
-        writer.flush();
-        writer.close();
     }
 }
