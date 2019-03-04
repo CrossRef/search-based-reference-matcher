@@ -34,7 +34,7 @@ import org.json.JSONObject;
 public class MainApp {
     private static final String DEFAULT_API_SCHEME = "https";
     private static final String DEFAULT_API_HOST = "api.crossref.org";
-    private static final int DEFAULT_API_PORT = 0; // assume no port
+    private static final int DEFAULT_API_PORT = 8011;
     private final static String CRAPI_KEY_FILE = ".crapi_key";
     private static final Logger logger = LogUtils.getLogger();
     
@@ -50,6 +50,7 @@ public class MainApp {
 
             // Initialize API client connector
             UnmanagedHttpClient httpClient = new UnmanagedHttpClient(apiScheme, apiHost, apiPort);
+            httpClient.initialize();
             httpClient.setCommonHeaders(createStdHeaders());
             ICrossRefApiClient apiClient = new CrossRefApiHttpClient(httpClient);
             
@@ -170,7 +171,7 @@ public class MainApp {
             String inputValue = cmd.getOptionValue("i");
             if (inputType == InputType.FILE) {
                 // Check for input file
-                File file = new File(cmd.getOptionValue(inputValue));
+                File file = new File(inputValue);
                 if (!file.exists()) {
                     throw new RuntimeException("The specified input file does not exist: " + inputValue);
                 }

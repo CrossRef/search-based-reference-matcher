@@ -87,7 +87,7 @@ public class ReferenceMatcher {
      */
     public MatchResponse match(MatchRequest request) throws IOException {
         
-        String data = null;
+        String data;
             
         switch(request.getInputType()) {
             case FILE: { // Contained in a text file

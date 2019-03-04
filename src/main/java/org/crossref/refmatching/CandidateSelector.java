@@ -47,7 +47,6 @@ public class CandidateSelector {
     private JSONArray searchWorks(String refString, int rows, String mailTo) {
         
         // Invoke the client
-        String worksJson;
         try {
             log.debug("API search for: " + refString);
         

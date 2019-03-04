@@ -28,7 +28,7 @@
     </appender>
 
     <logger name="org.crossref.cr.common">
-        <level value="trace" />
+        <level value="DEBUG" />
     </logger>
 
     <root>
