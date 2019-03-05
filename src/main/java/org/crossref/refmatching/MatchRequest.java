@@ -1,5 +1,8 @@
 package org.crossref.refmatching;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This contains user-specified inputs for executing matching logic.
  * 
@@ -22,6 +25,7 @@ public class MatchRequest {
     private int unstructuredRows = DEFAULT_UNSTR_ROWS;
     private int structuredRows = DEFAULT_STR_ROWS;
     private String mailTo = null;
+    private Map<String, String> headers = new HashMap<String, String>();
     
     public MatchRequest(InputType inputType, String inputValue) {
         this.inputType = inputType;
@@ -104,6 +108,21 @@ public class MatchRequest {
 
     public void setMailTo(String mailTo) {
         this.mailTo = mailTo;
+    }
+    
+    public void addHeader(String key, String value) {
+        this.headers.put(key, value);
+    }
+    
+    public void setHeaders(Map<String, String> headers) {
+        this.headers.clear();
+        if (headers != null) {
+            this.headers.putAll(headers);
+        }
+    }
+
+    public Map<String, String> getHeaders() {
+        return new HashMap<String, String>(this.headers);
     }
 }
 

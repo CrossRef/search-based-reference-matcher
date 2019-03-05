@@ -35,16 +35,19 @@ public class CandidateSelector {
      * 
      * @return A list of reference candidates
      */
-    public List<Candidate> findCandidates(String refString, int rows, double minScore, String mailTo) {
+    public List<Candidate> findCandidates(
+        String refString, int rows, double minScore, String mailTo, Map<String, String> headers) {
+        
         if (StringUtils.isEmpty(refString)) {
             return new ArrayList<>();
         }
 
-        JSONArray candidates = searchWorks(refString, rows, mailTo);
+        JSONArray candidates = searchWorks(refString, rows, mailTo, headers);
         return selectCandidates(refString, candidates, minScore);
     }
 
-    private JSONArray searchWorks(String refString, int rows, String mailTo) {
+    private JSONArray searchWorks(
+        String refString, int rows, String mailTo, Map<String, String> headers) {
         
         // Invoke the client
         try {
@@ -61,7 +64,7 @@ public class CandidateSelector {
             Timer timer = new Timer();
             timer.start();
             
-            JSONArray arr = apiClient.getWorks(args);
+            JSONArray arr = apiClient.getWorks(args, headers);
             
             timer.stop();
             

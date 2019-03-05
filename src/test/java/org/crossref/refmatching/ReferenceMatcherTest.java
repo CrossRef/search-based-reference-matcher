@@ -197,7 +197,7 @@ public class ReferenceMatcherTest {
     
     private MatchResponse invokeMockStringRequest(Object reference, String mockJsonFileName) {
          try {
-            when(apiTestClient.getWorks(any())).thenReturn(extractMockItems(mockJsonFileName));
+            when(apiTestClient.getWorks(any(), any())).thenReturn(extractMockItems(mockJsonFileName));
             
             MatchRequest request = new MatchRequest(InputType.STRING, reference.toString());
             
