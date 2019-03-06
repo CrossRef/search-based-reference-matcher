@@ -180,20 +180,41 @@ public class MainApp {
             // Init request with input type and value
             MatchRequest request = new MatchRequest(inputType, inputValue);
             
-            // Minimum candidate score
+            /**
+             * Optional request settings
+             */
+            
             if (cmd.hasOption("ct")) {
                 request.setCandidateMinScore(Double.valueOf(cmd.getOptionValue("ct")));
             }
             
-            // Minimum unstructured matching score
             if (cmd.hasOption("ut")) {
                 request.setUnstructuredMinScore(Double.valueOf(cmd.getOptionValue("ut")));
             }
             
-            // Minimum structured matching score
             if (cmd.hasOption("st")) {
                 request.setStructuredMinScore(Double.valueOf(cmd.getOptionValue("st")));
             }
+            
+            if (cmd.hasOption("sr")) {
+                request.setStructuredRows(Integer.valueOf(cmd.getOptionValue("sr")));
+            }
+            
+            if (cmd.hasOption("ur")) {
+                request.setUnstructuredRows(Integer.valueOf(cmd.getOptionValue("ur")));
+            }
+
+            if (cmd.hasOption("d")) {
+                request.setDataDelimiter(cmd.getOptionValue("d"));
+            }
+
+            if (cmd.hasOption("m")) {
+               request.setMailTo(cmd.getOptionValue("m"));
+            }
+            
+            /**
+             * Optional process settings
+             */
             
             if (cmd.hasOption("as")) {
                apiScheme = cmd.getOptionValue("as").toLowerCase();
@@ -202,16 +223,6 @@ public class MainApp {
                }
             }
             
-            // Minimum structured matching score
-            if (cmd.hasOption("sr")) {
-                request.setStructuredRows(Integer.valueOf(cmd.getOptionValue("sr")));
-            }
-            
-            // Minimum structured matching score
-            if (cmd.hasOption("ur")) {
-                request.setUnstructuredRows(Integer.valueOf(cmd.getOptionValue("ur")));
-            }
-
             if (cmd.hasOption("ah")) {
                apiHost = cmd.getOptionValue("ah");
             }
@@ -227,14 +238,6 @@ public class MainApp {
             if (cmd.hasOption("o")) {
                outputFileName = cmd.getOptionValue("o");
             } 
-
-            if (cmd.hasOption("m")) {
-               request.setMailTo(cmd.getOptionValue("m"));
-            }
-            
-            if (cmd.hasOption("d")) {
-                request.setDataDelimiter(cmd.getOptionValue("d"));
-            }
 
             // Return initialized request
             return request;
