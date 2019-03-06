@@ -177,22 +177,22 @@ public class MainApp {
                 }
             }
 
+            // Init request with input type and value
+            MatchRequest request = new MatchRequest(inputType, inputValue);
+            
             // Minimum candidate score
-            double candidateMinScore = MatchRequest.DEFAULT_CAND_MIN_SCORE;
             if (cmd.hasOption("ct")) {
-               candidateMinScore = Double.valueOf(cmd.getOptionValue("ct"));
+                request.setCandidateMinScore(Double.valueOf(cmd.getOptionValue("ct")));
             }
             
             // Minimum unstructured matching score
-            double unstructuredMinScore = MatchRequest.DEFAULT_UNSTR_MIN_SCORE;
             if (cmd.hasOption("ut")) {
-               unstructuredMinScore = Double.valueOf(cmd.getOptionValue("ut"));
+                request.setUnstructuredMinScore(Double.valueOf(cmd.getOptionValue("ut")));
             }
             
             // Minimum structured matching score
-            double structuredMinScore = MatchRequest.DEFAULT_STR_MIN_SCORE;
             if (cmd.hasOption("st")) {
-               structuredMinScore = Double.valueOf(cmd.getOptionValue("st"));
+                request.setStructuredMinScore(Double.valueOf(cmd.getOptionValue("st")));
             }
             
             if (cmd.hasOption("as")) {
@@ -203,15 +203,13 @@ public class MainApp {
             }
             
             // Minimum structured matching score
-            int structuredRows = MatchRequest.DEFAULT_STR_ROWS;
             if (cmd.hasOption("sr")) {
-               structuredRows = Integer.valueOf(cmd.getOptionValue("sr"));
+                request.setStructuredRows(Integer.valueOf(cmd.getOptionValue("sr")));
             }
             
             // Minimum structured matching score
-            int unstructuredRows = MatchRequest.DEFAULT_UNSTR_ROWS;
             if (cmd.hasOption("ur")) {
-               unstructuredRows = Integer.valueOf(cmd.getOptionValue("ur"));
+                request.setUnstructuredRows(Integer.valueOf(cmd.getOptionValue("ur")));
             }
 
             if (cmd.hasOption("ah")) {
@@ -230,21 +228,15 @@ public class MainApp {
                outputFileName = cmd.getOptionValue("o");
             } 
 
-            String mailTo = null;
             if (cmd.hasOption("m")) {
-               mailTo = cmd.getOptionValue("m");
+               request.setMailTo(cmd.getOptionValue("m"));
+            }
+            
+            if (cmd.hasOption("d")) {
+                request.setDataDelimiter(cmd.getOptionValue("d"));
             }
 
             // Return initialized request
-            MatchRequest request = new MatchRequest(inputType, inputValue);
-            
-            request.setCandidateMinScore(candidateMinScore);
-            request.setUnstructuredMinScore(unstructuredMinScore);
-            request.setStructuredMinScore(structuredMinScore);
-            request.setUnstructuredRows(unstructuredRows);
-            request.setStructuredRows(structuredRows);
-            request.setMailTo(mailTo);
-            
             return request;
             
         } catch (RuntimeException | ParseException ex) {

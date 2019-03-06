@@ -105,11 +105,12 @@ public class ReferenceMatcher {
         // Try to interpret data as a JSON array. If it can't be, assume it
         // one or more delimited reference strings.
         try {
-            refs = processJsonArray(
-                JsonUtils.createJSONArray(data), request);           
+            JSONArray arr = JsonUtils.createJSONArray(data);
+            refs = processJsonArray(arr, request);           
         } catch (JSONException ex) {
+            String[] strs = data.split(request.getDataDelimiter());
             refs = processReferenceStringList(
-                Arrays.asList(data.split(request.getDataDelimiter())),request);           
+                Arrays.asList(strs),request);           
         }
         
         refs.forEach(r -> response.addMatch(r));
@@ -126,8 +127,8 @@ public class ReferenceMatcher {
     private List<ReferenceLink> processJsonArray(
         JSONArray refArray, MatchRequest request) {
         List<JSONObject> refList = new ArrayList<>();
-        refArray.forEach(idx -> {
-            refList.add((JSONObject) refArray.get((Integer) idx));
+        refArray.forEach(ref -> {
+            refList.add((JSONObject) ref);
         });
 
         return refList.parallelStream().map(ref -> {

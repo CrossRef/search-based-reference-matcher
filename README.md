@@ -8,7 +8,7 @@ To match a single reference string:
 org.crossref.refmatching.ReferenceMatcher -it string -i "Jen CK, Foner SN, Cochran EL, Bowers VA (1958) Phys Rev 112:1169"
 ```
 
-To match references from a file:
+To match multiple references from a file, with each line containing a single reference:
 
 ```
 org.crossref.refmatching.ReferenceMatcher -it file -i /file/path/with/ref/strings/one/per/line -o /output/file/path
@@ -16,10 +16,10 @@ org.crossref.refmatching.ReferenceMatcher -it file -i /file/path/with/ref/string
 
 Output file is in JSON format.
 
-To match multiple structured references:
+To match multiple structured references from a JSON text file:
 
 ```
-org.crossref.refmatching.ReferenceMatcher -i json -f /json/file/path -o /output/file/path
+org.crossref.refmatching.ReferenceMatcher -it file -i /json/file/path -o /output/file/path
 ```
 
 Input JSON file should contain an array of structured references, for example:

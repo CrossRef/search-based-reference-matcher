@@ -14,7 +14,7 @@ public class MatchRequest {
     public static final double DEFAULT_STR_MIN_SCORE = 0.76;
     public static final int DEFAULT_STR_ROWS = 100;
     public static final int DEFAULT_UNSTR_ROWS = 20;
-    private static final String DEFAULT_DELIMITER = "\r?\n";
+    public static final String DEFAULT_DELIMITER = "\r?\n";
 
     private final InputType inputType;
     private final String inputValue;
