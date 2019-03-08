@@ -13,4 +13,10 @@ public interface Reference {
      * @return A reference string
      */
     String getString();
+    
+    /**
+     * The basic type of the query.
+     * @return A query type
+     */
+    ReferenceType getType();
 }

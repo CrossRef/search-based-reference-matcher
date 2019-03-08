@@ -34,7 +34,7 @@ import org.json.JSONObject;
 public class MainApp {
     private static final String DEFAULT_API_SCHEME = "https";
     private static final String DEFAULT_API_HOST = "api.crossref.org";
-    private static final int DEFAULT_API_PORT = 8011;
+    private static final int DEFAULT_API_PORT = 0;
     private final static String CRAPI_KEY_FILE = ".crapi_key";
     private static final Logger logger = LogUtils.getLogger();
     
@@ -133,7 +133,6 @@ public class MainApp {
         options.addOption("ak", "key-file", true, "CR API key file");
         options.addOption("d", "delim", true, "Textual data delimiter");
         options.addOption("o", "out-file", true, "File to direct console output to");
-        options.addOption("m", "mail-to", true, "Mail-To option for 'polite' API call");
         options.addOption("h", "help", false, "Print help");
       
        // Parse/validate given arguments against defined options
@@ -206,10 +205,6 @@ public class MainApp {
 
             if (cmd.hasOption("d")) {
                 request.setDataDelimiter(cmd.getOptionValue("d"));
-            }
-
-            if (cmd.hasOption("m")) {
-               request.setMailTo(cmd.getOptionValue("m"));
             }
             
             /**
@@ -301,7 +296,7 @@ public class MainApp {
                 
                 outputItem.put("doi", m.getDOI());
                 outputItem.put("score", m.getScore());
-                outputItem.put("reference", m.getReference());
+                outputItem.put("reference", m.getQuery().getReference());
                 
                 writer.print(outputItem.toString());
             }

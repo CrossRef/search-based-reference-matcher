@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.crossref.common.utils.LogUtils;
@@ -87,133 +86,90 @@ public class ReferenceMatcher {
      */
     public MatchResponse match(MatchRequest request) throws IOException {
         
-        String data;
-            
-        switch(request.getInputType()) {
-            case FILE: { // Contained in a text file
-                data = FileUtils.readFileToString(new File(request.getInputValue()), "UTF-8");
-                break;
-            }
-            default: { // Specified directly as a string
-                data = request.getInputValue();
-           }
+        // If either a file or a string has been specified for textual input
+        // data, parse the text into reference queries and add them to the request
+        if (request.getInputType() == InputType.FILE) {
+            convertTextToQueries(
+                FileUtils.readFileToString(new File(request.getInputValue()), "UTF-8"), 
+                request.getDataDelimiter()).forEach(q -> request.addQuery(q));
+        } else if (request.getInputType() == InputType.STRING) {
+            convertTextToQueries(request.getInputValue(), 
+                request.getDataDelimiter()).forEach(q -> request.addQuery(q));
         }
 
         MatchResponse response = new MatchResponse(request);
-        List<ReferenceLink> refs = null;
         
-        // Try to interpret data as a JSON array. If it can't be, assume it
-        // one or more delimited reference strings.
-        try {
-            JSONArray arr = JsonUtils.createJSONArray(data);
-            refs = processJsonArray(arr, request);           
-        } catch (JSONException ex) {
-            String[] strs = data.split(request.getDataDelimiter());
-            refs = processReferenceStringList(
-                Arrays.asList(strs),request);           
-        }
-        
-        refs.forEach(r -> response.addMatch(r));
-        
+        // Process the queries, which may be a mix of structured/unstructured
+        request.getQueries().parallelStream().forEach(q -> {
+            Reference ref = q.getReference();
+            response.addMatch(ref.getType() == ReferenceType.STRUCTURED ? 
+                matchStructuredReference(q, request)
+                :
+                matchUnstructuredReference(q, request));
+        });
+                
         return response;
     }
-    
-    /**
-     * Process an array of structured references
-     * @param refArray An array JSON objects
-     * @param request Request details
-     * @return A list of reference matches
-     */
-    private List<ReferenceLink> processJsonArray(
-        JSONArray refArray, MatchRequest request) {
-        List<JSONObject> refList = new ArrayList<>();
-        refArray.forEach(ref -> {
-            refList.add((JSONObject) ref);
-        });
-
-        return refList.parallelStream().map(ref -> {
-            return match(ref, request.getCandidateMinScore(), 
-                request.getStructuredMinScore(), request.getStructuredRows(), 
-                request.getMailTo(), request.getHeaders());
-        }).collect(Collectors.toList());
-    }
-    
-    /**
-     * Process a list of reference strings, some unstructured, some structured.
-     * 
-     * @param refStrings List of strings to process
-     * @param request Request details
-     * @return A list of reference matches
-     */
-    private List<ReferenceLink> processReferenceStringList(
-        List<String> refStrings, MatchRequest request) {
         
-        return refStrings.parallelStream().map(s -> {
-            try {
-                JSONObject refObject = new JSONObject(s);
-                return match(refObject, request.getCandidateMinScore(), 
-                    request.getStructuredMinScore(), request.getStructuredRows(), 
-                    request.getMailTo(), request.getHeaders());
-            } catch (JSONException ex) {
-                // OK, not JSON object - assume string
-                return match(new UnstructuredReference(s), request.getCandidateMinScore(), 
-                    request.getUnstructuredMinScore(), request.getUnstructuredRows(), 
-                    request.getMailTo(), request.getHeaders());
-            }
-        }).collect(Collectors.toList());
-    }
-
     /**
      * Perform a match given an unstructured reference string.
      * 
-     * @param refString The unstructured reference string
-     * @param candidateMinScore Minimum selection score
-     * @param unstructuredMinScore Minimum validation score
-     * @param rows Number of rows to select for consideration
+     * @param query The unstructured reference query to match
+     * @param request Match request containing query
      * @return A match object
      */
-    private ReferenceLink match(
-        UnstructuredReference reference, double candidateMinScore, 
-        double unstructuredMinScore, int rows, String emailTo, Map<String, String> headers) {
+    private ReferenceLink matchUnstructuredReference(
+        ReferenceQuery query, MatchRequest request) {
         
-        String refString = reference.getString();
+        Reference ref = query.getReference();
         
         List<Candidate> candidates = selector.findCandidates(
-            refString, rows, candidateMinScore, emailTo, headers);
-        Candidate candidate = validator.chooseCandidate(reference, candidates, unstructuredMinScore);       
+            ref.getString(), request.getUnstructuredRows(), 
+            request.getCandidateMinScore(), request.getHeaders());
+        
+        Candidate candidate = validator.chooseCandidate(
+            ref, candidates, request.getUnstructuredMinScore());       
          
         return new ReferenceLink(
-            refString, candidate == null ? null : candidate.getDOI(), 
+            query, candidate == null ? null : candidate.getDOI(), 
             candidate == null ? 0.0 : candidate.getValidationScore());
     }
 
     /**
      *  Perform a match given a structured JSON object reference.
      * 
-     * @param reference The structured reference to match
-     * @param candidateMinScore Minimum selection score
-     * @param structuredMinScore Minimum validation score
-     * @param rows Number of rows to select for consideration
+     * @param query The structured reference query to match
+     * @param request Match request containing query
      * @return A match object
      */
-    private ReferenceLink match(
-        JSONObject reference, double candidateMinScore, 
-        double structuredMinScore, int rows, String emailTo, Map<String, String> headers) {
+    private ReferenceLink matchStructuredReference(
+        ReferenceQuery query, MatchRequest request) {
+        StructuredReference ref = (StructuredReference) query.getReference();
         
         List<Candidate> candidates = selector.findCandidates(
-            reference.toString(), rows, candidateMinScore, emailTo, headers);
+            ref.getString(), request.getStructuredRows(), 
+            request.getCandidateMinScore(), request.getHeaders());
             
-        Candidate candidate = validator.chooseCandidate(new StructuredReference(reference), candidates, structuredMinScore);        
+        Candidate candidate = validator.chooseCandidate(
+            ref, candidates, request.getStructuredMinScore());        
+        
+        JSONObject refObj = new JSONObject(ref.getMap());
         
         String journalNorm = 
-            reference.optString("journal-title").toLowerCase().replaceAll("[^a-z]", "");
+            refObj.optString("journal-title").toLowerCase().replaceAll("[^a-z]", "");
         
         if (journals.containsKey(journalNorm)) {
-            reference.put("journal-title", journals.get(journalNorm));
-            candidates = selector.findCandidates(
-                reference.toString(), rows, candidateMinScore, emailTo, headers);
+            refObj.put("journal-title", journals.get(journalNorm));
             
-            Candidate candidate2 = validator.chooseCandidate(new StructuredReference(reference), candidates, structuredMinScore);
+            StructuredReference ref2 = new StructuredReference(refObj);
+            
+            candidates = selector.findCandidates(
+                ref2.getString(), request.getStructuredRows(), 
+                request.getCandidateMinScore(), request.getHeaders());
+            
+            Candidate candidate2 = validator.chooseCandidate(
+                ref2, candidates, request.getStructuredMinScore());
+            
             if (candidate == null) {
                 candidate = candidate2;
             }
@@ -223,7 +179,42 @@ public class ReferenceMatcher {
         }
         
         return new ReferenceLink(
-            reference.toString(), candidate == null ? null : candidate.getDOI(), 
+            query, candidate == null ? null : candidate.getDOI(), 
             candidate == null ? 0.0 : candidate.getValidationScore());
+    }
+    
+    /**
+     * Parse a string to derive a list of reference query objects.
+     * 
+     * @param text Input string, which may represent a JSONArray, or a
+     *      collection of delimited string references, each of which may be
+     *      a structured JSONObject, or an unstructured string.
+     * @param delim Delimiter used to separate reference values
+     * @return A list of reference query objects, parsed from the input string
+     */
+    private List<ReferenceQuery> convertTextToQueries(String text, String delim) {
+        List<ReferenceQuery> queries = new ArrayList<>();
+        
+        try {
+            JSONArray arr = JsonUtils.createJSONArray(text);
+            arr.forEach(ref -> {
+                queries.add(new ReferenceQuery(new StructuredReference((JSONObject) ref)));
+            });          
+        } catch (JSONException ex) {
+            String[] strs = text.split(delim);
+            Arrays.asList(strs).stream().forEach(str -> {
+                Reference ref;
+                try {
+                    // Treat as structured ref if JSON string
+                    ref = new StructuredReference(new JSONObject(str));
+                } catch (JSONException e) {
+                    // Otherwise, treat as unstructured ref
+                    ref = new UnstructuredReference(str);
+                }
+                queries.add(new ReferenceQuery(ref));
+            });         
+        }
+        
+        return queries;
     }
 }

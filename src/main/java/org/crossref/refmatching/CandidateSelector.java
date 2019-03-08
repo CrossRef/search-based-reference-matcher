@@ -32,22 +32,23 @@ public class CandidateSelector {
      * @param refString The reference string to perform selection.
      * @param rows The number of rows to select for consideration
      * @param minScore The minimum score to consider a row a candidate
+     * @param headers Headers to passed via the CR-API client
      * 
      * @return A list of reference candidates
      */
     public List<Candidate> findCandidates(
-        String refString, int rows, double minScore, String mailTo, Map<String, String> headers) {
+        String refString, int rows, double minScore, Map<String, String> headers) {
         
         if (StringUtils.isEmpty(refString)) {
             return new ArrayList<>();
         }
 
-        JSONArray candidates = searchWorks(refString, rows, mailTo, headers);
+        JSONArray candidates = searchWorks(refString, rows, headers);
         return selectCandidates(refString, candidates, minScore);
     }
 
     private JSONArray searchWorks(
-        String refString, int rows, String mailTo, Map<String, String> headers) {
+        String refString, int rows, Map<String, String> headers) {
         
         // Invoke the client
         try {
@@ -56,9 +57,6 @@ public class CandidateSelector {
             Map<String, Object> args = new LinkedHashMap<>();
             args.put("rows", rows);
             args.put("query.bibliographic", refString);
-            if (!StringUtils.isEmpty(mailTo)) { // polite support
-                args.put("mailto", mailTo);
-            }
             
             // Invoke client for items
             Timer timer = new Timer();

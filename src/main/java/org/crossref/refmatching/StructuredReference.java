@@ -1,5 +1,6 @@
 package org.crossref.refmatching;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
@@ -34,6 +35,18 @@ public class StructuredReference extends UnstructuredReference {
         return metadata.get(key);
     }
     
+    /**
+     * Return a copy of the internal map.
+     * 
+     * @return A map
+     */
+    public Map<String, String> getMap() {
+        Map<String, String> map = new HashMap<>();
+        map.putAll(metadata);
+        
+        return map;
+    }
+    
     private static String createRefStringFromMap(Map<String, String> metadata) {
         StringBuilder buf = new StringBuilder(500);
         for (String key : new String[]{"author", "article-title", "journal-title",
@@ -46,5 +59,9 @@ public class StructuredReference extends UnstructuredReference {
             buf.append(metadata.getOrDefault(key, ""));
         }
         return buf.toString().replaceAll(" +", " ").trim();
+    }
+    
+    public ReferenceType getType() {
+        return ReferenceType.STRUCTURED;
     }
 }

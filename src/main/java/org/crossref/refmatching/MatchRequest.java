@@ -1,6 +1,8 @@
 package org.crossref.refmatching;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,18 +17,30 @@ public class MatchRequest {
     public static final int DEFAULT_STR_ROWS = 100;
     public static final int DEFAULT_UNSTR_ROWS = 20;
     public static final String DEFAULT_DELIMITER = "\r?\n";
-
-    private final InputType inputType;
-    private final String inputValue;
+    
+    private InputType inputType;
+    private String inputValue;
     private double candidateMinScore = DEFAULT_CAND_MIN_SCORE;
     private double unstructuredMinScore = DEFAULT_UNSTR_MIN_SCORE;
     private double structuredMinScore = DEFAULT_STR_MIN_SCORE;
     private String dataDelimiter = DEFAULT_DELIMITER;
     private int unstructuredRows = DEFAULT_UNSTR_ROWS;
     private int structuredRows = DEFAULT_STR_ROWS;
-    private String mailTo = null;
-    private Map<String, String> headers = new HashMap<String, String>();
+    private final Map<String, String> headers = new HashMap<>();
+    private final List<ReferenceQuery> queries = new ArrayList<>();
     
+    /**
+     * Used when specifying queries directly in the request only.
+     */
+    public MatchRequest() {
+    }
+    
+    /**
+     * Used when including queries parsed from textual input data.
+     * 
+     * @param inputType The source of the textual data.
+     * @param inputValue The value corresponding to input type.
+     */
     public MatchRequest(InputType inputType, String inputValue) {
         this.inputType = inputType;
         this.inputValue = inputValue;
@@ -102,18 +116,20 @@ public class MatchRequest {
         this.structuredRows = structuredRows;
     }
 
-    public String getMailTo() {
-        return mailTo;
-    }
-
-    public void setMailTo(String mailTo) {
-        this.mailTo = mailTo;
-    }
-    
+   
+    /**
+     * Ad a header to be passed via the CR-API http client
+     * @param key
+     * @param value 
+     */
     public void addHeader(String key, String value) {
         this.headers.put(key, value);
     }
     
+    /**
+     * Set headers to be passed via the CR-API http client.
+     * @param headers Key/value pairs
+     */
     public void setHeaders(Map<String, String> headers) {
         this.headers.clear();
         if (headers != null) {
@@ -121,8 +137,28 @@ public class MatchRequest {
         }
     }
 
+    /**
+     * Get the headers to be passed via the CR-API client.
+     * @return A list of key/value pairs
+     */
     public Map<String, String> getHeaders() {
-        return new HashMap<String, String>(this.headers);
+        return new HashMap<>(this.headers);
+    }
+    
+    /**
+     * Add a query object to the request.
+     * @param query A query object
+     */
+    public void addQuery(ReferenceQuery query) {
+        queries.add(query);
+    }
+    
+    /**
+     * Get the list of queries associated with the request.
+     * @return A list of query objects
+     */
+    public List<ReferenceQuery> getQueries() {
+        return queries.subList(0, queries.size());
     }
 }
 

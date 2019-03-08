@@ -40,7 +40,7 @@ public class Candidate {
     }
 
     public double getValidationSimilarity(Reference reference) {
-        return (reference instanceof StructuredReference)
+        return (reference.getType() == ReferenceType.STRUCTURED)
             ? getStructuredValidationSimilarity((StructuredReference) reference)
             : getStringValidationSimilarity(reference);
     }

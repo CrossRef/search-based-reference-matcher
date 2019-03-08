@@ -25,4 +25,8 @@ public class UnstructuredReference implements Reference {
     public String toString() {
         return getString();
     }
+    
+    public ReferenceType getType() {
+        return ReferenceType.UNSTRUCTURED;
+    }
 }
