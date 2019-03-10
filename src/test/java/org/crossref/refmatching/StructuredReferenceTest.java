@@ -20,8 +20,7 @@ public class StructuredReferenceTest {
         reference.put("year", "1962");
         reference.put("journal-title", "J. Amer. chem. Soc.");
         
-        assertEquals("West J. Amer. chem. Soc. 1962 84 1763",
-                     new StructuredReference(reference).toString());
+        assertNull(new Reference(reference).getFormattedString());
     }
 
     @Test
@@ -33,12 +32,12 @@ public class StructuredReferenceTest {
         reference.put("year", "1962");
         reference.put("journal-title", "J. Amer. chem. Soc.");
         
-        StructuredReference sr = new StructuredReference(reference);
+        Reference sr = new Reference(reference);
         
-        assertNull(sr.getField("article-title"));
-        assertNull(sr.getField("issue"));
+        assertNull(sr.getFieldValue("article-title"));
+        assertNull(sr.getFieldValue("issue"));
         reference.keySet().forEach((key) -> {
-            assertEquals(reference.get(key), sr.getField(key));
+            assertEquals(reference.get(key), sr.getFieldValue(key));
         });
     }
 }

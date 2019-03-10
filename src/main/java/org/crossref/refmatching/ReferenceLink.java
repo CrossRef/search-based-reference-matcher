@@ -1,31 +1,34 @@
 package org.crossref.refmatching;
 
 /**
- * This represents a matched reference.
+ * The class represents a matched reference.
  * 
- * @author joe.aparo
+ * @author Joe Aparo
  */
 public class ReferenceLink {
-    private String reference;
-    private String doi;
-    private double score;
+    
+    private final Reference reference;
+    private final String doi;
+    private final double score;
 
-    public ReferenceLink(String reference, String doi, double score) {
+    public ReferenceLink(Reference reference, String doi, double score) {
         this.reference = reference;
         this.doi = doi;
         this.score = score;
     }
 
     /**
-     * Get the original reference that the item matched on.
-     * @return A String representing the reference
+     * Get the original reference.
+     * 
+     * @return A reference
      */
-    public String getReference() {
+    public Reference getReference() {
         return reference;
     }
 
     /**
-     * Get the DOI of the matched item.
+     * Get the DOI of the target document.
+     * 
      * @return A DOI
      */
     public String getDOI() {
@@ -34,9 +37,11 @@ public class ReferenceLink {
 
     /**
      * Get the matching confidence score.
+     * 
      * @return A score value
      */
     public double getScore() {
         return score;
     }
+
 }

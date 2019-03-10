@@ -9,7 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- *
+ * Represents a candidate target document.
+ * 
  * @author Dominika Tkaczyk
  */
 public class Candidate {
@@ -40,13 +41,14 @@ public class Candidate {
     }
 
     public double getValidationSimilarity(Reference reference) {
-        return (reference instanceof StructuredReference)
-            ? getStructuredValidationSimilarity((StructuredReference) reference)
+        return (reference.getType().equals(ReferenceType.STRUCTURED))
+            ? getStructuredValidationSimilarity(reference)
             : getStringValidationSimilarity(reference);
     }
 
     public double getStringValidationSimilarity(Reference reference) {
-        String refString = reference.getString();
+        String refString = reference.getFormattedString();
+
         GenJaccardSimilarity similarity = new GenJaccardSimilarity();
 
         // weights for relevance score
@@ -192,27 +194,26 @@ public class Candidate {
         return similarity.similarity();
     }
 
-    public double getStructuredValidationSimilarity(
-            StructuredReference reference) {
+    public double getStructuredValidationSimilarity(Reference reference) {
         GenJaccardSimilarity similarity = new GenJaccardSimilarity();
 
         // weights for volume
-        if (reference.getField("volume") != null
-                && !"".equals(reference.getField("volume"))) {
+        if (reference.getFieldValue("volume") != null
+                && !"".equals(reference.getFieldValue("volume"))) {
             updateWeightsOne("volume", getVolume(),
-                    reference.getField("volume"), similarity);
+                    reference.getFieldValue("volume"), similarity);
         }
 
         // weights for year
-        if (reference.getField("year") != null
-                && !"".equals(reference.getField("year"))) {
+        if (reference.getFieldValue("year") != null
+                && !"".equals(reference.getFieldValue("year"))) {
             updateWeightsOne("year", getYear(),
-                    reference.getField("year"), similarity);
+                    reference.getFieldValue("year"), similarity);
             if (similarity.getMinWeight("year") != null
                     && similarity.getMinWeight("year") < 1) {
                 try {
                     int year1 = Integer.parseInt(getYear());
-                    int year2 = Integer.parseInt(reference.getField("year"));
+                    int year2 = Integer.parseInt(reference.getFieldValue("year"));
                     if (year1 + 1 == year2 || year2 + 1 == year1) {
                         similarity.update("year", 1., 0.5);
                     }
@@ -222,47 +223,51 @@ public class Candidate {
         }
 
         // weights for pages
-        if (reference.getField("first-page") != null
-                && !"".equals(reference.getField("first-page"))) {
+        if (reference.getFieldValue("first-page") != null
+                && !"".equals(reference.getFieldValue("first-page"))) {
             updateWeightsOne("page", getPage(),
-                    reference.getField("first-page"), similarity);
+                    reference.getFieldValue("first-page"), similarity);
         }
 
         // weights for title
-        if (reference.getField("article-title") != null
-                && !"".equals(reference.getField("article-title"))) {
+        if (reference.getFieldValue("article-title") != null
+                && !"".equals(reference.getFieldValue("article-title"))) {
             String a = (getTitle() == null) ? "" : getTitle();
-            String b = reference.getField("article-title");
+            String b = reference.getFieldValue("article-title");
             similarity.update("title", 1.,
                               Utils.stringSimilarity(a, b, true, false));
         }
 
         // weights for container title
-        if (reference.getField("journal-title") != null
-                && !"".equals(reference.getField("journal-title"))) {
+        if (reference.getFieldValue("journal-title") != null
+                && !"".equals(reference.getFieldValue("journal-title"))) {
             String a = (getContainerTitle() == null) ? "" : getContainerTitle();
-            String b = reference.getField("journal-title");
+            String b = reference.getFieldValue("journal-title");
             similarity.update("ctitle", 1.,
                               Utils.stringSimilarity(a, b, true, false));
         }
         
         // weights for volume title
-        if (reference.getField("volume-title") != null
-                && !"".equals(reference.getField("volume-title"))) {
+        if (reference.getFieldValue("volume-title") != null
+                && !"".equals(reference.getFieldValue("volume-title"))) {
             String a = (getTitle() == null) ? "" : getTitle();
-            String b = reference.getField("volume-title");
-            similarity.update("vtitle", 1.,
-                              Utils.stringSimilarity(a, b, true, false));
+            String b = reference.getFieldValue("volume-title");
+	    double titleSim = Utils.stringSimilarity(a, b, true, false);
+            a = (getContainerTitle() == null) ? "" : getContainerTitle();
+            double ctitleSim = Utils.stringSimilarity(a, b, true, false);
+            similarity.update("vtitle", 1., Math.max(titleSim, ctitleSim));
         }
 
         // weights for author
-        if (reference.getField("author") != null
-                && !"".equals(reference.getField("author"))) {
+        if (reference.getFieldValue("author") != null
+                && !"".equals(reference.getFieldValue("author"))) {
             String a = (getAuthor() == null) ? "" : getAuthor();
-            String b = reference.getField("author");
-            double authorSim = Utils.stringSimilarity(a, b, true, false);
+            String b = reference.getFieldValue("author");
+            double authorSim = Utils.stringSimilarity(a, b, true,
+                                                      b.contains(" "));
             a = (getEditor() == null) ? "" : getEditor();
-            double editorSim = Utils.stringSimilarity(a, b, true, false);
+            double editorSim = Utils.stringSimilarity(a, b, true,
+                                                      b.contains(" "));
             similarity.update("author", 1., Math.max(authorSim, editorSim));
         }
 
@@ -320,7 +325,7 @@ public class Candidate {
             return 0.;
         }
         if (item.getString("type").equals("book-chapter")
-                && reference.getField("first-page") == null) {
+                && reference.getFieldValue("first-page") == null) {
             return 0.;
         }
         if (item.getString("type").equals("journal-issue")) {

@@ -1,12 +1,12 @@
-package org.crossref.refmatching;
+ package org.crossref.refmatching;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This contains user-specified inputs for executing matching logic.
+ * This class contains user-specified inputs for executing matching logic.
  * 
- * @author joe.aparo
+ * @author Joe Aparo
  */
 public class MatchRequest {
     public static final double DEFAULT_CAND_MIN_SCORE = 0.4;
@@ -25,18 +25,16 @@ public class MatchRequest {
     private int unstructuredRows = DEFAULT_UNSTR_ROWS;
     private int structuredRows = DEFAULT_STR_ROWS;
     private String mailTo = null;
-    private Map<String, String> headers = new HashMap<String, String>();
+    private final Map<String, String> headers = new HashMap<String, String>();
     
     public MatchRequest(InputType inputType, String inputValue) {
         this.inputType = inputType;
         this.inputValue = inputValue;
     }
 
-    public MatchRequest(
-        InputType inputType, String inputValue, double candidateMinScore, 
-        double unstructuredMinScore, double structuredMinScore,
-        int unstructuredRows, int structuredRows) {
-        
+    public MatchRequest(InputType inputType, String inputValue,
+            double candidateMinScore, double unstructuredMinScore,
+            double structuredMinScore, int unstructuredRows, int structuredRows) {
         this.inputType = inputType;
         this.candidateMinScore = candidateMinScore;
         this.unstructuredMinScore = unstructuredMinScore;
@@ -122,7 +120,6 @@ public class MatchRequest {
     }
 
     public Map<String, String> getHeaders() {
-        return new HashMap<String, String>(this.headers);
+        return new HashMap<>(this.headers);
     }
 }
-

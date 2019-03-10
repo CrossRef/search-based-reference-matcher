@@ -1,20 +1,16 @@
 package org.crossref.refmatching;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
@@ -24,24 +20,26 @@ import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.rest.impl.CrossRefApiHttpClient;
 import org.crossref.common.utils.LogUtils;
 import org.crossref.common.utils.UnmanagedHttpClient;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
  * This class executes a matching request via a main application entrypoint.
  * 
- * @author joe.aparo
+ * @author Joe Aparo
  */
 public class MainApp {
     private static final String DEFAULT_API_SCHEME = "https";
     private static final String DEFAULT_API_HOST = "api.crossref.org";
-    private static final int DEFAULT_API_PORT = 8011;
+    private static final int DEFAULT_API_PORT = 443;
     private final static String CRAPI_KEY_FILE = ".crapi_key";
-    private static final Logger logger = LogUtils.getLogger();
+    private static final Logger LOGGER = LogUtils.getLogger();
     
     private static String apiScheme = DEFAULT_API_SCHEME;
     private static String apiHost = DEFAULT_API_HOST;
     private static int apiPort = DEFAULT_API_PORT;
-    private static String apiKeyFile = System.getProperty("user.home") + "/" + CRAPI_KEY_FILE;
+    private static String apiKeyFile = System.getProperty("user.home") + "/"
+            + CRAPI_KEY_FILE;
     private static String outputFileName = null;
 
     public static void main(String[] args) {
@@ -49,27 +47,29 @@ public class MainApp {
             MatchRequest request = processArgs(args);
 
             // Initialize API client connector
-            UnmanagedHttpClient httpClient = new UnmanagedHttpClient(apiScheme, apiHost, apiPort);
+            UnmanagedHttpClient httpClient = new UnmanagedHttpClient(apiScheme,
+                    apiHost, apiPort);
             httpClient.initialize();
             httpClient.setCommonHeaders(createStdHeaders());
             ICrossRefApiClient apiClient = new CrossRefApiHttpClient(httpClient);
             
             // Initialize matcher object
             ReferenceMatcher matcher = new ReferenceMatcher(apiClient);
-            matcher.setCacheJournals(true);
+            matcher.setCacheJournalAbbrevMap(true);
             matcher.initialize();
             
             // Get match results
             outputResults(matcher.match(request));
         } catch (IOException ex) {
-            logger.error("Error performing matching process: " + ex.getMessage(), ex);
+            LOGGER.error("Error performing matching process: " + ex.getMessage(),
+                    ex);
         }
     }
     
     /**
-     * This method will attempt to load standard header info from a local file.
-     * The headers will be sent by the api client to the server when making 
-     * http calls.
+     * This method will attempt to load standard headers info from a local file.
+     * The headers will be sent by the API client to the server when making 
+     * HTTP calls.
      * 
      * @return A map of headers
      */
@@ -79,7 +79,7 @@ public class MainApp {
         try {
             crapiData = FileUtils.readFileToString(new File(apiKeyFile), "UTF-8");
         } catch (IOException ex) {
-            logger.warn("Unable to read API key file: " + apiKeyFile);
+            LOGGER.warn("Unable to read API key file: " + apiKeyFile);
             return null;
         }
         
@@ -103,40 +103,52 @@ public class MainApp {
     /**
      * Initialize a matching request object from given input arguments as well
      * as other runtime variables. In the process, this method performs validation
-     * and will exit the program if a validation fails.
+     * and will exit the program if the validation fails.
      * 
      * @param args The arguments to process
+     * 
+     * @return Matching request
      */
     private static MatchRequest processArgs(String[] args) {
-        
         // Define acceptable options
         Options options = new Options();
         options.addOption("it", "input-type", true,
-            "This option affects how the -i option is interpreted. Valid values for this option are "
-            + "\"string\" and \"file\". If \"string\", the value of the -i option is the actual data "
-            + "to perform a match on. If \"file\", the value of the -i option is interprereted as "
-            + "the name of a file from which to read the data to perform a match on. In either case, "
-            + "textual input is assumed to be in one of two formats, either 1) A JSON Array of structured "
-            + "references, or 2) A delmited string of reference strings. See the -d option regarding "
-            + "the delimiter. In the 2nd case, strings can be either unstructured, or structured JSON"
-            + "references.");
+            "Input type. Valid values are \"string\" and \"file\". This " +
+            "option affects how the -i option is interpreted. If input type == " +
+            "\"string\", the value of the -i option should be the input data " +
+            "for the matching. If input type == \"file\", the value of the -i " +
+            "option should be the path to the file from which the input data " +
+            "will be read. In either case, the input is assumed to be in one " +
+            "of two formats, either 1) a JSON Array of structured and/or " +
+            "unstructured references, or 2) a delimited list of structured " +
+            "and/or unstructured references. See also -d option.");
         options.addOption("i", "input", true,
-            "A string value to be interpreted based on the value of the -it option");
-        options.addOption("ct", "cand-min", true, "Candidate selection normalized threshold");
-        options.addOption("ut", "unstr-min", true, "Unstructured validation threshold");
-        options.addOption("st", "str-min", true, "Structured validation threshold");
-        options.addOption("ur", "unstr-rows", true, "Number of candidates to consider for an unstructured match");
-        options.addOption("sr", "str-rows", true, "Number of candidates to consider for an structured match");
-        options.addOption("as", "api-scheme", true, "CR API http scheme (http or https)");
-        options.addOption("ah", "api-host", true, "CR API host)");
+            "The input data, or the path to the file containing the input " +
+            "data, depending on the value of the -it option.");
+        options.addOption("ct", "cand-min", true,
+                "Candidate selection normalized threshold.");
+        options.addOption("ut", "unstr-min", true,
+                "Unstructured validation threshold.");
+        options.addOption("st", "str-min", true,
+                "Structured validation threshold.");
+        options.addOption("ur", "unstr-rows", true,
+                "Number of search items to consider as candidates in " +
+                "unstructured matching.");
+        options.addOption("sr", "str-rows", true,
+                "Number of search items to consider as candidates in " +
+                "structured matching.");
+        options.addOption("as", "api-scheme", true,
+                "CR API http scheme (http or https)");
+        options.addOption("ah", "api-host", true, "CR API host");
         options.addOption("ap", "api-port", true, "CR API port");
         options.addOption("ak", "key-file", true, "CR API key file");
         options.addOption("d", "delim", true, "Textual data delimiter");
-        options.addOption("o", "out-file", true, "File to direct console output to");
-        options.addOption("m", "mail-to", true, "Mail-To option for 'polite' API call");
+        options.addOption("o", "out-file", true, "Output file");
+        options.addOption("m", "mail-to", true,
+                "Mail-To option for 'polite' API call");
         options.addOption("h", "help", false, "Print help");
       
-       // Parse/validate given arguments against defined options
+        // Parse/validate given arguments against defined options
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
         
@@ -163,9 +175,12 @@ public class MainApp {
             InputType inputType = InputType.getByCode(typeCode);
             if (inputType == null) {
                 List<String> okVals = Arrays.asList(
-                    InputType.values()).stream().map(o-> {return o.getCode();}).collect(Collectors.toList());
+                    InputType.values()).stream()
+                        .map(o-> {return o.getCode();})
+                        .collect(Collectors.toList());
  
-                throw new RuntimeException("Invalid input type specified: " + typeCode + ". Valid types are: " + okVals);
+                throw new RuntimeException("Invalid input type specified: " + 
+                        typeCode + ". Valid types are: " + okVals);
             }
             
             String inputValue = cmd.getOptionValue("i");
@@ -173,10 +188,12 @@ public class MainApp {
                 // Check for input file
                 File file = new File(inputValue);
                 if (!file.exists()) {
-                    throw new RuntimeException("The specified input file does not exist: " + inputValue);
+                    throw new RuntimeException(
+                            "The specified input file does not exist: " + 
+                            inputValue);
                 }
             }
-
+            
             // Init request with input type and value
             MatchRequest request = new MatchRequest(inputType, inputValue);
             
@@ -185,23 +202,28 @@ public class MainApp {
              */
             
             if (cmd.hasOption("ct")) {
-                request.setCandidateMinScore(Double.valueOf(cmd.getOptionValue("ct")));
+                request.setCandidateMinScore(
+                        Double.valueOf(cmd.getOptionValue("ct")));
             }
             
             if (cmd.hasOption("ut")) {
-                request.setUnstructuredMinScore(Double.valueOf(cmd.getOptionValue("ut")));
+                request.setUnstructuredMinScore(
+                        Double.valueOf(cmd.getOptionValue("ut")));
             }
             
             if (cmd.hasOption("st")) {
-                request.setStructuredMinScore(Double.valueOf(cmd.getOptionValue("st")));
+                request.setStructuredMinScore(
+                        Double.valueOf(cmd.getOptionValue("st")));
             }
             
             if (cmd.hasOption("sr")) {
-                request.setStructuredRows(Integer.valueOf(cmd.getOptionValue("sr")));
+                request.setStructuredRows(
+                        Integer.valueOf(cmd.getOptionValue("sr")));
             }
             
             if (cmd.hasOption("ur")) {
-                request.setUnstructuredRows(Integer.valueOf(cmd.getOptionValue("ur")));
+                request.setUnstructuredRows(
+                        Integer.valueOf(cmd.getOptionValue("ur")));
             }
 
             if (cmd.hasOption("d")) {
@@ -219,7 +241,8 @@ public class MainApp {
             if (cmd.hasOption("as")) {
                apiScheme = cmd.getOptionValue("as").toLowerCase();
                if (!(apiScheme.equals("http") || apiScheme.equals("https"))) {
-                   throw new RuntimeException("Invalid http scheme: " + apiScheme);
+                   throw new RuntimeException(
+                           "Invalid http scheme: " + apiScheme);
                }
             }
             
@@ -243,7 +266,7 @@ public class MainApp {
             return request;
             
         } catch (RuntimeException | ParseException ex) {
-            logger.error("Error processing input arguments: " + ex.getMessage());
+            LOGGER.error("Error processing input arguments: " + ex.getMessage());
             printHelp(options);
             return null;
         }
@@ -251,64 +274,34 @@ public class MainApp {
     
     /**
      * Display command line option help text.
+     * 
      * @param options Available options
      */
     private static void printHelp(Options options) {
-        System.out.println("\nUsage: MainApp [options]");
-        
-        System.out.println("\nOptions:");
-        String fmt = "%-15s%-15s%s";
-        
-        System.out.println(String.format(fmt, "Short Opt", "Long Opt", "Description"));
-        System.out.println(String.format(fmt, "---------", "--------", "-----------"));
-        
-        options.getOptions().stream().forEach(o -> {
-            System.out.println(
-                String.format(fmt, "-"+ o.getOpt(), "--" + o.getLongOpt(), o.getDescription()));
-        });
-                
+        System.out.println("\n");
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("MainApp [options]", options);     
         System.exit(0);
     }
     
     /**
      * Output results.
-     * @param response The response containing results
+     * 
+     * @param response The matching response
      */
     private static void outputResults(MatchResponse response) {
-        JSONObject outputItem = new JSONObject();
+        JSONArray results = response.toJSON();
         
-        // Assume console
-        OutputStream out = System.out;
-        
-        // Check for redirect to file
         if (outputFileName != null) {
             try {
-                out = new FileOutputStream(new File(outputFileName));
-            } catch (FileNotFoundException ex) {
-                java.util.logging.Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+                FileUtils.writeStringToFile(new File(outputFileName),
+                        results.toString(2), "UTF-8");
+            } catch (IOException ex) {
+                LOGGER.error("Error writing output file: " + ex.getMessage(), ex);
             }
-        }
-        
-        // Generate output
-        try (PrintWriter writer = new PrintWriter(out)) {
-            int x = 0; // for commas
-            
-            writer.println("[");
-            for (ReferenceLink m : response.getMatches()) {
-                if (x++ > 0) {
-                    writer.println(',');
-                }
-                
-                outputItem.put("doi", m.getDOI());
-                outputItem.put("score", m.getScore());
-                outputItem.put("reference", m.getReference());
-                
-                writer.print(outputItem.toString());
-            }
-            
-            // Close the writer
-            writer.println("\n]");
-            writer.flush();
+        } else {
+            System.out.println(results.toString(2));
         }
     }
+    
 }

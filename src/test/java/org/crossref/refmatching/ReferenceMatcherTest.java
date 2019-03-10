@@ -20,7 +20,8 @@ import org.mockito.MockitoAnnotations;
 
 /**
  *
- * @author joe.aparo
+ * @author Dominika Tkaczyk
+ * @author Joe Aparo
  */
 public class ReferenceMatcherTest {
     private static final double STRING_VALID_TH = 0.34;
@@ -41,7 +42,7 @@ public class ReferenceMatcherTest {
         MockitoAnnotations.initMocks(this);
         
         matcher = new ReferenceMatcher(apiTestClient);
-        matcher.setCacheJournals(true);
+        matcher.setCacheJournalAbbrevMap(true);
         matcher.initialize();
     }
     
@@ -54,10 +55,12 @@ public class ReferenceMatcherTest {
         reference.put("year", "2015");
         reference.put("journal-title", "IJDAR");
         
-        MatchResponse response = invokeMockStringRequest(reference, "structured-ref-response-1.json");
+        MatchResponse response = invokeMockStringRequest(reference,
+                "structured-ref-response-1.json");
         
-        Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDOI().equals("10.1007/s10032-015-0249-8"));
+        Assert.assertEquals(1, response.getMatchedLinks().size());
+        Assert.assertEquals("10.1007/s10032-015-0249-8",
+                response.getMatchedLinks().get(0).getDOI());
     }
     
     @Test
@@ -66,16 +69,18 @@ public class ReferenceMatcherTest {
         reference.put("author", "Tkaczyk");
         reference.put("volume", "93");
         reference.put("year", "2015");
-        reference.put("journal-title", "Communications in Computer and Information");
+        reference.put("journal-title",
+                "Communications in Computer and Information");
 
-        MatchResponse response = invokeMockStringRequest(reference, "structured-ref-response-2.json");
+        MatchResponse response = invokeMockStringRequest(reference,
+                "structured-ref-response-2.json");
         
-        Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDOI() == null);
+        Assert.assertEquals(1, response.getMatchedLinks().size());
+        Assert.assertNull(response.getMatchedLinks().get(0).getDOI());
     }
     
     @Test
-    public void shouldMatch_whenUntructuredRefIsFound() {
+    public void shouldMatch_whenUnstructuredRefIsFound() {
         
         String reference = 
             "[1]D. Tkaczyk, P. Szostek, M. Fedoryszak, P. J. Dendek, and "
@@ -84,15 +89,16 @@ public class ReferenceMatcherTest {
             + "on Document Analysis and Recognition (IJDAR), vol. 18, no. 4, "
             + "pp. 317–335, 2015.";
         
-        MatchResponse response = 
-            invokeMockStringRequest(reference, "unstructured-ref-response-1.json");
+        MatchResponse response = invokeMockStringRequest(reference,
+                "unstructured-ref-response-1.json");
         
-        Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDOI().equals("10.1007/s10032-015-0249-8"));
+        Assert.assertEquals(1, response.getMatchedLinks().size());
+        Assert.assertEquals("10.1007/s10032-015-0249-8",
+                response.getMatchedLinks().get(0).getDOI());
     }
     
     @Test
-    public void shouldNotMatch_whenUntructuredRefIsNotFound() {
+    public void shouldNotMatch_whenUnstructuredRefIsNotFound() {
         
         String reference = 
             "P. Szostek, M. Fedoryszak, P. J. Dendek, and Ł. Bolikowski,"
@@ -100,11 +106,11 @@ public class ReferenceMatcherTest {
             + "scientific literature,” IJDAR, vol. 14, no. 40, pp. 310–335, "
             + "2016.";
         
-        MatchResponse response = 
-            invokeMockStringRequest(reference, "unstructured-ref-response-2.json");
+        MatchResponse response = invokeMockStringRequest(reference,
+                "unstructured-ref-response-2.json");
         
-        Assert.assertTrue(response.getMatches().size() == 1);
-        Assert.assertTrue(response.getMatches().get(0).getDOI() == null);
+        Assert.assertEquals(1, response.getMatchedLinks().size());
+        Assert.assertNull(response.getMatchedLinks().get(0).getDOI());
     }
 
     @Test
@@ -125,40 +131,40 @@ public class ReferenceMatcherTest {
         item.put("score", 50);
         Candidate candidate = new Candidate(item);
 
-        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new Reference(
             "[1]D. Tkaczyk, P. Szostek, M. Fedoryszak, P. J. Dendek, and Ł. "
             + "Bolikowski, “CERMINE: automatic extraction of structured "
             + "metadata from scientific literature,” International Journal "
             + "on Document Analysis and Recognition (IJDAR), vol. 18, no. 4, "
             + "pp. 317–335, 2015.")) > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new Reference(
             "[1] D. Tkaczyk, P. Szostek, M. Fedoryszak, P.J. Dendek, Ł. "
             + "Bolikowski, International Journal on Document Analysis and "
             + "Recognition (IJDAR) 18 (2015) 317.")) > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new Reference(
             "[1]D. Tkaczyk and Ł. Bolikowski, “Extracting Contextual "
             + "Information from Scientific Literature Using CERMINE System,” "
             + "Communications in Computer and Information Science, pp. "
             + "93–104, 2015.")) < STRING_VALID_TH);
-        Assert.assertTrue(candidate.getStringValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getStringValidationSimilarity(new Reference(
             "[1] D. Tkaczyk, Ł. Bolikowski, Communications in Computer and "
             + "Information Science (2015) 93.")) < STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getValidationSimilarity(new Reference(
             "[1]D. Tkaczyk, P. Szostek, M. Fedoryszak, P. J. Dendek, and Ł. "
             + "Bolikowski,“CERMINE: automatic extraction of structured "
             + "metadata from scientific literature,” International Journal "
             + "on Document Analysis and Recognition (IJDAR), vol. 18, no. 4, "
             + "pp. 317–335, 2015.")) > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getValidationSimilarity(new Reference(
             "[1] D. Tkaczyk, P. Szostek, M. Fedoryszak, P.J. Dendek, Ł. "
             + "Bolikowski, International Journal on Document Analysis and "
             + "Recognition (IJDAR) 18 (2015) 317.")) > STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getValidationSimilarity(new Reference(
             "[1]D. Tkaczyk and Ł. Bolikowski, “Extracting Contextual "
             + "Information from Scientific Literature Using CERMINE System,” "
             + "Communications in Computer and Information Science, pp. "
             + "93–104, 2015.")) < STRING_VALID_TH);
-        Assert.assertTrue(candidate.getValidationSimilarity(new UnstructuredReference(
+        Assert.assertTrue(candidate.getValidationSimilarity(new Reference(
             "[1] D. Tkaczyk, Ł. Bolikowski, Communications in Computer and "
             + "Information Science (2015) 93.")) < STRING_VALID_TH);
     }
@@ -175,10 +181,11 @@ public class ReferenceMatcherTest {
         fields.put("first-page", "317");
         fields.put("year", "2015");
         fields.put("journal-title", "IJDAR");
-        StructuredReference reference = new StructuredReference(fields);
+        Reference reference = new Reference(fields);
 
         Assert.assertTrue(
-            candidate.getStructuredValidationSimilarity(reference) > STRUCTURED_VALID_TH);
+            candidate.getStructuredValidationSimilarity(reference)
+                    > STRUCTURED_VALID_TH);
         Assert.assertTrue(
             candidate.getValidationSimilarity(reference) > STRUCTURED_VALID_TH);
 
@@ -187,22 +194,25 @@ public class ReferenceMatcherTest {
         fields.put("volume", "93");
         fields.put("year", "2015");
         fields.put("journal-title", "Communications in Computer and Information");
-        reference = new StructuredReference(fields);
+        reference = new Reference(fields);
 
         Assert.assertTrue(
-            candidate.getStructuredValidationSimilarity(reference) < STRUCTURED_VALID_TH);
+            candidate.getStructuredValidationSimilarity(reference)
+                    < STRUCTURED_VALID_TH);
         Assert.assertTrue(
             candidate.getValidationSimilarity(reference) < STRUCTURED_VALID_TH);
     }
     
-    private MatchResponse invokeMockStringRequest(Object reference, String mockJsonFileName) {
+    private MatchResponse invokeMockStringRequest(Object reference,
+            String mockJsonFileName) {
          try {
-            when(apiTestClient.getWorks(any(), any())).thenReturn(extractMockItems(mockJsonFileName));
+            when(apiTestClient.getWorks(any(), any()))
+                    .thenReturn(extractMockItems(mockJsonFileName));
             
-            MatchRequest request = new MatchRequest(InputType.STRING, reference.toString());
+            MatchRequest request = new MatchRequest(InputType.STRING,
+                    reference.toString());
             
             return matcher.match(request);
-
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -215,7 +225,6 @@ public class ReferenceMatcherTest {
     
     private JSONObject extractFirstMockItem(String mockJsonFileName) {
         JSONArray items = extractMockItems(mockJsonFileName);
-
         return items.getJSONObject(0);
     }
     
@@ -223,7 +232,8 @@ public class ReferenceMatcherTest {
         File[] files = ResourceUtils.getResourceFolderFiles("api-responses");
         for (File f : files) {
             try {
-                mockResponseMap.put(f.getName(), FileUtils.readFileToString(f, "UTF-8"));
+                mockResponseMap.put(f.getName(),
+                        FileUtils.readFileToString(f, "UTF-8"));
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

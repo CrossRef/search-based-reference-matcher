@@ -14,11 +14,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Class for identifying reference candidates for matching.
+ * Class for selecting target document candidates from the corpus.
  * 
  * @author Dominika Tkaczyk
+ * @author Joe Aparo
  */
 public class CandidateSelector {
+    
     private final ICrossRefApiClient apiClient;
     private final Logger log = LogUtils.getLogger();
     
@@ -27,29 +29,31 @@ public class CandidateSelector {
     }
 
     /**
-     * Find candidate journals for matching.
+     * Select candidate target items.
      * 
-     * @param refString The reference string to perform selection.
-     * @param rows The number of rows to select for consideration
-     * @param minScore The minimum score to consider a row a candidate
+     * @param reference The reference to match
+     * @param rows The number of search items to consider as candidates
+     * @param minScore The minimum relevance score to consider a search item
+     * a candidate
+     * @param mailTo Polite mailTo
+     * @param headers Additional headers to pass in the search request
      * 
-     * @return A list of reference candidates
+     * @return A list of candidates
      */
-    public List<Candidate> findCandidates(
-        String refString, int rows, double minScore, String mailTo, Map<String, String> headers) {
+    public List<Candidate> findCandidates(Reference reference, int rows,
+            double minScore, String mailTo, Map<String, String> headers) {
+        String query = getQuery(reference);
         
-        if (StringUtils.isEmpty(refString)) {
+        if (StringUtils.isEmpty(query)) {
             return new ArrayList<>();
         }
 
-        JSONArray candidates = searchWorks(refString, rows, mailTo, headers);
-        return selectCandidates(refString, candidates, minScore);
+        JSONArray candidates = searchWorks(query, rows, mailTo, headers);
+        return selectCandidates(query, candidates, minScore);
     }
 
-    private JSONArray searchWorks(
-        String refString, int rows, String mailTo, Map<String, String> headers) {
-        
-        // Invoke the client
+    private JSONArray searchWorks(String refString, int rows, String mailTo,
+            Map<String, String> headers) {
         try {
             log.debug("API search for: " + refString);
         
@@ -63,9 +67,7 @@ public class CandidateSelector {
             // Invoke client for items
             Timer timer = new Timer();
             timer.start();
-            
             JSONArray arr = apiClient.getWorks(args, headers);
-            
             timer.stop();
             
             log.debug("apiClient.getWorks: " + timer.elapsedMs()); 
@@ -78,7 +80,8 @@ public class CandidateSelector {
         }
     }
 
-    private List<Candidate> selectCandidates(String refString, JSONArray items, double minScore) {
+    private List<Candidate> selectCandidates(String refString, JSONArray items,
+            double minScore) {
         List<Candidate> candidates = new ArrayList<>();
 	if (items == null) {
 	    return candidates;
@@ -95,4 +98,23 @@ public class CandidateSelector {
         }
         return candidates;
     }
+
+    private String getQuery(Reference reference) {
+        if (reference.getType().equals(ReferenceType.UNSTRUCTURED)) {
+            return reference.getFormattedString();
+        }
+        StringBuilder sb = new StringBuilder(500);
+        for (String key : new String[]{"author", "article-title", "journal-title",
+            "series-title", "volume-title", "year", "volume", "issue",
+            "first-page", "edition", "ISSN"}) {
+            
+            if (sb.length() > 0) {
+                sb.append(" ");
+            }
+            sb.append(reference.getFieldValue(key) == null ?
+                    "" : reference.getFieldValue(key));
+        }
+        return sb.toString().replaceAll(" +", " ").trim();
+    }
+    
 }

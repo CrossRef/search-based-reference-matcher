@@ -5,13 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Class for selecting a single reference candidate from a list based on best score.
+ * Class for selecting a single target document from a list of candidates.
  * 
  * @author Dominika Tkaczyk
  */
 public class CandidateValidator {
 
-    public Candidate chooseCandidate(Reference reference, List<Candidate> candidates, double minScore) {
+    public Candidate chooseCandidate(Reference reference,
+            List<Candidate> candidates, double minScore) {
         if (candidates.isEmpty()) {
             return null;
         }

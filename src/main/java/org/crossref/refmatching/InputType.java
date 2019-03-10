@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents the ways in which textual content to be matched may be provided.
+ * Represents the ways in which textual input for matching may be provided.
  * 
- * FILE - content to match is specified as the name of a file to read
- * STRING - content to match is provided directly
+ * FILE - content to match is specified as the path to a file
+ * STRING - content to match is provided as a string
+ * 
+ * @author Joe Aparo
  */
 public enum InputType {
     FILE("file"),
@@ -23,6 +25,7 @@ public enum InputType {
     
     /**
      * Construct the enum.
+     * 
      * @param code User specified code
      */
     InputType(String code) {
@@ -33,6 +36,7 @@ public enum InputType {
      * Fetch a type by its code.
      * 
      * @param code Code to find
+     * 
      * @return Found type, or null if not found
      */
     public static InputType getByCode(String code) {
@@ -41,9 +45,11 @@ public enum InputType {
     
     /**
      * Get the internal code associated with the enum.
+     * 
      * @return A user defined string code
      */
     public String getCode() {
         return this.code;
     }
+    
 }

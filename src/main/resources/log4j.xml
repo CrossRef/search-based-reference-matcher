@@ -28,11 +28,11 @@
     </appender>
 
     <logger name="org.crossref.cr.common">
-        <level value="DEBUG" />
+        <level value="ERROR" />
     </logger>
 
     <root>
-        <level value="DEBUG" />
+        <level value="ERROR" />
         <appender-ref ref="async" />
     </root>
 </log4j:configuration>
