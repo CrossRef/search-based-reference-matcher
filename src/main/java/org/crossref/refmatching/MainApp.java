@@ -144,8 +144,6 @@ public class MainApp {
         options.addOption("ak", "key-file", true, "CR API key file");
         options.addOption("d", "delim", true, "Textual data delimiter");
         options.addOption("o", "out-file", true, "Output file");
-        options.addOption("m", "mail-to", true,
-                "Mail-To option for 'polite' API call");
         options.addOption("h", "help", false, "Print help");
       
         // Parse/validate given arguments against defined options
@@ -170,7 +168,7 @@ public class MainApp {
                throw new RuntimeException("Input value not specified");
             }
 
-           // Validate given input type
+            // Validate given input type
             String typeCode = cmd.getOptionValue("it");
             InputType inputType = InputType.getByCode(typeCode);
             if (inputType == null) {
@@ -228,10 +226,6 @@ public class MainApp {
 
             if (cmd.hasOption("d")) {
                 request.setDataDelimiter(cmd.getOptionValue("d"));
-            }
-
-            if (cmd.hasOption("m")) {
-               request.setMailTo(cmd.getOptionValue("m"));
             }
             
             /**

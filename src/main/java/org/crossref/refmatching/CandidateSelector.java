@@ -41,18 +41,18 @@ public class CandidateSelector {
      * @return A list of candidates
      */
     public List<Candidate> findCandidates(Reference reference, int rows,
-            double minScore, String mailTo, Map<String, String> headers) {
+            double minScore, Map<String, String> headers) {
         String query = getQuery(reference);
         
         if (StringUtils.isEmpty(query)) {
             return new ArrayList<>();
         }
 
-        JSONArray candidates = searchWorks(query, rows, mailTo, headers);
+        JSONArray candidates = searchWorks(query, rows, headers);
         return selectCandidates(query, candidates, minScore);
     }
 
-    private JSONArray searchWorks(String refString, int rows, String mailTo,
+    private JSONArray searchWorks(String refString, int rows,
             Map<String, String> headers) {
         try {
             log.debug("API search for: " + refString);
@@ -60,9 +60,6 @@ public class CandidateSelector {
             Map<String, Object> args = new LinkedHashMap<>();
             args.put("rows", rows);
             args.put("query.bibliographic", refString);
-            if (!StringUtils.isEmpty(mailTo)) { // polite support
-                args.put("mailto", mailTo);
-            }
             
             // Invoke client for items
             Timer timer = new Timer();
