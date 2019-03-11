@@ -4,7 +4,8 @@ import cz.jirutka.unidecode.Unidecode;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 /**
- *
+ * Utility class.
+ * 
  * @author Dominika Tkaczyk
  */
 public class Utils {

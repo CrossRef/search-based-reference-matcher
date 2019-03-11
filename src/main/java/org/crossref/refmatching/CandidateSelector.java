@@ -1,106 +1,87 @@
 package org.crossref.refmatching;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.crossref.common.rest.api.ICrossRefApiClient;
+import org.crossref.common.utils.LogUtils;
+import org.crossref.common.utils.Timer;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
 
 /**
- *
+ * Class for selecting target document candidates from the corpus.
+ * 
  * @author Dominika Tkaczyk
+ * @author Joe Aparo
  */
 public class CandidateSelector {
-
-    private final double minScore;
-    private final int rows;
     
-    private String authorization;
-    private String mailto;
+    private final ICrossRefApiClient apiClient;
+    private final Logger log = LogUtils.getLogger();
     
-    private final static String CRAPI_KEY_FILE = ".crapi_key";
-    private final static String CRAPI_URL = "https://api.crossref.org/";
-    
-    private final static int TIMEOUT = 30*1000;
-
-    private static final Logger LOGGER =
-            LogManager.getLogger(CandidateSelector.class.getName());
-    
-    public CandidateSelector(double minScore, int rows) {
-        this.minScore = minScore;
-        this.rows = rows;
-        try {
-            String home = System.getProperty("user.home");
-            String crapiData = FileUtils.readFileToString(
-                    new File(home + "/" + CRAPI_KEY_FILE), "UTF-8");
-            JSONObject crapiJson = new JSONObject(crapiData);
-            authorization = crapiJson.optString("Authorization", null);
-            mailto = crapiJson.optString("Mailto", null);
-        } catch (IOException ex) {
-        }
+    public CandidateSelector(ICrossRefApiClient apiClient) {
+        this.apiClient = apiClient;
     }
 
-    public List<Candidate> findCandidates(Reference reference) {
+    /**
+     * Select candidate target items.
+     * 
+     * @param reference The reference to match
+     * @param rows The number of search items to consider as candidates
+     * @param minScore The minimum relevance score to consider a search item
+     * a candidate
+     * @param mailTo Polite mailTo
+     * @param headers Additional headers to pass in the search request
+     * 
+     * @return A list of candidates
+     */
+    public List<Candidate> findCandidates(Reference reference, int rows,
+            double minScore, String mailTo, Map<String, String> headers) {
+        String query = getQuery(reference);
+        
+        if (StringUtils.isEmpty(query)) {
+            return new ArrayList<>();
+        }
+
+        JSONArray candidates = searchWorks(query, rows, mailTo, headers);
+        return selectCandidates(query, candidates, minScore);
+    }
+
+    private JSONArray searchWorks(String refString, int rows, String mailTo,
+            Map<String, String> headers) {
         try {
-            if (reference.getString().isEmpty()) {
-                return new ArrayList<>();
+            log.debug("API search for: " + refString);
+        
+            Map<String, Object> args = new LinkedHashMap<>();
+            args.put("rows", rows);
+            args.put("query.bibliographic", refString);
+            if (!StringUtils.isEmpty(mailTo)) { // polite support
+                args.put("mailto", mailTo);
             }
-            JSONArray candidates = search(reference.getString());
-            return selectCandidates(reference.getString(), candidates);
-        } catch (UnsupportedEncodingException ex) {
-            LOGGER.fatal(ex);
+            
+            // Invoke client for items
+            Timer timer = new Timer();
+            timer.start();
+            JSONArray arr = apiClient.getWorks(args, headers);
+            timer.stop();
+            
+            log.debug("apiClient.getWorks: " + timer.elapsedMs()); 
+            
+            return arr;
+            
         } catch (IOException ex) {
-            LOGGER.fatal(ex);
+            log.error("Error calling api client: " + ex.getMessage(), ex);
+            return new JSONArray();
         }
-        return new ArrayList<>();
     }
 
-    private JSONArray search(String refString)
-            throws MalformedURLException, UnsupportedEncodingException,
-            IOException {
-        RequestConfig.Builder requestBuilder = RequestConfig.custom();
-        requestBuilder = requestBuilder.setConnectTimeout(TIMEOUT);
-        requestBuilder = requestBuilder.setConnectionRequestTimeout(TIMEOUT);
-
-        HttpClientBuilder builder = HttpClientBuilder.create();     
-        builder.setDefaultRequestConfig(requestBuilder.build());
-        HttpClient httpclient = builder.build();
-        HttpGet httpget = new HttpGet(
-                String.format("%s/works?rows=%d&query.bibliographic=%s",
-                              CRAPI_URL, rows,
-                              URLEncoder.encode(refString, "UTF-8")));
-        if (authorization != null) {
-            httpget.setHeader("Authorization", authorization);
-        }
-        if (mailto != null) {
-            httpget.setHeader("Mailto", mailto);
-        }
-        HttpResponse response = httpclient.execute(httpget);
-        response.getEntity().getContent();
-        try {
-	    JSONObject json = new JSONObject(IOUtils.toString(
-                response.getEntity().getContent(), "UTF-8"));
-            return json.getJSONObject("message").optJSONArray("items");
-	} catch (JSONException e) {
-	    return new JSONArray();
-	}
-    }
-
-    private List<Candidate> selectCandidates(String refString, JSONArray items) {
+    private List<Candidate> selectCandidates(String refString, JSONArray items,
+            double minScore) {
         List<Candidate> candidates = new ArrayList<>();
 	if (items == null) {
 	    return candidates;
@@ -118,4 +99,22 @@ public class CandidateSelector {
         return candidates;
     }
 
+    private String getQuery(Reference reference) {
+        if (reference.getType().equals(ReferenceType.UNSTRUCTURED)) {
+            return reference.getFormattedString();
+        }
+        StringBuilder sb = new StringBuilder(500);
+        for (String key : new String[]{"author", "article-title", "journal-title",
+            "series-title", "volume-title", "year", "volume", "issue",
+            "first-page", "edition", "ISSN"}) {
+            
+            if (sb.length() > 0) {
+                sb.append(" ");
+            }
+            sb.append(reference.getFieldValue(key) == null ?
+                    "" : reference.getFieldValue(key));
+        }
+        return sb.toString().replaceAll(" +", " ").trim();
+    }
+    
 }

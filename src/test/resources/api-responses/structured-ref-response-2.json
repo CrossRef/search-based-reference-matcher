@@ -1,0 +1,1068 @@
+
+{
+    "status": "ok",
+    "message-type": "work-list",
+    "message-version": "1.0.0",
+    "message": {
+        "facets": {},
+        "total-results": 8367871,
+        "items": [
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            29
+                        ]
+                    ],
+                    "date-time": "2018-09-29T06:02:37Z",
+                    "timestamp": 1538200957263
+                },
+                "publisher-location": "Cham",
+                "reference-count": 14,
+                "publisher": "Springer International Publishing",
+                "isbn-type": [
+                    {
+                        "value": "9783319255170",
+                        "type": "print"
+                    },
+                    {
+                        "value": "9783319255187",
+                        "type": "electronic"
+                    }
+                ],
+                "license": [
+                    {
+                        "URL": "http://www.springer.com/tdm",
+                        "start": {
+                            "date-parts": [
+                                [
+                                    2015,
+                                    1,
+                                    1
+                                ]
+                            ],
+                            "date-time": "2015-01-01T00:00:00Z",
+                            "timestamp": 1420070400000
+                        },
+                        "delay-in-days": 0,
+                        "content-version": "unspecified"
+                    },
+                    {
+                        "URL": "http://www.springer.com/tdm",
+                        "start": {
+                            "date-parts": [
+                                [
+                                    2015,
+                                    1,
+                                    1
+                                ]
+                            ],
+                            "date-time": "2015-01-01T00:00:00Z",
+                            "timestamp": 1420070400000
+                        },
+                        "delay-in-days": 0,
+                        "content-version": "unspecified"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015
+                        ]
+                    ]
+                },
+                "DOI": "10.1007/978-3-319-25518-7_8",
+                "type": "book-chapter",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            9,
+                            30
+                        ]
+                    ],
+                    "date-time": "2015-09-30T04:20:51Z",
+                    "timestamp": 1443586851000
+                },
+                "page": "93-104",
+                "source": "Crossref",
+                "is-referenced-by-count": 5,
+                "title": [
+                    "Extracting Contextual Information from Scientific Literature Using CERMINE System"
+                ],
+                "prefix": "10.1007",
+                "author": [
+                    {
+                        "given": "Dominika",
+                        "family": "Tkaczyk",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Łukasz",
+                        "family": "Bolikowski",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "297",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2016,
+                            1,
+                            7
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "key": "8_CR1",
+                        "unstructured": "Dublin Core. http://dublincore.org/"
+                    },
+                    {
+                        "key": "8_CR2",
+                        "unstructured": "iText. http://itextpdf.com/"
+                    },
+                    {
+                        "key": "8_CR3",
+                        "unstructured": "NLM. http://dtd.nlm.nih.gov/archiving/"
+                    },
+                    {
+                        "key": "8_CR4",
+                        "unstructured": "PdfMiner. http://www.unixuser.org/~euske/python/pdfminer/"
+                    },
+                    {
+                        "key": "8_CR5",
+                        "unstructured": "PubMed. http://www.ncbi.nlm.nih.gov/pubmed"
+                    },
+                    {
+                        "key": "8_CR6",
+                        "unstructured": "vCard. http://www.w3.org/TR/vcard-rdf/"
+                    },
+                    {
+                        "issue": "3",
+                        "key": "8_CR7",
+                        "first-page": "27",
+                        "volume": "2",
+                        "author": "C Chang",
+                        "year": "2011",
+                        "unstructured": "Chang, C., Lin, C.: LIBSVM: a library for support vector machines. ACM TIST 2(3), 27 (2011)",
+                        "journal-title": "ACM TIST"
+                    },
+                    {
+                        "key": "8_CR8",
+                        "unstructured": "Giles, C.L., Bollacker, K.D., Lawrence, S.: Citeseer: An automatic citation indexing system. In: Proceedings of the 3rd ACM International Conference on Digital Libraries, pp. 89–98 (1998)",
+                        "DOI": "10.1145/276675.276685",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "8_CR9",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "127",
+                        "DOI": "10.1023/A:1009953814988",
+                        "volume": "3",
+                        "author": "A McCallum",
+                        "year": "2000",
+                        "unstructured": "McCallum, A., Nigam, K., Rennie, J.: Automating the construction of internet portals with machine learning. Inf. Retrieval 3, 127–163 (2000)",
+                        "journal-title": "Inf. Retrieval"
+                    },
+                    {
+                        "key": "8_CR10",
+                        "unstructured": "McCallum, A.K.: MALLET: A Machine Learning for Language Toolkit (2002)"
+                    },
+                    {
+                        "issue": "11",
+                        "key": "8_CR11",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1162",
+                        "DOI": "10.1109/34.244677",
+                        "volume": "15",
+                        "author": "L O’Gorman",
+                        "year": "1993",
+                        "unstructured": "O’Gorman, L.: The document spectrum for page layout analysis. IEEE Trans. Pattern Anal. Mach. Intell. 15(11), 1162–1173 (1993)",
+                        "journal-title": "IEEE Trans. Pattern Anal. Mach. Intell."
+                    },
+                    {
+                        "key": "8_CR12",
+                        "unstructured": "Tkaczyk, D., Szostek, P., Bolikowski, L.: GROTOAP2 - the methodology of creating a large ground truth dataset of scientific articles. D-Lib Magazine (2014)",
+                        "DOI": "10.1045/november14-tkaczyk",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "8_CR13",
+                        "unstructured": "Tkaczyk, D., Szostek, P., Fedoryszak, M., Dendek, P.J., Bolikowski, L.: CERMINE: automatic extraction of structured metadata from scientific literature. Int. J. Doc. Anal. Recogn. (IJDAR), 1–19 (2015). http://dx.doi.org/10.1007/s10032-015-0249-8 . doi: 10.1007/s10032-015-0249-8",
+                        "DOI": "10.1007/s10032-015-0249-8",
+                        "doi-asserted-by": "publisher"
+                    },
+                    {
+                        "key": "8_CR14",
+                        "unstructured": "Tkaczyk, D., et al.: Cermine: Cermine 1.6 (2015). http://dx.doi.org/10.5281/zenodo.17594"
+                    }
+                ],
+                "container-title": [
+                    "Semantic Web Evaluation Challenges",
+                    "Communications in Computer and Information Science"
+                ],
+                "link": [
+                    {
+                        "URL": "http://link.springer.com/content/pdf/10.1007/978-3-319-25518-7_8",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            6,
+                            23
+                        ]
+                    ],
+                    "date-time": "2017-06-23T20:29:45Z",
+                    "timestamp": 1498249785000
+                },
+                "score": 31.899239,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015
+                        ]
+                    ]
+                },
+                "ISBN": [
+                    "9783319255170",
+                    "9783319255187"
+                ],
+                "references-count": 14,
+                "URL": "http://dx.doi.org/10.1007/978-3-319-25518-7_8",
+                "relation": {
+                    "cites": []
+                },
+                "ISSN": [
+                    "1865-0929",
+                    "1865-0937"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1865-0929",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1865-0937",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            3
+                        ]
+                    ],
+                    "date-time": "2018-05-03T20:32:23Z",
+                    "timestamp": 1525379543828
+                },
+                "reference-count": 4,
+                "publisher": "Elsevier BV",
+                "issue": "2",
+                "license": [
+                    {
+                        "URL": "http://www.elsevier.com/tdm/userlicense/1.0/",
+                        "start": {
+                            "date-parts": [
+                                [
+                                    1989,
+                                    4,
+                                    1
+                                ]
+                            ],
+                            "date-time": "1989-04-01T00:00:00Z",
+                            "timestamp": 607392000000
+                        },
+                        "delay-in-days": 0,
+                        "content-version": "tdm"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "Computer Communications"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            1989,
+                            4
+                        ]
+                    ]
+                },
+                "DOI": "10.1016/0140-3664(89)90063-7",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2003,
+                            8,
+                            7
+                        ]
+                    ],
+                    "date-time": "2003-08-07T22:34:07Z",
+                    "timestamp": 1060295647000
+                },
+                "page": "93-96",
+                "source": "Crossref",
+                "is-referenced-by-count": 2,
+                "title": [
+                    "Font information interchange standard ISO/IEC 9541"
+                ],
+                "prefix": "10.1016",
+                "volume": "12",
+                "author": [
+                    {
+                        "given": "Edwin J",
+                        "family": "Smura",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Barbara",
+                        "family": "Beeton",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Karla",
+                        "family": "Savage",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Alan",
+                        "family": "Griffee",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "78",
+                "container-title": [
+                    "Computer Communications"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "http://api.elsevier.com/content/article/PII:0140366489900637?httpAccept=text/xml",
+                        "content-type": "text/xml",
+                        "content-version": "vor",
+                        "intended-application": "text-mining"
+                    },
+                    {
+                        "URL": "http://api.elsevier.com/content/article/PII:0140366489900637?httpAccept=text/plain",
+                        "content-type": "text/plain",
+                        "content-version": "vor",
+                        "intended-application": "text-mining"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            6,
+                            15
+                        ]
+                    ],
+                    "date-time": "2017-06-15T23:54:29Z",
+                    "timestamp": 1497570869000
+                },
+                "score": 22.900406,
+                "issued": {
+                    "date-parts": [
+                        [
+                            1989,
+                            4
+                        ]
+                    ]
+                },
+                "references-count": 4,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                1989,
+                                4
+                            ]
+                        ]
+                    },
+                    "issue": "2"
+                },
+                "alternative-id": [
+                    "0140366489900637"
+                ],
+                "URL": "http://dx.doi.org/10.1016/0140-3664(89)90063-7",
+                "ISSN": [
+                    "0140-3664"
+                ],
+                "issn-type": [
+                    {
+                        "value": "0140-3664",
+                        "type": "print"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            10,
+                            30
+                        ]
+                    ],
+                    "date-time": "2018-10-30T08:22:41Z",
+                    "timestamp": 1540887761019
+                },
+                "reference-count": 41,
+                "publisher": "Elsevier BV",
+                "license": [
+                    {
+                        "URL": "https://www.elsevier.com/tdm/userlicense/1.0/",
+                        "start": {
+                            "date-parts": [
+                                [
+                                    2015,
+                                    12,
+                                    1
+                                ]
+                            ],
+                            "date-time": "2015-12-01T00:00:00Z",
+                            "timestamp": 1448928000000
+                        },
+                        "delay-in-days": 0,
+                        "content-version": "tdm"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [
+                        "elsevier.com",
+                        "sciencedirect.com"
+                    ],
+                    "crossmark-restriction": true
+                },
+                "short-container-title": [
+                    "Computer Communications"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            12
+                        ]
+                    ]
+                },
+                "DOI": "10.1016/j.comcom.2015.06.001",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            6,
+                            13
+                        ]
+                    ],
+                    "date-time": "2015-06-13T03:35:16Z",
+                    "timestamp": 1434166516000
+                },
+                "page": "93-106",
+                "update-policy": "http://dx.doi.org/10.1016/elsevier_cm_policy",
+                "source": "Crossref",
+                "is-referenced-by-count": 23,
+                "title": [
+                    "Smooth path construction and adjustment for multiple mobile sinks in wireless sensor networks"
+                ],
+                "prefix": "10.1016",
+                "volume": "72",
+                "author": [
+                    {
+                        "ORCID": "http://orcid.org/0000-0002-6306-3995",
+                        "authenticated-orcid": false,
+                        "given": "Andrew",
+                        "family": "Wichmann",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Turgay",
+                        "family": "Korkmaz",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "78",
+                "container-title": [
+                    "Computer Communications"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "https://api.elsevier.com/content/article/PII:S0140366415002157?httpAccept=text/xml",
+                        "content-type": "text/xml",
+                        "content-version": "vor",
+                        "intended-application": "text-mining"
+                    },
+                    {
+                        "URL": "https://api.elsevier.com/content/article/PII:S0140366415002157?httpAccept=text/plain",
+                        "content-type": "text/plain",
+                        "content-version": "vor",
+                        "intended-application": "text-mining"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            21
+                        ]
+                    ],
+                    "date-time": "2018-09-21T21:53:24Z",
+                    "timestamp": 1537566804000
+                },
+                "score": 22.596756,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            12
+                        ]
+                    ]
+                },
+                "references-count": 41,
+                "alternative-id": [
+                    "S0140366415002157"
+                ],
+                "URL": "http://dx.doi.org/10.1016/j.comcom.2015.06.001",
+                "ISSN": [
+                    "0140-3664"
+                ],
+                "issn-type": [
+                    {
+                        "value": "0140-3664",
+                        "type": "print"
+                    }
+                ],
+                "subject": [
+                    "Computer Networks and Communications"
+                ],
+                "assertion": [
+                    {
+                        "value": "Elsevier",
+                        "name": "publisher",
+                        "label": "This article is maintained by"
+                    },
+                    {
+                        "value": "Smooth path construction and adjustment for multiple mobile sinks in wireless sensor networks",
+                        "name": "articletitle",
+                        "label": "Article Title"
+                    },
+                    {
+                        "value": "Computer Communications",
+                        "name": "journaltitle",
+                        "label": "Journal Title"
+                    },
+                    {
+                        "value": "https://doi.org/10.1016/j.comcom.2015.06.001",
+                        "name": "articlelink",
+                        "label": "CrossRef DOI link to publisher maintained version"
+                    },
+                    {
+                        "value": "article",
+                        "name": "content_type",
+                        "label": "Content Type"
+                    },
+                    {
+                        "value": "Copyright © 2015 Elsevier B.V. All rights reserved.",
+                        "name": "copyright",
+                        "label": "Copyright"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            20
+                        ]
+                    ],
+                    "date-time": "2018-09-20T23:10:27Z",
+                    "timestamp": 1537485027721
+                },
+                "reference-count": 19,
+                "publisher": "Elsevier BV",
+                "license": [
+                    {
+                        "URL": "https://www.elsevier.com/tdm/userlicense/1.0/",
+                        "start": {
+                            "date-parts": [
+                                [
+                                    2015,
+                                    9,
+                                    1
+                                ]
+                            ],
+                            "date-time": "2015-09-01T00:00:00Z",
+                            "timestamp": 1441065600000
+                        },
+                        "delay-in-days": 0,
+                        "content-version": "tdm"
+                    }
+                ],
+                "funder": [
+                    {
+                        "DOI": "10.13039/501100002878",
+                        "name": "Consejería de Economía, Innovación, Ciencia y Empleo, Junta de Andalucía",
+                        "doi-asserted-by": "publisher",
+                        "award": [
+                            "PISCIS (TIC-6334)",
+                            "(TIC-07223)"
+                        ]
+                    }
+                ],
+                "content-domain": {
+                    "domain": [
+                        "elsevier.com",
+                        "sciencedirect.com"
+                    ],
+                    "crossmark-restriction": true
+                },
+                "short-container-title": [
+                    "Computer Communications"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            9
+                        ]
+                    ]
+                },
+                "DOI": "10.1016/j.comcom.2015.07.015",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            7,
+                            16
+                        ]
+                    ],
+                    "date-time": "2015-07-16T22:57:30Z",
+                    "timestamp": 1437087450000
+                },
+                "page": "33-46",
+                "update-policy": "http://dx.doi.org/10.1016/elsevier_cm_policy",
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Contextualising heterogeneous information in unified communications with security restrictions"
+                ],
+                "prefix": "10.1016",
+                "volume": "68",
+                "author": [
+                    {
+                        "ORCID": "http://orcid.org/0000-0003-2826-9119",
+                        "authenticated-orcid": false,
+                        "given": "Ana",
+                        "family": "Nieto",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Javier",
+                        "family": "Lopez",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "78",
+                "container-title": [
+                    "Computer Communications"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "https://api.elsevier.com/content/article/PII:S0140366415002534?httpAccept=text/plain",
+                        "content-type": "text/plain",
+                        "content-version": "vor",
+                        "intended-application": "text-mining"
+                    },
+                    {
+                        "URL": "https://api.elsevier.com/content/article/PII:S0140366415002534?httpAccept=text/xml",
+                        "content-type": "text/xml",
+                        "content-version": "vor",
+                        "intended-application": "text-mining"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2018,
+                            9,
+                            20
+                        ]
+                    ],
+                    "date-time": "2018-09-20T22:28:23Z",
+                    "timestamp": 1537482503000
+                },
+                "score": 22.547855,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            9
+                        ]
+                    ]
+                },
+                "references-count": 19,
+                "alternative-id": [
+                    "S0140366415002534"
+                ],
+                "URL": "http://dx.doi.org/10.1016/j.comcom.2015.07.015",
+                "ISSN": [
+                    "0140-3664"
+                ],
+                "issn-type": [
+                    {
+                        "value": "0140-3664",
+                        "type": "print"
+                    }
+                ],
+                "subject": [
+                    "Computer Networks and Communications"
+                ],
+                "assertion": [
+                    {
+                        "value": "Elsevier",
+                        "name": "publisher",
+                        "label": "This article is maintained by"
+                    },
+                    {
+                        "value": "Contextualising heterogeneous information in unified communications with security restrictions",
+                        "name": "articletitle",
+                        "label": "Article Title"
+                    },
+                    {
+                        "value": "Computer Communications",
+                        "name": "journaltitle",
+                        "label": "Journal Title"
+                    },
+                    {
+                        "value": "https://doi.org/10.1016/j.comcom.2015.07.015",
+                        "name": "articlelink",
+                        "label": "CrossRef DOI link to publisher maintained version"
+                    },
+                    {
+                        "value": "article",
+                        "name": "content_type",
+                        "label": "Content Type"
+                    },
+                    {
+                        "value": "Copyright © 2015 Elsevier B.V. All rights reserved.",
+                        "name": "copyright",
+                        "label": "Copyright"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            7
+                        ]
+                    ],
+                    "date-time": "2018-05-07T19:41:39Z",
+                    "timestamp": 1525722099781
+                },
+                "publisher-location": "Berlin, Heidelberg",
+                "reference-count": 13,
+                "publisher": "Springer Berlin Heidelberg",
+                "isbn-type": [
+                    {
+                        "value": "9783662485576",
+                        "type": "print"
+                    },
+                    {
+                        "value": "9783662485583",
+                        "type": "electronic"
+                    }
+                ],
+                "license": [
+                    {
+                        "URL": "http://www.springer.com/tdm",
+                        "start": {
+                            "date-parts": [
+                                [
+                                    2015,
+                                    1,
+                                    1
+                                ]
+                            ],
+                            "date-time": "2015-01-01T00:00:00Z",
+                            "timestamp": 1420070400000
+                        },
+                        "delay-in-days": 0,
+                        "content-version": "unspecified"
+                    }
+                ],
+                "content-domain": {
+                    "domain": [],
+                    "crossmark-restriction": false
+                },
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015
+                        ]
+                    ]
+                },
+                "DOI": "10.1007/978-3-662-48558-3_9",
+                "type": "book-chapter",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            9,
+                            18
+                        ]
+                    ],
+                    "date-time": "2015-09-18T08:46:47Z",
+                    "timestamp": 1442566007000
+                },
+                "page": "86-93",
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "The Modified Mumford-Shah Model Based on Nonlocal Means Method for Textures Segmentation"
+                ],
+                "prefix": "10.1007",
+                "author": [
+                    {
+                        "given": "Jingge",
+                        "family": "Lu",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Guodong",
+                        "family": "Wang",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Zhenkuan",
+                        "family": "Pan",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "297",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2015,
+                            11,
+                            6
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "key": "9_CR1",
+                        "unstructured": "Paragios, N., Deriche, R.: Geodesic active contours for supervised texture segmentation. In: Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR 1999), pp. 699–706, June 1999",
+                        "DOI": "10.1109/CVPR.1999.784715",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "9_CR2",
+                        "series-title": "Lecture Notes in Computer Science",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "197",
+                        "DOI": "10.1007/11864349_18",
+                        "volume-title": "Advanced Concepts for Intelligent Vision Systems",
+                        "author": "MA Savelonas",
+                        "year": "2006",
+                        "unstructured": "Savelonas, M.A., Iakovidis, D.K., Maroulis, D.E., Karkanis, S.A.: An Active Contour Model Guided by LBP Distributions. In: Blanc-Talon, J., Philips, W., Popescu, D., Scheunders, P. (eds.) ACIVS 2006. LNCS, vol. 4179, pp. 197–207. Springer, Heidelberg (2006)"
+                    },
+                    {
+                        "issue": "9",
+                        "key": "9_CR3",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1404",
+                        "DOI": "10.1016/j.patrec.2008.02.013",
+                        "volume": "29",
+                        "author": "MA Savelonas",
+                        "year": "2008",
+                        "unstructured": "Savelonas, M.A., Iakovidis, D.K., Maroulis, D.: LBP-guided active contours. Pattern Recognition Letters 29(9), 1404–1415 (2008)",
+                        "journal-title": "Pattern Recognition Letters"
+                    },
+                    {
+                        "key": "9_CR4",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "577",
+                        "DOI": "10.1002/cpa.3160420503",
+                        "volume": "42",
+                        "author": "D Mumford",
+                        "year": "1989",
+                        "unstructured": "Mumford, D., Shah, J.: Optimal approximation by piecewise smooth functions and associated variational problems. Communications on Pure and Applied Mathematics 42, 577–685 (1989)",
+                        "journal-title": "Communications on Pure and Applied Mathematics"
+                    },
+                    {
+                        "key": "9_CR5",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "999",
+                        "DOI": "10.1002/cpa.3160430805",
+                        "volume": "43",
+                        "author": "L Ambrosio",
+                        "year": "1990",
+                        "unstructured": "Ambrosio, L., Tortorelli, V.M.: Approximation of functionals depending on jumps by elliptic functionals via Gamma-convergence. Communications on Pure and Applied Mathematics 43, 999–1036 (1990)",
+                        "journal-title": "Communications on Pure and Applied Mathematics"
+                    },
+                    {
+                        "issue": "2",
+                        "key": "9_CR6",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "266",
+                        "DOI": "10.1109/83.902291",
+                        "volume": "10",
+                        "author": "TF Chan",
+                        "year": "2001",
+                        "unstructured": "Chan, T.F., Vese, L.A.: Active contours without edges. IEEE Trans. Image Processing 10(2), 266–277 (2001)",
+                        "journal-title": "IEEE Trans. Image Processing"
+                    },
+                    {
+                        "issue": "2",
+                        "key": "9_CR7",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "151",
+                        "DOI": "10.1007/s10851-007-0002-0",
+                        "volume": "28",
+                        "author": "X Bresson",
+                        "year": "2007",
+                        "unstructured": "Bresson, X., Esedoglu, S., Vandergheynst, P., Thiran, J.P., Osher, S.: Fast global minimization of the active contour/snake model. Journal of Mathematical Imaging and Vision 28(2), 151–167 (2007)",
+                        "journal-title": "Journal of Mathematical Imaging and Vision"
+                    },
+                    {
+                        "issue": "2",
+                        "key": "9_CR8",
+                        "first-page": "595630",
+                        "volume": "6",
+                        "author": "G Gilboa",
+                        "year": "2007",
+                        "unstructured": "Gilboa, G., Osher, S.: Nonlocal Linear Image Regularization and Supervised Segmentation. SIAM Multiscale Modeling and Simulation (MMS) 6(2), 595630 (2007)",
+                        "journal-title": "SIAM Multiscale Modeling and Simulation (MMS)"
+                    },
+                    {
+                        "key": "9_CR9",
+                        "unstructured": "Yaroslavsky, L.P.: Digital Picture Processing, an Introduction. Springer-Verlag (1985)",
+                        "DOI": "10.1007/978-3-642-81929-2",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "9_CR10",
+                        "unstructured": "Tomasi, C., Manduchi, R.: Bilateral Filtering for Gray and Color Images. In: International Conference on Computer Vision (ICCV), pp. 839–846 (1998)",
+                        "DOI": "10.1109/ICCV.1998.710815",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "9_CR11",
+                        "unstructured": "Efros, A., Leung, T.: Texture Synthesis by Non-Parametric Sampling. In: International Conference on Computer Vision, pp. 1033–1038 (1999)",
+                        "DOI": "10.1109/ICCV.1999.790383",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "9_CR12",
+                        "unstructured": "Bresson, X., Chan, T.F.: Non-local unsupervised variational image segmentation models. CAM-report No.08-67 (2008)"
+                    },
+                    {
+                        "key": "9_CR13",
+                        "unstructured": "Wang, G., Pan, Z., Dong, Q., Zhao, X., Zhang, Z., Duan, J.: Unsupervised Texture Segmentation Using Active Contour Model and Oscillating Information. Journal of Applied Mathematics 2014 (2014). Article ID614613, 11pages"
+                    }
+                ],
+                "container-title": [
+                    "Communications in Computer and Information Science",
+                    "Computer Vision"
+                ],
+                "link": [
+                    {
+                        "URL": "http://link.springer.com/content/pdf/10.1007/978-3-662-48558-3_9",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            5,
+                            19
+                        ]
+                    ],
+                    "date-time": "2017-05-19T21:00:41Z",
+                    "timestamp": 1495227641000
+                },
+                "score": 22.40393,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015
+                        ]
+                    ]
+                },
+                "ISBN": [
+                    "9783662485576",
+                    "9783662485583"
+                ],
+                "references-count": 13,
+                "URL": "http://dx.doi.org/10.1007/978-3-662-48558-3_9",
+                "relation": {
+                    "cites": []
+                },
+                "ISSN": [
+                    "1865-0929",
+                    "1865-0937"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1865-0929",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1865-0937",
+                        "type": "electronic"
+                    }
+                ]
+            }
+        ],
+        "items-per-page": 5,
+        "query": {
+            "start-index": 0,
+            "search-terms": null
+        }
+    }
+}

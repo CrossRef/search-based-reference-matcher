@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Generalized Jaccard similarity.
+ * 
  * @author Dominika Tkaczyk
  */
 public class GenJaccardSimilarity {
@@ -32,6 +33,12 @@ public class GenJaccardSimilarity {
                 .map(k -> Math.max(first.get(k), second.get(k)))
                 .reduce(0., (a, b) -> a + b);
         return (denominator == 0) ? 1. : numerator / denominator;
+    }
+
+    @Override
+    public String toString() {
+        return "GenJaccardSimilarity{" + "first=" + first +
+                ", second=" + second + '}';
     }
 
 }

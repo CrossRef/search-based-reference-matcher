@@ -1,0 +1,1900 @@
+{
+    "status": "ok",
+    "message-type": "work-list",
+    "message-version": "1.0.0",
+    "message": {
+        "facets": {},
+        "total-results": 6337223,
+        "items": [
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            12,
+                            7
+                        ]
+                    ],
+                    "date-time": "2018-12-07T10:02:51Z",
+                    "timestamp": 1544176971648
+                },
+                "reference-count": 39,
+                "publisher": "Springer Nature",
+                "issue": "4",
+                "funder": [
+                    {
+                        "DOI": "10.13039/501100000780",
+                        "name": "European Commission",
+                        "doi-asserted-by": "publisher",
+                        "award": [
+                            "283595"
+                        ]
+                    }
+                ],
+                "content-domain": {
+                    "domain": [
+                        "link.springer.com"
+                    ],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "IJDAR"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            12
+                        ]
+                    ]
+                },
+                "DOI": "10.1007/s10032-015-0249-8",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            7,
+                            2
+                        ]
+                    ],
+                    "date-time": "2015-07-02T12:36:00Z",
+                    "timestamp": 1435840560000
+                },
+                "page": "317-335",
+                "update-policy": "http://dx.doi.org/10.1007/springer_crossmark_policy",
+                "source": "Crossref",
+                "is-referenced-by-count": 19,
+                "title": [
+                    "CERMINE: automatic extraction of structured metadata from scientific literature"
+                ],
+                "prefix": "10.1007",
+                "volume": "18",
+                "author": [
+                    {
+                        "given": "Dominika",
+                        "family": "Tkaczyk",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Paweł",
+                        "family": "Szostek",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Mateusz",
+                        "family": "Fedoryszak",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Piotr Jan",
+                        "family": "Dendek",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Łukasz",
+                        "family": "Bolikowski",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "297",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2015,
+                            7,
+                            3
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "key": "249_CR1",
+                        "unstructured": "PubMed. http://www.ncbi.nlm.nih.gov/pubmed"
+                    },
+                    {
+                        "key": "249_CR2",
+                        "unstructured": "CERMINE. http://cermine.ceon.pl"
+                    },
+                    {
+                        "key": "249_CR3",
+                        "unstructured": "Tkaczyk, D., Szostek, P., Dendek, P.J., Fedoryszak, M., Bolikowski, L.: CERMINE—automatic extraction of metadata and references from scientific literature. In: 11th IAPR International Workshop on Document Analysis Systems, pp. 217–221 (2014)",
+                        "DOI": "10.1109/DAS.2014.63",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR4",
+                        "unstructured": "Tkaczyk, D., Szostek, P., Bolikowski, L.: GROTOAP2—the methodology of creating a large ground truth dataset of scientific articles. D-Lib Magazine (2014)",
+                        "DOI": "10.1045/november14-tkaczyk",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR5",
+                        "unstructured": "Giuffrida, G., Shek, E.C., Yang, J.: Knowledge-based metadata extraction from postscript files. In: ACM DL, pp. 77–84 (2000)",
+                        "DOI": "10.1145/336597.336639",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR6",
+                        "unstructured": "Constantin, A., Pettifer, S., Voronkov, A.: PDFX: fully-automated pdf-to-xml conversion of scientific literature. In: ACM Symposium on Document Engineering, pp. 177–180 (2013)",
+                        "DOI": "10.1145/2494266.2494271",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR7",
+                        "unstructured": "Pdf-extract. http://labs.crossref.org/pdfextract/"
+                    },
+                    {
+                        "key": "249_CR8",
+                        "unstructured": "Han, H., Giles, C.L., Manavoglu, E., Zha, H., Zhang, Z., Fox, E.A.: Automatic document metadata extraction using support vector machines. In: ACM/IEEE 2003 Joint Conference on Digital Libraries, pp. 37–48 (2003)",
+                        "DOI": "10.1109/JCDL.2003.1204842",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR9",
+                        "unstructured": "Kovacevic, A., Ivanovic, D., Milosavljevic, B., Konjovic, Z., Surla, D.: Automatic extraction of metadata from scientific publications for CRIS systems. Program 45(4), 376–396 (2011)",
+                        "DOI": "10.1108/00330331111182094",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR10",
+                        "unstructured": "Lu, X., Kahle, B., Wang, J.Z., Giles, C.L.: A metadata generation system for scanned scientific volumes. In: ACM/IEEE Joint Conference on Digital Libraries, JCDL 2008, Pittsburgh, PA, USA, 16–20 June 2008, pp. 167–176 (2008)",
+                        "DOI": "10.1145/1378889.1378918",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR11",
+                        "unstructured": "Marinai, S.: Metadata extraction from PDF papers for digital library ingest. In: 10th International Conference on Document Analysis and Recognition, pp. 251–255 (2009)",
+                        "DOI": "10.1109/ICDAR.2009.232",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR12",
+                        "unstructured": "Cui, B., Chen, X.: An improved hidden Markov model for literature metadata extraction. In: Advanced Intelligent Computing Theories and Applications, 6th International Conference on Intelligent Computing, pp. 205–212 (2010)",
+                        "DOI": "10.1007/978-3-642-14922-1_26",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "7/8",
+                        "key": "249_CR13",
+                        "first-page": "1",
+                        "volume": "18",
+                        "author": "R Kern",
+                        "year": "2012",
+                        "unstructured": "Kern, R., Jack, K., Hristakeva, M., Granitzer, M.: Teambeam—meta-data extraction from scientific literature. D Lib Mag. 18(7/8), 1 (2012)",
+                        "journal-title": "D Lib Mag."
+                    },
+                    {
+                        "key": "249_CR14",
+                        "unstructured": "Lopez, P.: GROBID: combining automatic bibliographic data recognition and term extraction for scholarship publications. In: Research and Advanced Technology for Digital Libraries, 13th European Conference, pp. 473–474 (2009)",
+                        "DOI": "10.1007/978-3-642-04346-8_62",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "4",
+                        "key": "249_CR15",
+                        "first-page": "1",
+                        "volume": "1",
+                        "author": "M Luong",
+                        "year": "2010",
+                        "unstructured": "Luong, M., Nguyen, T.D., Kan, M.: Logical structure recovery in scholarly articles with rich document features. IJDLS 1(4), 1–23 (2010)",
+                        "journal-title": "IJDLS"
+                    },
+                    {
+                        "key": "249_CR16",
+                        "unstructured": "Councill, I.G., Giles, C.L., Kan, M.: Parscit: an open-source CRF reference string parsing package. In: Proceedings of the International Conference on Language Resources and Evaluation, LREC 2008, 26 May–1 June 2008, Marrakech, Morocco (2008)"
+                    },
+                    {
+                        "key": "249_CR17",
+                        "unstructured": "Gao, L., Tang, Z., Lin, X.: CEBBIP: a parser of bibliographic information in chinese electronic books. In: Proceedings of the 2009 Joint International Conference on Digital Libraries, pp. 73–76 (2009)",
+                        "DOI": "10.1145/1555400.1555412",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "2",
+                        "key": "249_CR18",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "107",
+                        "DOI": "10.1007/s10032-009-0105-9",
+                        "volume": "13",
+                        "author": "J Zou",
+                        "year": "2010",
+                        "unstructured": "Zou, J., Le, D.X., Thoma, G.R.: Locating and parsing bibliographic references in HTML medical articles. IJDAR 13(2), 107–119 (2010)",
+                        "journal-title": "IJDAR"
+                    },
+                    {
+                        "key": "249_CR19",
+                        "unstructured": "Day, M., Tsai, R.T., Sung, C., Hsieh, C., Lee, C., Wu, S., Wu, K., Ong, C., Hsu, W.: Reference metadata extraction using a hierarchical knowledge representation framework. Decis. Support Syst. 43(1), 152–167 (2007)",
+                        "DOI": "10.1016/j.dss.2006.08.006",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR20",
+                        "unstructured": "Vilarinho, E.C.C., da Silva, A.S., Gonçalves, M.A., de Sá Mesquita, F., de Moura, E.S.: FLUX-CIM: flexible unsupervised extraction of citation metadata. In: ACM/IEEE Joint Conference on Digital Libraries, pp. 215–224 (2007)"
+                    },
+                    {
+                        "key": "249_CR21",
+                        "unstructured": "Zhang, Q., Cao, Y., Yu, H.: Parsing citations in biomedical articles using conditional random fields. Comput. Biol. Med. 41(4), 190–194 (2011)",
+                        "DOI": "10.1016/j.compbiomed.2011.02.005",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "S–3",
+                        "key": "249_CR22",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "S7",
+                        "DOI": "10.1186/1471-2105-12-S3-S7",
+                        "volume": "12",
+                        "author": "X Zhang",
+                        "year": "2011",
+                        "unstructured": "Zhang, X., Zou, J., Le, D.X., Thoma, G.R.: A structural SVM approach for reference parsing. BMC Bioinform. 12(S–3), S7 (2011)",
+                        "journal-title": "BMC Bioinform."
+                    },
+                    {
+                        "key": "249_CR23",
+                        "unstructured": "Hetzner, E.: A simple method for citation metadata extraction using hidden markov models. In: ACM/IEEE Joint Conference on Digital Libraries, pp. 280–284 (2008)",
+                        "DOI": "10.1145/1378889.1378937",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR24",
+                        "unstructured": "PDFX. http://pdfx.cs.man.ac.uk/"
+                    },
+                    {
+                        "key": "249_CR25",
+                        "unstructured": "Grobid. https://github.com/grobid/grobid"
+                    },
+                    {
+                        "key": "249_CR26",
+                        "unstructured": "ParsCit. http://aye.comp.nus.edu.sg/parsCit/"
+                    },
+                    {
+                        "issue": "3",
+                        "key": "249_CR27",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "811",
+                        "DOI": "10.1016/S0031-3203(02)00101-2",
+                        "volume": "36",
+                        "author": "CH Lee",
+                        "year": "2003",
+                        "unstructured": "Lee, C.H., Kanungo, T.: The architecture of trueviz: a groundtruth/metadata editing and visualizing toolkit. Pattern Recognit. 36(3), 811–825 (2003)",
+                        "journal-title": "Pattern Recognit."
+                    },
+                    {
+                        "key": "249_CR28",
+                        "unstructured": "NLM, JATS. http://dtd.nlm.nih.gov/archiving/"
+                    },
+                    {
+                        "key": "249_CR29",
+                        "unstructured": "NISO Z39.96-2012. http://www.niso.org/apps/group_public/document.php?document_id=10591"
+                    },
+                    {
+                        "key": "249_CR30",
+                        "unstructured": "iText. http://itextpdf.com/"
+                    },
+                    {
+                        "issue": "11",
+                        "key": "249_CR31",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1162",
+                        "DOI": "10.1109/34.244677",
+                        "volume": "15",
+                        "author": "L O’Gorman",
+                        "year": "1993",
+                        "unstructured": "O’Gorman, L.: The document spectrum for page layout analysis. IEEE Trans. Pattern Anal. Mach. Intell. 15(11), 1162–1173 (1993)",
+                        "journal-title": "IEEE Trans. Pattern Anal. Mach. Intell."
+                    },
+                    {
+                        "key": "249_CR32",
+                        "unstructured": "PdfMiner. http://www.unixuser.org/euske/python/pdfminer/"
+                    },
+                    {
+                        "issue": "3",
+                        "key": "249_CR33",
+                        "first-page": "27",
+                        "volume": "2",
+                        "author": "C Chang",
+                        "year": "2011",
+                        "unstructured": "Chang, C., Lin, C.: LIBSVM: a library for support vector machines. ACM TIST 2(3), 27 (2011)",
+                        "journal-title": "ACM TIST"
+                    },
+                    {
+                        "key": "249_CR34",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "310",
+                        "DOI": "10.1080/01621459.1963.10500850",
+                        "volume": "58",
+                        "author": "LA Goodman",
+                        "year": "1963",
+                        "unstructured": "Goodman, L.A., Kruskal, W.H.: Measures of association for cross classifications iii: approximate sampling theory. J. Am. Stat. Assoc. 58, 310–364 (1963)",
+                        "journal-title": "J. Am. Stat. Assoc."
+                    },
+                    {
+                        "key": "249_CR35",
+                        "unstructured": "McCallum, A.K.: MALLET: a machine learning for language toolkit (2002)"
+                    },
+                    {
+                        "key": "249_CR36",
+                        "unstructured": "Giles, C.L., Bollacker, K.D., Lawrence, S.: Citeseer: an automatic citation indexing system. In: Proceedings of the 3rd ACM International Conference on Digital Libraries, pp. 89–98 (1998)",
+                        "DOI": "10.1145/276675.276685",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "249_CR37",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "127",
+                        "DOI": "10.1023/A:1009953814988",
+                        "volume": "3",
+                        "author": "A McCallum",
+                        "year": "2000",
+                        "unstructured": "McCallum, A., Nigam, K., Rennie, J.: Automating the construction of internet portals with machine learning. Inf. Retr. 3, 127–163 (2000)",
+                        "journal-title": "Inf. Retr."
+                    },
+                    {
+                        "key": "249_CR38",
+                        "unstructured": "Tkaczyk, D., Czeczko, A., Rusek, K., Bolikowski, L., Bogacewicz, R.: GROTOAP: ground truth for open access publications. In: Proceedings of the 12th ACM/IEEE-CS Joint Conference on Digital Libraries, pp. 381–382 (2012)",
+                        "DOI": "10.1145/2232817.2232901",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "1",
+                        "key": "249_CR39",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "195",
+                        "DOI": "10.1016/0022-2836(81)90087-5",
+                        "volume": "147",
+                        "author": "T Smith",
+                        "year": "1981",
+                        "unstructured": "Smith, T., Waterman, M.: Identification of common molecular subsequences. J. Mol. Biol. 147(1), 195–197 (1981)",
+                        "journal-title": "J. Mol. Biol."
+                    }
+                ],
+                "container-title": [
+                    "International Journal on Document Analysis and Recognition (IJDAR)"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "http://link.springer.com/content/pdf/10.1007/s10032-015-0249-8",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2018,
+                            7,
+                            27
+                        ]
+                    ],
+                    "date-time": "2018-07-27T14:50:56Z",
+                    "timestamp": 1532703056000
+                },
+                "score": 38.54594,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            7,
+                            3
+                        ]
+                    ]
+                },
+                "references-count": 39,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                2015,
+                                12
+                            ]
+                        ]
+                    },
+                    "issue": "4"
+                },
+                "alternative-id": [
+                    "249"
+                ],
+                "URL": "http://dx.doi.org/10.1007/s10032-015-0249-8",
+                "relation": {
+                    "cites": []
+                },
+                "ISSN": [
+                    "1433-2833",
+                    "1433-2825"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1433-2833",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1433-2825",
+                        "type": "electronic"
+                    }
+                ],
+                "subject": [
+                    "Software",
+                    "Computer Vision and Pattern Recognition",
+                    "Computer Science Applications"
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            7
+                        ]
+                    ],
+                    "date-time": "2018-05-07T11:10:14Z",
+                    "timestamp": 1525691414369
+                },
+                "reference-count": 0,
+                "publisher": "Springer Nature",
+                "issue": "2",
+                "content-domain": {
+                    "domain": [
+                        "link.springer.com"
+                    ],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "IJDAR"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            6
+                        ]
+                    ]
+                },
+                "DOI": "10.1007/s10032-015-0244-0",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5,
+                            2
+                        ]
+                    ],
+                    "date-time": "2015-05-02T04:01:11Z",
+                    "timestamp": 1430539271000
+                },
+                "page": "109-110",
+                "update-policy": "http://dx.doi.org/10.1007/springer_crossmark_policy",
+                "source": "Crossref",
+                "is-referenced-by-count": 0,
+                "title": [
+                    "Preface"
+                ],
+                "prefix": "10.1007",
+                "volume": "18",
+                "author": [
+                    {
+                        "given": "Faisal",
+                        "family": "Shafait",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Dimosthenis",
+                        "family": "Karatzas",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Seiichi",
+                        "family": "Uchida",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Masakazu",
+                        "family": "Iwamura",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "297",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5,
+                            3
+                        ]
+                    ]
+                },
+                "container-title": [
+                    "International Journal on Document Analysis and Recognition (IJDAR)"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "http://link.springer.com/content/pdf/10.1007/s10032-015-0244-0",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5,
+                            13
+                        ]
+                    ],
+                    "date-time": "2015-05-13T17:21:02Z",
+                    "timestamp": 1431537662000
+                },
+                "score": 26.109343,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5,
+                            3
+                        ]
+                    ]
+                },
+                "references-count": 0,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                2015,
+                                6
+                            ]
+                        ]
+                    },
+                    "issue": "2"
+                },
+                "alternative-id": [
+                    "244"
+                ],
+                "URL": "http://dx.doi.org/10.1007/s10032-015-0244-0",
+                "ISSN": [
+                    "1433-2833",
+                    "1433-2825"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1433-2833",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1433-2825",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2019,
+                            2,
+                            1
+                        ]
+                    ],
+                    "date-time": "2019-02-01T16:42:53Z",
+                    "timestamp": 1549039373653
+                },
+                "reference-count": 39,
+                "publisher": "Springer Nature",
+                "issue": "4",
+                "content-domain": {
+                    "domain": [
+                        "link.springer.com"
+                    ],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "IJDAR"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            12
+                        ]
+                    ]
+                },
+                "DOI": "10.1007/s10032-015-0250-2",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            8,
+                            12
+                        ]
+                    ],
+                    "date-time": "2015-08-12T05:45:27Z",
+                    "timestamp": 1439358327000
+                },
+                "page": "357-374",
+                "update-policy": "http://dx.doi.org/10.1007/springer_crossmark_policy",
+                "source": "Crossref",
+                "is-referenced-by-count": 8,
+                "title": [
+                    "Nastalique segmentation-based approach for Urdu OCR"
+                ],
+                "prefix": "10.1007",
+                "volume": "18",
+                "author": [
+                    {
+                        "given": "Sarmad",
+                        "family": "Hussain",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Salman",
+                        "family": "Ali",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "ORCID": "http://orcid.org/0000-0002-7863-0032",
+                        "authenticated-orcid": false,
+                        "given": "Qurat ul Ain",
+                        "family": "Akram",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "297",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2015,
+                            8,
+                            13
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "key": "250_CR1",
+                        "author": "M Davis",
+                        "year": "2015",
+                        "unstructured": "Davis, M., Iancu, L.: Unicode Text Segmentation. Unicode Consortium, Mountain View, USA (2015)",
+                        "volume-title": "Unicode Text Segmentation"
+                    },
+                    {
+                        "key": "250_CR2",
+                        "unstructured": "Naseem, T., Hussain, S.: A novel approach for ranking spelling error corrections for Urdu. Language resources and evaluation, Springer 41, (2007)"
+                    },
+                    {
+                        "key": "250_CR3",
+                        "unstructured": "Akram, M., Hussain, S.: Word Segmentation for Urdu OCR System. In: 8th Workshop on Asian language resources, COLIG 2010. Beijing (2010)"
+                    },
+                    {
+                        "key": "250_CR4",
+                        "unstructured": "Hussain, S.: In 12th AMIC Annual Conference on E-Worlds: Governments, Business and Civil Society, Asian Media Information Center, Singapore. www.LICT4D.asia/Fonts/Nafees_Nastalique (2003)"
+                    },
+                    {
+                        "key": "250_CR5",
+                        "unstructured": "Wali, A., Hussain, S.: Context sensitive shape-substitution in nastaliq writing system: analysis and formulation. In: International joint conferences on computer, information, and systems sciences, and engineering (2006)"
+                    },
+                    {
+                        "key": "250_CR6",
+                        "unstructured": "Hussain, S., Rahman, S., Wali, A., Gulzar, A., Rahman, S.J.: Grammatical analysis of Nastalique writing style of Urdu. Center for Research in Urdu language processing, FAST-nu, Lahore, Pakistan (2002)"
+                    },
+                    {
+                        "key": "250_CR7",
+                        "unstructured": "Ijaz, M., Hussain, S.: Corpus based Urdu Lexicon development. In Conference on Language Technology, Peshawar (2007)"
+                    },
+                    {
+                        "key": "250_CR8",
+                        "unstructured": "Shaw, B., Parui, S.K., Shridhar, M.: Offline handwritten Devanagari word recognition: a segmentation based approach. In: 19th international conference on pattern recognition (2008)"
+                    },
+                    {
+                        "key": "250_CR9",
+                        "unstructured": "Lorigo, L., Govindaraju, V.: Segmentation and pre-recognition of Arabic handwriting. In: Eight international conference on document analysis and recognition (2005)",
+                        "DOI": "10.1109/ICDAR.2005.207",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "2",
+                        "key": "250_CR10",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "215",
+                        "DOI": "10.1016/S0031-3203(99)00227-7",
+                        "volume": "34",
+                        "author": "A Cheung",
+                        "year": "2001",
+                        "unstructured": "Cheung, A., Bennamoun, M., Bergmann, N.M.: An Arabic optical character recognition system using recognition-based segmentation. Pattern Recognit. 34(2), 215–233 (2001)",
+                        "journal-title": "Pattern Recognit."
+                    },
+                    {
+                        "key": "250_CR11",
+                        "unstructured": "Mehran, R., Pirsiavash, H., Razzazi, F.: A front-end OCR for omni-font Persian/Arabic cursive printed documents. In: Digital image computing on techniques and applications. DC, Washington (2005)"
+                    },
+                    {
+                        "key": "250_CR12",
+                        "first-page": "95",
+                        "volume": "30",
+                        "author": "R Safabakhsh",
+                        "year": "2005",
+                        "unstructured": "Safabakhsh, R., Abidi, P.: Nastaaligh handwritten word recognition using a continuous-density variable-duration HMM. Arab. J. Sci. Eng. 30, 95–118 (2005)",
+                        "journal-title": "Arab. J. Sci. Eng."
+                    },
+                    {
+                        "key": "250_CR13",
+                        "unstructured": "Javed, S.T., Hussain, S.: ”Segmentation Based Urdu Nastalique OCR,” in 18th Iberoamerican Congress on Pattern Recognition, Havana CUBA, (2013)"
+                    },
+                    {
+                        "key": "250_CR14",
+                        "unstructured": "Muaz, A.: Urdu optical character recognition system. MS Thesis Report, National University of Computer and Emerging Sciences, Lahore (2010)"
+                    },
+                    {
+                        "key": "250_CR15",
+                        "unstructured": "Sankaran, N., Jawahar, C.V.: Recognition of printed Devanagari text using BLSTM Neural Network. In: 21st international conference on pattern recognition (2012)"
+                    },
+                    {
+                        "issue": "12",
+                        "key": "250_CR16",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "2902",
+                        "DOI": "10.1016/j.sigpro.2008.06.013",
+                        "volume": "88",
+                        "author": "HA Al-Muhtaseb",
+                        "year": "2008",
+                        "unstructured": "Al-Muhtaseb, H.A., Mahmoud, S.A., Qahwaji, R.S.: Recognition of off-line printed Arabic text using Hidden Markov models. Signal Process. 88(12), 2902–2912 (2008)",
+                        "journal-title": "Signal Process."
+                    },
+                    {
+                        "issue": "1",
+                        "key": "250_CR17",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "21",
+                        "DOI": "10.2174/1876825300902010021",
+                        "volume": "2",
+                        "author": "JH AlKhateeb",
+                        "year": "2009",
+                        "unstructured": "AlKhateeb, J.H., Jiang, J., Ren, J., Khelifi, F., Ipson, S.S.: Multiclass classification of unconstrained handwritten arabic words using machine learning approaches. Open Signal Process. J. 2(1), 21–28 (2009)",
+                        "journal-title": "Open Signal Process. J."
+                    },
+                    {
+                        "issue": "8",
+                        "key": "250_CR18",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1081",
+                        "DOI": "10.1016/j.patrec.2011.02.006",
+                        "volume": "32",
+                        "author": "JH AlKhateeb",
+                        "year": "2011",
+                        "unstructured": "AlKhateeb, J.H., Ren, J., Jiang, J., Al-Muhtaseb, H.: Offline handwritten Arabic cursive text recognition using Hidden Markov models and re-ranking. Pattern Recognit. Lett. 32(8), 1081–1088 (2011)",
+                        "journal-title": "Pattern Recognit. Lett."
+                    },
+                    {
+                        "issue": "12",
+                        "key": "250_CR19",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1563",
+                        "DOI": "10.1016/j.patrec.2007.03.014",
+                        "volume": "28",
+                        "author": "MS Khorsheed",
+                        "year": "2007",
+                        "unstructured": "Khorsheed, M.S.: Offline recognition of omnifont Arabic text usingthe HMM ToolKit (HTK). Pattern Recognit. Lett. 28(12), 1563–1571 (2007)",
+                        "journal-title": "Pattern Recognit. Lett."
+                    },
+                    {
+                        "key": "250_CR20",
+                        "unstructured": "Ul-Hasan, A., Ahmed, S.B., Rashid, S.F., Shafait, F., Breuel, T.M.: Offline printed Urdu Nastaleeq script recognition with bidirectional LSTM networks. In: International conference on document analysis and recognition (2013)",
+                        "DOI": "10.1109/ICDAR.2013.212",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR21",
+                        "unstructured": "Sabbour, N., Shafait, F.: A segmentation free approach to Arabic and Urdu OCR. In: SPIE 8658, (2013)",
+                        "DOI": "10.1117/12.2003731",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR22",
+                        "unstructured": "Javed, S.T., Hussain, S., Maqbool, A., Asloob, S., Jamil, S., Mohsin, H.: Segmentation Free Nastalique Urdu OCR, vol. 46, pp. 456–461. World Academy of Science, Engineering and Technology (2010)"
+                    },
+                    {
+                        "key": "250_CR23",
+                        "unstructured": "Shah, Z., Saleem, F.: Ligature based optical character recognition of Urdu, Nastaleeq font. In: International multi topic conference. Karachi (2002)"
+                    },
+                    {
+                        "key": "250_CR24",
+                        "unstructured": "Lehal, G.S., Rana, A.: Recognition of Nastalique Urdu ligatures. In: 4th International workshop on multilingual OCR. NY, New York (2013)",
+                        "DOI": "10.1145/2505377.2505379",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR25",
+                        "unstructured": "Sattar, S.A.: A technique for the design and implementation of an OCR for printed Nastalique text. Degree of Doctor of Philosophy Thesis Report. N.E.D University of Engineering and Technology, Karachi (2009)"
+                    },
+                    {
+                        "key": "250_CR26",
+                        "unstructured": "Satti, D.A.: Offline Urdu Nastaliq OCR for printed text using analytical approach. MS Thesis report, Quaid-i-Azam University, Islamabad (2013)"
+                    },
+                    {
+                        "key": "250_CR27",
+                        "unstructured": "Akram, Q., Hussain, S., Niazi, A., Anjum, U., Irfan, F.: Adapting Tesseract for complex scripts: an example for Urdu Nastalique. In: 11th IAPR Workshop on document analysis systems. Tours (2014)",
+                        "DOI": "10.1109/DAS.2014.45",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "6",
+                        "key": "250_CR28",
+                        "first-page": "653",
+                        "volume": "54",
+                        "author": "MA Rashwan",
+                        "year": "2007",
+                        "unstructured": "Rashwan, M.A., Fakhr, M.W., Attia, M., El-Mahallawy, M.: Arabic OCR system analogous to HMM-based ASR systems; implementation and evaluation. J. Eng. Appl. Sci. Cairo 54(6), 653–672 (2007)",
+                        "journal-title": "J. Eng. Appl. Sci. Cairo"
+                    },
+                    {
+                        "key": "250_CR29",
+                        "unstructured": "Naz, M., Akram, Q., Hussain, S.: Binarization and its evaluation for Urdu Nastalique document images. In: Proceedings of the 16th international multi topic conference, Lahore (2013)",
+                        "DOI": "10.1109/INMIC.2013.6731352",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR30",
+                        "unstructured": "Huang, L., Wan, G., Liu, C.: An improved parallel thinning algorithm. In: Seventh international conference on document analysis and recognition (2003)",
+                        "DOI": "10.1109/ICDAR.2003.1227768",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR31",
+                        "unstructured": "Jiang, Y., Hongwei, G., Chao, L.: A filtering algorithm for removing salt and pepper noise and preserving details of images. In: 6th international conference on wireless communications networking and mobile computing (2010)"
+                    },
+                    {
+                        "key": "250_CR32",
+                        "unstructured": "Li, F., Fan, J.: Salt and pepper noise removal by adaptive median filter and minimal surface inpainting. In: 2nd international congress on image and signal processing (2009)",
+                        "DOI": "10.1109/CISP.2009.5303579",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR33",
+                        "unstructured": "Al-Khaffaf, H.S., Talib, A.Z., Abdul, R.: Salt and pepper noise removal from document images. In: Proceedings of the 1st international visual informatics conference on visual informatics (2009)",
+                        "DOI": "10.1007/978-3-642-05036-7_57",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR34",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "90",
+                        "DOI": "10.1109/T-C.1974.223784",
+                        "volume": "C–25",
+                        "author": "N Ahmed",
+                        "year": "1974",
+                        "unstructured": "Ahmed, N., Natarajan, T., Rao, K.R.: Discrete cosine transform. IEEE Trans. Comput. C–25, 90–93 (1974)",
+                        "journal-title": "IEEE Trans. Comput."
+                    },
+                    {
+                        "key": "250_CR35",
+                        "unstructured": "Rabiner, L.R.: Mathematical foundations of hidden Markov models. In: Proceedings of the NATO advanced study institute on recent advances in speech understanding and dialog systems (1988)",
+                        "DOI": "10.1007/978-3-642-83476-9_19",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "250_CR36",
+                        "unstructured": "Walker, W., Lamere, P., Kwok, P., Raj, B., Singh, R., Gouvea, E., Wolf, P., Woelfel, J.: Sphinx-4: a flexible open source framework for speech recognition. Sun Microsystems Inc, Mountain View, CA (2004)"
+                    },
+                    {
+                        "key": "250_CR37",
+                        "unstructured": "CLE, Text corpora. In: Center for Language Engineering, 10 December 2014. http://www.cle.org.pk/clestore/index.htm (2014). Accessed 11 May 2015"
+                    },
+                    {
+                        "key": "250_CR38",
+                        "unstructured": "Urooj, S., Hussain, S., Adeeba, F., Jabeen, F., Parveen, R.: CLE Urdu digest corpus. In: Conference on language and technology 2012 (CLT12), Lahore (2012)"
+                    },
+                    {
+                        "key": "250_CR39",
+                        "unstructured": "CLE, CLE Urdu image corpus 14 point size. In: Center for Language Engineering, 12 July 2012. http://www.cle.org.pk/clestore/cleurduimagecorpus14pt.htm (2012). Accessed 11 May 2015"
+                    }
+                ],
+                "container-title": [
+                    "International Journal on Document Analysis and Recognition (IJDAR)"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "http://link.springer.com/content/pdf/10.1007/s10032-015-0250-2",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            6,
+                            23
+                        ]
+                    ],
+                    "date-time": "2017-06-23T17:28:06Z",
+                    "timestamp": 1498238886000
+                },
+                "score": 23.336615,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            8,
+                            13
+                        ]
+                    ]
+                },
+                "references-count": 39,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                2015,
+                                12
+                            ]
+                        ]
+                    },
+                    "issue": "4"
+                },
+                "alternative-id": [
+                    "250"
+                ],
+                "URL": "http://dx.doi.org/10.1007/s10032-015-0250-2",
+                "relation": {
+                    "cites": []
+                },
+                "ISSN": [
+                    "1433-2833",
+                    "1433-2825"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1433-2833",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1433-2825",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            7
+                        ]
+                    ],
+                    "date-time": "2018-05-07T11:50:30Z",
+                    "timestamp": 1525693830516
+                },
+                "reference-count": 40,
+                "publisher": "Springer Nature",
+                "issue": "3",
+                "content-domain": {
+                    "domain": [
+                        "link.springer.com"
+                    ],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "IJDAR"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            9
+                        ]
+                    ]
+                },
+                "DOI": "10.1007/s10032-015-0246-y",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5,
+                            14
+                        ]
+                    ],
+                    "date-time": "2015-05-14T04:25:54Z",
+                    "timestamp": 1431577554000
+                },
+                "page": "271-285",
+                "update-policy": "http://dx.doi.org/10.1007/springer_crossmark_policy",
+                "source": "Crossref",
+                "is-referenced-by-count": 4,
+                "title": [
+                    "Machine-assisted authentication of paper currency: an experiment on Indian banknotes"
+                ],
+                "prefix": "10.1007",
+                "volume": "18",
+                "author": [
+                    {
+                        "given": "Ankush",
+                        "family": "Roy",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "ORCID": "http://orcid.org/0000-0003-4047-0229",
+                        "authenticated-orcid": false,
+                        "given": "Biswajit",
+                        "family": "Halder",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Utpal",
+                        "family": "Garain",
+                        "sequence": "additional",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "David S.",
+                        "family": "Doermann",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "297",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5,
+                            15
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "key": "246_CR1",
+                        "unstructured": "Reserve Bank of India, High Level RBI Group Suggests Steps to Check Menace of Fake Notes, Press release 2009–2010/232, Dated 11 August (2009)"
+                    },
+                    {
+                        "key": "246_CR2",
+                        "unstructured": "Kaushal, R.: Fake money circulation boosts black economy India Today, 5 August (2009)"
+                    },
+                    {
+                        "key": "246_CR3",
+                        "unstructured": "Counterfeit Currency in Canada: Publication of Royal Canadian Mounted Police (December 2007)"
+                    },
+                    {
+                        "key": "246_CR4",
+                        "unstructured": "Thompson, T.: Security clampdown on the home PC banknote forgers. The Observer (2004)"
+                    },
+                    {
+                        "key": "246_CR5",
+                        "unstructured": "van Renesse, R.L.: Paper based document security-a review. In: IEEE European Conference on Security and Detection (ECOS), pp. 75–80 (1997)",
+                        "DOI": "10.1049/cp:19970425",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR6",
+                        "author": "SJ Murdoch",
+                        "year": "2004",
+                        "unstructured": "Murdoch, S.J., Laurie, B.: The Convergence of Anti-Counterfeiting and Computer Security, Lecture at 21st Chaos Communication Congress. Berliner Congress Center, Berlin (2004)",
+                        "volume-title": "The Convergence of Anti-Counterfeiting and Computer Security, Lecture at 21st Chaos Communication Congress"
+                    },
+                    {
+                        "key": "246_CR7",
+                        "unstructured": "Department of Financial Services, Ministry of Finance, Govt. of India: Counterfeit Notes from ATM. Press release number F No 11/16/2011-FI, 3rd Floor, Jeevan Deep Building, New Delhi, India, 6th July (2012)"
+                    },
+                    {
+                        "key": "246_CR8",
+                        "unstructured": "Seropyan, C.D.: Means of Preventing Counterfeiting Bank Notes, US Patent, No. 17, 473, 2 Jan (1857)"
+                    },
+                    {
+                        "key": "246_CR9",
+                        "unstructured": "Gotaas, E.: Sensor for Verification of Genuineness of Security Paper, US Patent 5,122,754, 16 June (1992)"
+                    },
+                    {
+                        "key": "246_CR10",
+                        "unstructured": "Harbaugh, S.K.: Capacitive Verification Device for a Security Thread Embedded Within Currency Paper, US Patent 5,417,316, 23 May (1995)"
+                    },
+                    {
+                        "key": "246_CR11",
+                        "unstructured": "Slepyan, E., Kugel, A., Eisenberg, J.: Currency Verification, US Patent, No. 6,766,045, 20 July (2004)"
+                    },
+                    {
+                        "key": "246_CR12",
+                        "unstructured": "Massimo, M.: Device for Validating Banknotes, EPO Patent, No. EP 0537513 (A1), 21 April (1993)"
+                    },
+                    {
+                        "key": "246_CR13",
+                        "unstructured": "Graves, B.T., Jones, W.J., Mennie, D.U., Sculits, F.M.: Method and Apparatus for Authenticating and Discriminating Currency, US Patent, No. 5,960,103, 28 Sept (1999)"
+                    },
+                    {
+                        "key": "246_CR14",
+                        "unstructured": "Takeda, F., Omatu, S.: Recognition system of US dollars using a neural network with random masks. In: Proceedings of the International Joint Conference on Neural Networks, Nagoya, Japan, Vol. 2 (1993)",
+                        "DOI": "10.1109/IJCNN.1993.717058",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "6",
+                        "key": "246_CR15",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1482",
+                        "DOI": "10.1109/72.548175",
+                        "volume": "7",
+                        "author": "A Frosini",
+                        "year": "1996",
+                        "unstructured": "Frosini, A., Gori, M., Priami, P.: A neural network-based model for paper currency recognition and verification. IEEE Trans. Neural Netw. 7(6), 1482–1490 (1996)",
+                        "journal-title": "IEEE Trans. Neural Netw."
+                    },
+                    {
+                        "key": "246_CR16",
+                        "first-page": "99",
+                        "volume": "44",
+                        "author": "M Aoba",
+                        "year": "2003",
+                        "unstructured": "Aoba, M., Kikuchi, T., Takefuji, Y.: Euro banknote recognition system using a three layered perceptron and RBF networks. IPSJ Trans. Math. Model. Appl. 44, 99–109 (2003)",
+                        "journal-title": "IPSJ Trans. Math. Model. Appl."
+                    },
+                    {
+                        "issue": "6",
+                        "key": "246_CR17",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "560",
+                        "DOI": "10.4304/jmm.5.6.560-567",
+                        "volume": "5",
+                        "author": "KK Debnath",
+                        "year": "2010",
+                        "unstructured": "Debnath, K.K., Ahmed, S., Shahjahan, Md: A paper currency recognition system using negatively correlated neural network ensemble. J. Multimed. 5(6), 560–567 (2010)",
+                        "journal-title": "J. Multimed."
+                    },
+                    {
+                        "key": "246_CR18",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1010510111",
+                        "DOI": "10.1016/j.eswa.2009.01.057",
+                        "volume": "36",
+                        "author": "H Hassanpour",
+                        "year": "2009",
+                        "unstructured": "Hassanpour, H., Farahabadi, P.M.: Using hidden Markov models for paper currency recognition. Expert Syst. Appl. 36, 1010510111 (2009)",
+                        "journal-title": "Expert Syst. Appl."
+                    },
+                    {
+                        "issue": "2",
+                        "key": "246_CR19",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "257",
+                        "DOI": "10.1016/j.aca.2005.11.084",
+                        "volume": "559",
+                        "author": "A Vila",
+                        "year": "2006",
+                        "unstructured": "Vila, A., Ferrer, N., Mantecon, J., Breton, D., Garcia, J.F.: Development of a fast and non-destructive procedure for characterizing and distinguishing original and fake euro notes. Anal. Chim. Acta 559(2), 257–263 (2006)",
+                        "journal-title": "Anal. Chim. Acta"
+                    },
+                    {
+                        "key": "246_CR20",
+                        "unstructured": "Yoshida, K., Kamruzzaman, M., Jewel, F.A., Sajal, R.F.: Design and implementation of a machine vision based but low cost stand-alone system for real time counterfeit Bangladeshi bank notes detection. In: Proceedings of 10th International Conference on Computer and Information Technology (ICCIT), pp. 1–5, Dhaka (2007)",
+                        "DOI": "10.1109/ICCITECHN.2007.4579427",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR21",
+                        "unstructured": "Features & Utility of Paradigm EXC 6700-I, E-Brochure, Paradigm Cash Systems Pvt. Ltd. (2009)"
+                    },
+                    {
+                        "key": "246_CR22",
+                        "unstructured": "Garain, U., Halder, B.: On automatic authenticity verification of printed security documents. In: Proceedings of Indian Conference on Computer Vision, Graphics and Image processing (ICVGIP), pp. 706–713, Bhubaneswar, India (2008)",
+                        "DOI": "10.1109/ICVGIP.2008.67",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR23",
+                        "unstructured": "Garain, U., Halder, B.: Machine authentication of security documents. In: Proceedings of International Conference on Document Analysis and Recognition (ICDAR), pp. 718–722, Bacelona, Spain (2009)",
+                        "DOI": "10.1109/ICDAR.2009.234",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR24",
+                        "unstructured": "Roy, A., Halder, B., Garain, U.: Authentication of currency notes through printing technique verification. In: Proceedings of ACM, Indian Conference on Computer Vision, Graphics and Image processing (ICVGIP), pp. 383–390, Chennai, India (2010)",
+                        "DOI": "10.1145/1924559.1924610",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR25",
+                        "unstructured": "Warner, R.D., Adams, R.M., Believe, M.: Introduction to Security Printing. Graphic Arts Center Publishing Company. ISBN 0883623757 (2005)"
+                    },
+                    {
+                        "key": "246_CR26",
+                        "unstructured": "Bender, K.W.: Moneymakers: The Secret World of Banknote Printing. Wiley-VCH Publishers, Hoboken, NJ (2006)"
+                    },
+                    {
+                        "key": "246_CR27",
+                        "unstructured": "Reserve Bank of India, Detection and Impounding of Counterfeit Notes, Master Circular, released on 01 July (2011)"
+                    },
+                    {
+                        "key": "246_CR28",
+                        "unstructured": "Halder, B., Darbar, R., Garain, U.: Investigating the role of fluorescent paper pulp for detecting counterfeit Banknotes. In: 5th IAPR International Workshop on Computational Forensics (IWCF), pp. 13–23. ICPR, Tsukuba, Japan (2012)"
+                    },
+                    {
+                        "key": "246_CR29",
+                        "unstructured": "Halder, B., Darbar, R., Garain, U., Mondal, A.C.: Analysis of fluorescent paper pulps for detecting counterfeit Indian paper money. In: Proceedings of 10th International Conference on Information Systems Security (ICISS), pp. 411–424, Hyderabad, India (2014)",
+                        "DOI": "10.1007/978-3-319-13841-1_23",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR30",
+                        "unstructured": "Gonzalez, R.C., Woods, R.E.: Digital Image Processing. Prentice Hall, Upper Saddle River, NJ (2008)"
+                    },
+                    {
+                        "key": "246_CR31",
+                        "unstructured": "Duda, R.O., Hart, P.E., Strok, D.G.: Pattern Classification. Wiley, Hoboken, NJ (2001)"
+                    },
+                    {
+                        "key": "246_CR32",
+                        "unstructured": "Kelly, J.S., Lindblom, B.S. (eds.): Scientific Examination of Questioned Documents. Forensic and Police Science Series, 2nd edn. CRC Press, Boca Raton, FL (2006)",
+                        "DOI": "10.1201/9781420003765",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR33",
+                        "unstructured": "Schulze, C., Schreyer, M., Stahl, A., Breuel, T.M.: Evaluation of gray level features for printing technique classification in high throughput document management systems. In: 2nd International Workshop on Computational Forensics (IWCF), LNCS, Springer, Berlin, 5158:3546, Washington (2008)"
+                    },
+                    {
+                        "key": "246_CR34",
+                        "unstructured": "Kuehni, R.G.: Color Space and its Divisions: Color Order from Antiquity to the Present. Wiley, Hoboken, NJ (2003)",
+                        "DOI": "10.1002/0471432261",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR35",
+                        "unstructured": "Franke, K., Rose, S.: Ink-deposition model: the relation of writing and ink deposition processes. In: Proceedings of the Ninth International Workshop on Frontiers in Handwriting Recognition (IWFHR), pp. 173-178 (2004)",
+                        "DOI": "10.1109/IWFHR.2004.59",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR36",
+                        "unstructured": "Visual Spectral Comparator 5000, (VSC 5000). http://crimesight.co.za"
+                    },
+                    {
+                        "issue": "6",
+                        "key": "246_CR37",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "978",
+                        "DOI": "10.1109/34.9121",
+                        "volume": "10",
+                        "author": "J Duchene",
+                        "year": "1988",
+                        "unstructured": "Duchene, J., Leclercq, S.: An optimal transformation for discriminant and principal component analysis. IEEE Trans. Pattern Anal. Mach. Intell. 10(6), 978–983 (1988)",
+                        "journal-title": "IEEE Trans. Pattern Anal. Mach. Intell."
+                    },
+                    {
+                        "key": "246_CR38",
+                        "unstructured": "Halder, B., Garain, U., Darbar, R., Mondal, A.C.: Inverse of low resolution line halftone images for document inspection. In: Proceedings of 6th IAPR International Workshop on Computational Forensics (IWCF), Springer (2015) (in press)",
+                        "DOI": "10.1007/978-3-319-20125-2_9",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR39",
+                        "unstructured": "Halder, B., Garain, U.: Color feature based approach for determining ink age in printed documents. In: Proceedings of International Conference on Patter Recognition (ICPR), Istanbul, Turkey, pp. 3212–3215 (2010)",
+                        "DOI": "10.1109/ICPR.2010.785",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "246_CR40",
+                        "unstructured": "Garain, U., Parui, S.K., Paquet, T., Heutte, L.: Machine dating of handwritten manuscripts. In: Proceedings of International Conference on Document Analysis and Recognition (ICDAR), pp. 759–763, Curitiba, Brazil (2007)",
+                        "DOI": "10.1109/ICDAR.2007.4377017",
+                        "doi-asserted-by": "crossref"
+                    }
+                ],
+                "container-title": [
+                    "International Journal on Document Analysis and Recognition (IJDAR)"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "http://link.springer.com/content/pdf/10.1007/s10032-015-0246-y",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            6,
+                            23
+                        ]
+                    ],
+                    "date-time": "2017-06-23T11:35:05Z",
+                    "timestamp": 1498217705000
+                },
+                "score": 23.336615,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            5,
+                            15
+                        ]
+                    ]
+                },
+                "references-count": 40,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                2015,
+                                9
+                            ]
+                        ]
+                    },
+                    "issue": "3"
+                },
+                "alternative-id": [
+                    "246"
+                ],
+                "URL": "http://dx.doi.org/10.1007/s10032-015-0246-y",
+                "relation": {
+                    "cites": []
+                },
+                "ISSN": [
+                    "1433-2833",
+                    "1433-2825"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1433-2833",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1433-2825",
+                        "type": "electronic"
+                    }
+                ]
+            },
+            {
+                "indexed": {
+                    "date-parts": [
+                        [
+                            2018,
+                            5,
+                            9
+                        ]
+                    ],
+                    "date-time": "2018-05-09T08:58:29Z",
+                    "timestamp": 1525856309464
+                },
+                "reference-count": 43,
+                "publisher": "Springer Nature",
+                "issue": "3",
+                "content-domain": {
+                    "domain": [
+                        "link.springer.com"
+                    ],
+                    "crossmark-restriction": false
+                },
+                "short-container-title": [
+                    "IJDAR"
+                ],
+                "published-print": {
+                    "date-parts": [
+                        [
+                            2015,
+                            9
+                        ]
+                    ]
+                },
+                "DOI": "10.1007/s10032-015-0241-3",
+                "type": "journal-article",
+                "created": {
+                    "date-parts": [
+                        [
+                            2015,
+                            2,
+                            7
+                        ]
+                    ],
+                    "date-time": "2015-02-07T12:50:09Z",
+                    "timestamp": 1423313409000
+                },
+                "page": "249-262",
+                "update-policy": "http://dx.doi.org/10.1007/springer_crossmark_policy",
+                "source": "Crossref",
+                "is-referenced-by-count": 1,
+                "title": [
+                    "Toward automatic development of handwritten personal Farsi/Arabic OpenType $$^{\\textregistered }$$ ® fonts"
+                ],
+                "prefix": "10.1007",
+                "volume": "18",
+                "author": [
+                    {
+                        "given": "Kazim",
+                        "family": "Fouladi",
+                        "sequence": "first",
+                        "affiliation": []
+                    },
+                    {
+                        "given": "Babak N.",
+                        "family": "Araabi",
+                        "sequence": "additional",
+                        "affiliation": []
+                    }
+                ],
+                "member": "297",
+                "published-online": {
+                    "date-parts": [
+                        [
+                            2015,
+                            2,
+                            8
+                        ]
+                    ]
+                },
+                "reference": [
+                    {
+                        "issue": "20",
+                        "key": "241_CR1",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "445",
+                        "DOI": "10.5897/ERR11.303",
+                        "volume": "7",
+                        "author": "SM Awaida",
+                        "year": "2012",
+                        "unstructured": "Awaida, S.M., Mahmoud, S.A.: State of the art in off-line writer identification of handwritten text and survey of writer identification of Arabic text. Educ. Res. Rev. 7(20), 445–463 (2012)",
+                        "journal-title": "Educ. Res. Rev."
+                    },
+                    {
+                        "issue": "10",
+                        "key": "241_CR2",
+                        "first-page": "16",
+                        "volume": "9",
+                        "author": "A Azmi",
+                        "year": "2010",
+                        "unstructured": "Azmi, A., Alsaiari, A.: Arabic typography: a survey. Int. J. Electr. Comput. Sci. IJECS 9(10), 16–22 (2010)",
+                        "journal-title": "Int. J. Electr. Comput. Sci. IJECS"
+                    },
+                    {
+                        "key": "241_CR3",
+                        "author": "S Boeuf",
+                        "year": "2011",
+                        "unstructured": "Boeuf, S.: Arabic Font Production Tutorial. Khatt Books, Netherlands (2011)",
+                        "volume-title": "Arabic Font Production Tutorial"
+                    },
+                    {
+                        "key": "241_CR4",
+                        "author": "J Cano",
+                        "first-page": "548",
+                        "year": "2002",
+                        "unstructured": "Cano, J., Perez-Cortes, J., Arlandis, J., Llobet, R.: Training set expansion in handwritten character recognition. Structural, Syntactic, and Statistical Pattern Recognition, pp. 548–556. Springer, Berlin Heidelberg (2002)",
+                        "volume-title": "Structural, Syntactic, and Statistical Pattern Recognition",
+                        "DOI": "10.1007/3-540-70659-3_57",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "1",
+                        "key": "241_CR5",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1",
+                        "DOI": "10.1007/s10032-011-0147-7",
+                        "volume": "15",
+                        "author": "W Chang",
+                        "year": "2012",
+                        "unstructured": "Chang, W., Shin, J.: A statistical handwriting model for style-preserving and variable character synthesis. Int. J. Doc. Anal. Recognit. 15(1), 1–19 (2012)",
+                        "journal-title": "Int. J. Doc. Anal. Recognit."
+                    },
+                    {
+                        "key": "241_CR6",
+                        "unstructured": "Chen, Z., Zhou, B.: Effective radical segmentation of offline handwritten Chinese characters towards constructing personal handwritten fonts. In: Proc. of the 2012 ACM Symposium on Document Engineering, pp. 107–116. (2012)",
+                        "DOI": "10.1145/2361354.2361379",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "241_CR7",
+                        "unstructured": "Cheng, W., Lopresti, D.: Parameter calibration for synthesizing realistic-looking variability in offline handwriting. In: Proc. of IS&T/SPIE Electronic Imaging, 78740Y, Document Recognition and Retrieval XVIII (2011)",
+                        "DOI": "10.1117/12.873431",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "241_CR8",
+                        "unstructured": "Elarian, Y.S., Al-Muhsateb, H.A., Ghouti, L.M.: Arabic handwriting synthesis. In: Proc. of the First International Workshop on Frontiers in Arabic Handwriting Recognition (2011)"
+                    },
+                    {
+                        "issue": "17",
+                        "key": "241_CR9",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "181",
+                        "DOI": "10.1007/s10032-013-0210-7",
+                        "volume": "2",
+                        "author": "K Fouladi",
+                        "year": "2014",
+                        "unstructured": "Fouladi, K., Araabi, B.N., Kabir, E.: A fast and accurate contour-based method for writer-dependent offline handwritten Farsi/Arabic subwords recognition. Int. J. Doc. Anal. Recognit. (IJDAR) 2(17), 181–203 (2014)",
+                        "journal-title": "Int. J. Doc. Anal. Recognit. (IJDAR)"
+                    },
+                    {
+                        "key": "241_CR10",
+                        "unstructured": "Guyon, I.: Handwriting synthesis from handwritten glyphs. In: Proc. of the Fifth International Workshop on Frontiers of Handwriting Recognition, pp. 140–153. (1996)"
+                    },
+                    {
+                        "issue": "2 & 3",
+                        "key": "241_CR11",
+                        "first-page": "111",
+                        "volume": "8",
+                        "author": "Y Haralambous",
+                        "year": "1995",
+                        "unstructured": "Haralambous, Y.: The traditional Arabic typecase extended to the unicode set of glyphs. Electron. Publ. 8(2 & 3), 111–124 (1995)",
+                        "journal-title": "Electron. Publ."
+                    },
+                    {
+                        "key": "241_CR12",
+                        "author": "Y Haralambous",
+                        "year": "2007",
+                        "unstructured": "Haralambous, Y.: Fonts & Encodings. O’Reilly Media, Sebastopol (2007)",
+                        "volume-title": "Fonts & Encodings"
+                    },
+                    {
+                        "key": "241_CR13",
+                        "unstructured": "HighLogic Scanhand $$^{\\textregistered }$$ ® . URL: http://www.high-logic.com/font-generator/scanahand.html . Retrieved: 3 Sep 2013"
+                    },
+                    {
+                        "key": "241_CR14",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "277",
+                        "DOI": "10.1016/j.patrec.2003.10.005",
+                        "volume": "25",
+                        "author": "FD Jou",
+                        "year": "2004",
+                        "unstructured": "Jou, F.D., Fan, K.C., Chang, Y.L.: Efficient matching of large-size histograms. Pattern Recognit. Lett. 25, 277–286 (2004)",
+                        "journal-title": "Pattern Recognit. Lett."
+                    },
+                    {
+                        "issue": "4",
+                        "key": "241_CR15",
+                        "first-page": "217",
+                        "volume": "7",
+                        "author": "M Kokula",
+                        "year": "1994",
+                        "unstructured": "Kokula, M.: Automatic generation of script font ligatures based on curve smoothness optimization. Electron. Publ. 7(4), 217–229 (1994)",
+                        "journal-title": "Electron. Publ."
+                    },
+                    {
+                        "issue": "12",
+                        "key": "241_CR16",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "1",
+                        "DOI": "10.4156/jdcta.vol5.issue12.1",
+                        "volume": "5",
+                        "author": "T Kuroiwa",
+                        "year": "2011",
+                        "unstructured": "Kuroiwa, T., Shin, J.: Discovery of efficient Chinese characters for handwritten-style font generation. Int. J. Digit. Content Technol. Appl. (JDCTA) 5(12), 1–10 (2011)",
+                        "journal-title": "Int. J. Digit. Content Technol. Appl. (JDCTA)"
+                    },
+                    {
+                        "issue": "4",
+                        "key": "241_CR17",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "527",
+                        "DOI": "10.1016/0097-8493(91)90052-J",
+                        "volume": "15",
+                        "author": "C Liao",
+                        "year": "1991",
+                        "unstructured": "Liao, C., Huang, J.S.: Font generation by beta-spline curve. Comput. Graph. 15(4), 527–534 (1991)",
+                        "journal-title": "Comput. Graph."
+                    },
+                    {
+                        "key": "241_CR18",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "2097",
+                        "DOI": "10.1016/j.patcog.2006.11.024",
+                        "volume": "40",
+                        "author": "Z Lin",
+                        "year": "2007",
+                        "unstructured": "Lin, Z., Wan, L.: Style-preserving English handwriting synthesis. Pattern Recognit. 40, 2097–2109 (2007)",
+                        "journal-title": "Pattern Recognit."
+                    },
+                    {
+                        "key": "241_CR19",
+                        "unstructured": "Liu, P., Xu, S., Lin, S.: Automatic generation of personalized Chinese handwriting characters. In: Proc. of the Fourth IEEE International Conference on Digital Home (ICDH), pp. 109–116. (2012)",
+                        "DOI": "10.1109/ICDH.2012.77",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "3",
+                        "key": "241_CR20",
+                        "first-page": "117",
+                        "volume": "6",
+                        "author": "CD McQueen",
+                        "year": "1993",
+                        "unstructured": "McQueen, C.D., Beausoleil, R.G.: Infinifont: a parametric font generation system. Electron. Publ. 6(3), 117–132 (1993)",
+                        "journal-title": "Electron. Publ."
+                    },
+                    {
+                        "key": "241_CR21",
+                        "author": "SK Pal",
+                        "year": "1986",
+                        "unstructured": "Pal, S.K., Dutta, D.K.: Fuzzy Mathematical Approach to Pattern Recognition. Wiley Eastern Limited, New Delhi (1986)",
+                        "volume-title": "Fuzzy Mathematical Approach to Pattern Recognition"
+                    },
+                    {
+                        "key": "241_CR22",
+                        "unstructured": "Piška, K.: Fonts with complex OpenType tables. In: Proc. of Actes des conferences International ConTeXt Meeting & TeXperience (2010)"
+                    },
+                    {
+                        "issue": "1",
+                        "key": "241_CR23",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "467",
+                        "DOI": "10.1016/0360-8352(88)90129-5",
+                        "volume": "15",
+                        "author": "JH Ristroph",
+                        "year": "1988",
+                        "unstructured": "Ristroph, J.H.: Multi-system font generation. Comput. Ind. Eng. 15(1), 467–474 (1988)",
+                        "journal-title": "Comput. Ind. Eng."
+                    },
+                    {
+                        "key": "241_CR24",
+                        "unstructured": "Saabni, R.M., El-Sana, J. A.: Comprehensive synthetic Arabic database for on/off-line script recognition research. Int. J. Doc. Anal. Recognit. (IJDAR), 1–10 (2012)"
+                    },
+                    {
+                        "issue": "5",
+                        "key": "241_CR25",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "795",
+                        "DOI": "10.1016/S0097-8493(02)00134-6",
+                        "volume": "26",
+                        "author": "M Sarfraz",
+                        "year": "2002",
+                        "unstructured": "Sarfraz, M., Razzak, M.F.A.: An algorithm for automatic capturing of the font outlines. Comput. Graph. 26(5), 795–804 (2002)",
+                        "journal-title": "Comput. Graph."
+                    },
+                    {
+                        "issue": "3",
+                        "key": "241_CR26",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "177",
+                        "DOI": "10.1016/S0020-0255(02)00376-6",
+                        "volume": "150",
+                        "author": "M Sarfraz",
+                        "year": "2003",
+                        "unstructured": "Sarfraz, M., Razzak, M.F.A.: A web based system to capture outlines of Arabic fonts. Inf. Sci. 150(3), 177–193 (2003)",
+                        "journal-title": "Inf. Sci."
+                    },
+                    {
+                        "key": "241_CR27",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "609",
+                        "DOI": "10.1016/j.engappai.2012.03.010",
+                        "volume": "26",
+                        "author": "E Sesa-Nogueras",
+                        "year": "2013",
+                        "unstructured": "Sesa-Nogueras, E., Faundez-Zanuy, M.: Writer recognition enhancement by means of synthetically generated handwritten text. Eng. Appl. Artif. Intell. 26, 609–624 (2013)",
+                        "journal-title": "Eng. Appl. Artif. Intell."
+                    },
+                    {
+                        "key": "241_CR28",
+                        "unstructured": "Shin, J., Suzuki, K.: Interactive system for handwritten-style font generation. In: Proc. of the Fourth IEEE International Conference on Computer and Information Technology (CIT’04), pp. 94–100. (2004)"
+                    },
+                    {
+                        "issue": "4",
+                        "key": "241_CR29",
+                        "first-page": "163",
+                        "volume": "5",
+                        "author": "J Srouji",
+                        "year": "1992",
+                        "unstructured": "Srouji, J., Berry, D.M.: Arabic formatting with DITROFF/FFORTID. Electron. Publ. 5(4), 163–208 (1992)",
+                        "journal-title": "Electron. Publ."
+                    },
+                    {
+                        "key": "241_CR30",
+                        "unstructured": "Stanislav, K., Mestetskiy, L., Semenov, A.: Handwritten fonts modeling based on fat lines of variable width. In: Proc. of the 16th International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision (WSCG’08), pp. 25–32. (2008)"
+                    },
+                    {
+                        "key": "241_CR31",
+                        "author": "R Suveeranont",
+                        "first-page": "127",
+                        "year": "2010",
+                        "unstructured": "Suveeranont, R., Igarashi, T.: Example-based automatic font generation. Smart Graphics, pp. 127–138. Springer, Berlin Heidelberg (2010)",
+                        "volume-title": "Smart Graphics",
+                        "DOI": "10.1007/978-3-642-13544-6_12",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "key": "241_CR32",
+                        "unstructured": "Van Der Maaten, L., Postma, E.O.: Improving automatic writer identification. In: Proc. of the 17th Belgium-Netherlands Conference on Artificial Intelligence (BNAIC’05), pp. 260–266. (2005)"
+                    },
+                    {
+                        "key": "241_CR33",
+                        "unstructured": "Varga T., Bunke, H.: Generation of synthetic training data for an HMM-based handwriting recognition system. In: Proc. of the Seventh International Conference on Document Analysis and Recognition (ICDAR 2003), pp. 618–622. (2003)",
+                        "DOI": "10.1109/ICDAR.2003.1227736",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "3",
+                        "key": "241_CR34",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "267",
+                        "DOI": "10.1016/j.patrec.2004.10.014",
+                        "volume": "26",
+                        "author": "N Vincent",
+                        "year": "2005",
+                        "unstructured": "Vincent, N., Seropian, A., Stamon, G.: Synthesis for handwriting analysis. Pattern Recognit. Lett. 26(3), 267–275 (2005)",
+                        "journal-title": "Pattern Recognit. Lett."
+                    },
+                    {
+                        "key": "241_CR35",
+                        "unstructured": "Wada, A., Hagiwara, M.: Japanese font automatic creating system reflecting user’s Kansei. In: Proc. of IEEE International Conference on Systems, Man and Cybernetics, vol. 4, pp. 3804–3809. (2003)",
+                        "DOI": "10.1109/ICSMC.2003.1244481",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "6",
+                        "key": "241_CR36",
+                        "first-page": "1066",
+                        "volume": "82",
+                        "author": "L Wang",
+                        "year": "1999",
+                        "unstructured": "Wang, L., Lifeng, H.E., Nakamura, T., Mutoh, A., Itoh, H.: Calligraphy generation using deformable contours. IEICE Trans. Inf. Syst. 82(6), 1066–1073 (1999)",
+                        "journal-title": "IEICE Trans. Inf. Syst."
+                    },
+                    {
+                        "key": "241_CR37",
+                        "unstructured": "Williams, G.: Font creation with FontForge. In: Proc. of EuroTEX 2003, TUGboat, vol. 24(3), pp. 531–544. (2003)"
+                    },
+                    {
+                        "key": "241_CR38",
+                        "author": "G Williams",
+                        "first-page": "257",
+                        "year": "2004",
+                        "unstructured": "Williams, G.: Beyond glyphs, advanced typographic features of fonts. TeX, XML, and Digital Typography, pp. 257–263. Springer, Berlin Heidelberg (2004)",
+                        "volume-title": "TeX, XML, and Digital Typography",
+                        "DOI": "10.1007/978-3-540-27773-6_20",
+                        "doi-asserted-by": "crossref"
+                    },
+                    {
+                        "issue": "1",
+                        "key": "241_CR39",
+                        "first-page": "121",
+                        "volume": "20",
+                        "author": "M Xiaohu",
+                        "year": "1994",
+                        "unstructured": "Xiaohu, M., Zhigeng, P.: Automatic generation algorithm of high-quality outline font using Bezier curve. Zidonghua Xuebao/Acta Automatica Sinica 20(1), 121–125 (1994)",
+                        "journal-title": "Zidonghua Xuebao/Acta Automatica Sinica"
+                    },
+                    {
+                        "issue": "3",
+                        "key": "241_CR40",
+                        "doi-asserted-by": "crossref",
+                        "first-page": "32",
+                        "DOI": "10.1109/MIS.2005.41",
+                        "volume": "20",
+                        "author": "S Xu",
+                        "year": "2005",
+                        "unstructured": "Xu, S., CM Lau, F., Cheung, W.K., Pan, Y.: Automatic generation of artistic Chinese calligraphy. IEEE Intell. Syst. 20(3), 32–39 (2005)",
+                        "journal-title": "IEEE Intell. Syst."
+                    },
+                    {
+                        "key": "241_CR41",
+                        "unstructured": "Xu, S., Jin, T., Jiang, H., CM Lau, F.: Automatic generation of personal Chinese handwriting by capturing the characteristics of personal handwriting. In: Proc. of the 21st Innovative Applications of Artificial Intelligence Conference (IAAI’09), pp. 191–196. (2009)"
+                    },
+                    {
+                        "key": "241_CR42",
+                        "unstructured": "Yoshida, K., Nakagawa, Y., Köppen, M.: Interactive genetic algorithm for font generation system. In: IEEE World Automation Congress (WAC), pp. 1–6. (2010)"
+                    },
+                    {
+                        "key": "241_CR43",
+                        "first-page": "591",
+                        "volume": "22",
+                        "author": "P Zhigeng",
+                        "year": "1996",
+                        "unstructured": "Zhigeng, P., Xiaohu, M., Jiaoying, S.: The automatic generation algorithm for dynamic Chinese font. Zidonghua Xuebao/Acta Automation, Sinica 22, 591–596 (1996)",
+                        "journal-title": "Zidonghua Xuebao/Acta Automation, Sinica"
+                    }
+                ],
+                "container-title": [
+                    "International Journal on Document Analysis and Recognition (IJDAR)"
+                ],
+                "language": "en",
+                "link": [
+                    {
+                        "URL": "http://link.springer.com/content/pdf/10.1007/s10032-015-0241-3",
+                        "content-type": "unspecified",
+                        "content-version": "vor",
+                        "intended-application": "similarity-checking"
+                    }
+                ],
+                "deposited": {
+                    "date-parts": [
+                        [
+                            2017,
+                            6,
+                            23
+                        ]
+                    ],
+                    "date-time": "2017-06-23T05:07:30Z",
+                    "timestamp": 1498194450000
+                },
+                "score": 23.336615,
+                "issued": {
+                    "date-parts": [
+                        [
+                            2015,
+                            2,
+                            8
+                        ]
+                    ]
+                },
+                "references-count": 43,
+                "journal-issue": {
+                    "published-print": {
+                        "date-parts": [
+                            [
+                                2015,
+                                9
+                            ]
+                        ]
+                    },
+                    "issue": "3"
+                },
+                "alternative-id": [
+                    "241"
+                ],
+                "URL": "http://dx.doi.org/10.1007/s10032-015-0241-3",
+                "relation": {
+                    "cites": []
+                },
+                "ISSN": [
+                    "1433-2833",
+                    "1433-2825"
+                ],
+                "issn-type": [
+                    {
+                        "value": "1433-2833",
+                        "type": "print"
+                    },
+                    {
+                        "value": "1433-2825",
+                        "type": "electronic"
+                    }
+                ]
+            }
+        ],
+        "items-per-page": 5,
+        "query": {
+            "start-index": 0,
+            "search-terms": null
+        }
+    }
+}
