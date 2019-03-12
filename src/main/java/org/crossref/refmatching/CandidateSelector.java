@@ -35,7 +35,6 @@ public class CandidateSelector {
      * @param rows The number of search items to consider as candidates
      * @param minScore The minimum relevance score to consider a search item
      * a candidate
-     * @param mailTo Polite mailTo
      * @param headers Additional headers to pass in the search request
      * 
      * @return A list of candidates

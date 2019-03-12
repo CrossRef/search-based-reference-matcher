@@ -1,22 +1,14 @@
 package org.crossref.refmatching;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
 import org.crossref.common.utils.LogUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.crossref.common.rest.api.ICrossRefApiClient;
-import org.crossref.common.utils.JsonUtils;
-import org.json.JSONException;
 
 /**
  * Main point of entry for performing reference matching. Its logic relies on
@@ -46,6 +38,7 @@ public class ReferenceMatcher {
         
     /**
      * Set flag indicating whether or not to cache journal abbreviation map.
+     * 
      * @param cacheJournalAbbrevMap A flag
      */
     public void setCacheJournalAbbrevMap(boolean cacheJournalAbbrevMap) {
@@ -80,49 +73,35 @@ public class ReferenceMatcher {
     }
     
     /**
-     * Main method for performing a reference match.
+     * Main method for performing reference matching.
      * 
-     * @param request Request parameters
+     * @param request Request object
      * @return A match response
      * @throws IOException 
      */
     public MatchResponse match(MatchRequest request) throws IOException {
-        
-        // If either a file or a string has been specified for textual input
-        // data, parse the text into reference queries and add them to the request
-        if (request.getInputType() == InputType.FILE) {
-            convertTextToQueries(
-                FileUtils.readFileToString(new File(request.getInputValue()), "UTF-8"), 
-                request.getDataDelimiter()).forEach(q -> request.addQuery(q));
-        } else if (request.getInputType() == InputType.STRING) {
-            convertTextToQueries(request.getInputValue(), 
-                request.getDataDelimiter()).forEach(q -> request.addQuery(q));
-        }
-
         MatchResponse response = new MatchResponse(request);
         
-        // Process the queries, which may be a mix of structured/unstructured
-        request.getQueries().parallelStream().forEach(q -> {
-            Reference ref = q.getReference();
-            response.addMatchedLink(ref.getType() == ReferenceType.STRUCTURED ? 
-                matchStructured(q, request)
-                :
-                matchUnstructured(q, request));
+        // Process the references, which may be a mix of structured/unstructured
+        request.getReferences().parallelStream().forEach(q -> {
+            response.addMatchedLink(
+                    q.getReference().getType() == ReferenceType.STRUCTURED ? 
+                    matchStructured(q, request) :
+                    matchUnstructured(q, request));
         });
                 
         return response;
     }
         
     /**
-     * Perform a match given an unstructured reference string.
+     * Match an unstructured reference.
      * 
-     * @param query The unstructured reference query to match
-     * @param request Match request containing query
-     * @return A match object
+     * @param query The unstructured reference
+     * @param request Match request
+     * @return Reference link
      */
-    private ReferenceLink matchUnstructured(
-        ReferenceQuery query, MatchRequest request) {
-        
+    private ReferenceLink matchUnstructured(ReferenceData query,
+            MatchRequest request) {
         Reference ref = query.getReference();
         
         List<Candidate> candidates = selector.findCandidates(
@@ -138,15 +117,15 @@ public class ReferenceMatcher {
     }
 
     /**
-     *  Perform a match given a structured JSON object reference.
+     * Match a structured reference.
      * 
-     * @param query The structured reference query to match
-     * @param request Match request containing query
-     * @return A match object
+     * @param query The structured reference
+     * @param request Match request
+     * 
+     * @return Reference link
      */
-    private ReferenceLink matchStructured(
-        ReferenceQuery query, MatchRequest request) {
-        
+    private ReferenceLink matchStructured(ReferenceData query,
+            MatchRequest request) {
         Reference reference = query.getReference();
         
         List<Candidate> candidates = selector.findCandidates(
@@ -184,39 +163,5 @@ public class ReferenceMatcher {
             candidate == null ? null : candidate.getDOI(), 
             candidate == null ? 0.0 : candidate.getValidationScore());
     }
-    
-    /**
-     * Parse a string to derive a list of reference query objects.
-     * 
-     * @param text Input string, which may represent a JSONArray, or a
-     *      collection of delimited string references, each of which may be
-     *      a structured JSONObject, or an unstructured string.
-     * @param delim Delimiter used to separate reference values
-     * @return A list of reference query objects, parsed from the input string
-     */
-    private List<ReferenceQuery> convertTextToQueries(String text, String delim) {
-        List<ReferenceQuery> queries = new ArrayList<>();
-        
-        try {
-            JSONArray arr = JsonUtils.createJSONArray(text);
-            arr.forEach(ref -> {
-                queries.add(new ReferenceQuery(new Reference((JSONObject) ref)));
-            });          
-        } catch (JSONException ex) {
-            String[] strs = text.split(delim);
-            Arrays.asList(strs).stream().forEach(str -> {
-                Reference ref;
-                try {
-                    // Treat as structured ref if JSON string
-                    ref = new Reference(new JSONObject(str));
-                } catch (JSONException e) {
-                    // Otherwise, treat as unstructured ref
-                    ref = new Reference(str);
-                }
-                queries.add(new ReferenceQuery(ref));
-            });         
-        }
-        
-        return queries;
-    }    
+  
 }

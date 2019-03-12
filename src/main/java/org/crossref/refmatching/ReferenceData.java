@@ -4,19 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents a distinct reference query object, which includes the
- * original reference to query, and other values pertinent to the
- * reference w/respect to the query. Optional values are provided
- * so that caller-specified values (such as an internal correlation key)
- * can be echoed back as part of the items returned in a match response.
+ * Encapsulates the bibliographic reference and additional related information
+ * (optional). Additional information are not used for matching, but preserved
+ * and returned back in the response. Example use case is an internal correlation
+ * key.
  * 
- * @author joe.aparo
+ * @author Joe Aparo
  */
-public class ReferenceQuery {
+public class ReferenceData {
     private final Reference reference;
     private final Map<String, Object> options = new HashMap<>();
     
-    public ReferenceQuery(Reference reference) {
+    public ReferenceData(Reference reference) {
         this.reference = reference;
     }
     

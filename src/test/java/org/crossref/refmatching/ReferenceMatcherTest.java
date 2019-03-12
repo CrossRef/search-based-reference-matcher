@@ -209,8 +209,9 @@ public class ReferenceMatcherTest {
             when(apiTestClient.getWorks(any(), any()))
                     .thenReturn(extractMockItems(mockJsonFileName));
             
-            MatchRequest request = new MatchRequest(InputType.STRING,
-                    reference.toString());
+            MatchRequest request = new MatchRequest(
+                    Utils.parseInputReferences(InputType.STRING,
+                            reference.toString(), "\r?\n"));
             
             return matcher.match(request);
         } catch (IOException ex) {

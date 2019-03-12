@@ -3,25 +3,22 @@ package org.crossref.refmatching;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.rest.impl.CrossRefApiHttpClient;
 import org.crossref.common.utils.LogUtils;
 import org.crossref.common.utils.UnmanagedHttpClient;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * This class executes a matching request via a main application entrypoint.
@@ -33,6 +30,7 @@ public class MainApp {
     private static final String DEFAULT_API_HOST = "api.crossref.org";
     private static final int DEFAULT_API_PORT = 443;
     private final static String CRAPI_KEY_FILE = ".crapi_key";
+    private static final String DEFAULT_DELIMITER = "\r?\n";
     private static final Logger LOGGER = LogUtils.getLogger();
     
     private static String apiScheme = DEFAULT_API_SCHEME;
@@ -41,6 +39,7 @@ public class MainApp {
     private static String apiKeyFile = System.getProperty("user.home") + "/"
             + CRAPI_KEY_FILE;
     private static String outputFileName = null;
+    private static String delimiter = DEFAULT_DELIMITER;
 
     public static void main(String[] args) {
         try {
@@ -50,7 +49,7 @@ public class MainApp {
             UnmanagedHttpClient httpClient = new UnmanagedHttpClient(apiScheme,
                     apiHost, apiPort);
             httpClient.initialize();
-            httpClient.setCommonHeaders(createStdHeaders());
+            httpClient.setCommonHeaders(Utils.createStdHeaders(apiKeyFile));
             ICrossRefApiClient apiClient = new CrossRefApiHttpClient(httpClient);
             
             // Initialize matcher object
@@ -64,40 +63,6 @@ public class MainApp {
             LOGGER.error("Error performing matching process: " + ex.getMessage(),
                     ex);
         }
-    }
-    
-    /**
-     * This method will attempt to load standard headers info from a local file.
-     * The headers will be sent by the API client to the server when making 
-     * HTTP calls.
-     * 
-     * @return A map of headers
-     */
-    private static Map<String, String> createStdHeaders() {
-        String crapiData;
-
-        try {
-            crapiData = FileUtils.readFileToString(new File(apiKeyFile), "UTF-8");
-        } catch (IOException ex) {
-            LOGGER.warn("Unable to read API key file: " + apiKeyFile);
-            return null;
-        }
-        
-        JSONObject crapiJson = new JSONObject(crapiData);
-        String authorization = crapiJson.optString("Authorization", null);
-        String mailTo = crapiJson.optString("Mailto", null);
-        
-        Map<String, String> stdHeaders = new HashMap();
-        
-        if (!StringUtils.isEmpty(authorization)) {
-            stdHeaders.put("Authorization", authorization);
-        }
-
-        if (!StringUtils.isEmpty(mailTo)) {
-            stdHeaders.put("Mailto", mailTo);
-        }
-        
-        return stdHeaders;
     }
     
     /**
@@ -155,17 +120,17 @@ public class MainApp {
             cmd = parser.parse(options, args);
             
             if (cmd.hasOption("h")) {
-                printHelp(options);
+                printHelp(options, 0);
             }
             
             // Check required input type option
             if (!cmd.hasOption("it")) {
-               throw new RuntimeException("Input type not specified");
+               throw new MissingOptionException("Input type not specified");
             }
 
              // Check required input value option
             if (!cmd.hasOption("i")) {
-               throw new RuntimeException("Input value not specified");
+               throw new MissingOptionException("Input value not specified");
             }
 
             // Validate given input type
@@ -177,23 +142,20 @@ public class MainApp {
                         .map(o-> {return o.getCode();})
                         .collect(Collectors.toList());
  
-                throw new RuntimeException("Invalid input type specified: " + 
+                throw new ParseException("Invalid input type specified: " + 
                         typeCode + ". Valid types are: " + okVals);
             }
             
             String inputValue = cmd.getOptionValue("i");
-            if (inputType == InputType.FILE) {
-                // Check for input file
-                File file = new File(inputValue);
-                if (!file.exists()) {
-                    throw new RuntimeException(
-                            "The specified input file does not exist: " + 
-                            inputValue);
-                }
+            
+            if (cmd.hasOption("d")) {
+                delimiter = cmd.getOptionValue("d");
             }
             
             // Init request with input type and value
-            MatchRequest request = new MatchRequest(inputType, inputValue);
+            MatchRequest request;
+            request = new MatchRequest(Utils.parseInputReferences(inputType,
+                    inputValue, delimiter));
             
             /**
              * Optional request settings
@@ -223,20 +185,15 @@ public class MainApp {
                 request.setUnstructuredRows(
                         Integer.valueOf(cmd.getOptionValue("ur")));
             }
-
-            if (cmd.hasOption("d")) {
-                request.setDataDelimiter(cmd.getOptionValue("d"));
-            }
             
             /**
              * Optional process settings
              */
-            
+
             if (cmd.hasOption("as")) {
                apiScheme = cmd.getOptionValue("as").toLowerCase();
                if (!(apiScheme.equals("http") || apiScheme.equals("https"))) {
-                   throw new RuntimeException(
-                           "Invalid http scheme: " + apiScheme);
+                   throw new ParseException("Invalid http scheme: " + apiScheme);
                }
             }
             
@@ -259,9 +216,10 @@ public class MainApp {
             // Return initialized request
             return request;
             
-        } catch (RuntimeException | ParseException ex) {
-            LOGGER.error("Error processing input arguments: " + ex.getMessage());
-            printHelp(options);
+        } catch (RuntimeException | ParseException | IOException ex) {
+            ex.printStackTrace(System.err);
+            LOGGER.error("Error processing input arguments: " + ex);
+            printHelp(options, 1);
             return null;
         }
     }
@@ -271,11 +229,11 @@ public class MainApp {
      * 
      * @param options Available options
      */
-    private static void printHelp(Options options) {
+    private static void printHelp(Options options, int status) {
         System.out.println("\n");
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("MainApp [options]", options);     
-        System.exit(0);
+        System.exit(status);
     }
     
     /**
