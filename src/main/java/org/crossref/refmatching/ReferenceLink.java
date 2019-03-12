@@ -7,23 +7,22 @@ package org.crossref.refmatching;
  */
 public class ReferenceLink {
     
-    private final Reference reference;
+    private final ReferenceData query;
     private final String doi;
     private final double score;
 
-    public ReferenceLink(Reference reference, String doi, double score) {
-        this.reference = reference;
+    public ReferenceLink(ReferenceData query, String doi, double score) {
+        this.query = query;
         this.doi = doi;
         this.score = score;
     }
 
     /**
-     * Get the original reference.
-     * 
-     * @return A reference
+     * Get the original reference query that the item matched on.
+     * @return A String representing the reference
      */
-    public Reference getReference() {
-        return reference;
+    public ReferenceData getQuery() {
+        return query;
     }
 
     /**

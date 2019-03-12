@@ -1,6 +1,7 @@
  package org.crossref.refmatching;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,42 +15,28 @@ public class MatchRequest {
     public static final double DEFAULT_STR_MIN_SCORE = 0.76;
     public static final int DEFAULT_STR_ROWS = 100;
     public static final int DEFAULT_UNSTR_ROWS = 20;
-    public static final String DEFAULT_DELIMITER = "\r?\n";
 
-    private final InputType inputType;
-    private final String inputValue;
     private double candidateMinScore = DEFAULT_CAND_MIN_SCORE;
     private double unstructuredMinScore = DEFAULT_UNSTR_MIN_SCORE;
     private double structuredMinScore = DEFAULT_STR_MIN_SCORE;
-    private String dataDelimiter = DEFAULT_DELIMITER;
     private int unstructuredRows = DEFAULT_UNSTR_ROWS;
     private int structuredRows = DEFAULT_STR_ROWS;
-    private String mailTo = null;
     private final Map<String, String> headers = new HashMap<String, String>();
-    
-    public MatchRequest(InputType inputType, String inputValue) {
-        this.inputType = inputType;
-        this.inputValue = inputValue;
+    private final List<ReferenceData> references;
+
+    public MatchRequest(List<ReferenceData> references) {
+        this.references = references;
     }
 
-    public MatchRequest(InputType inputType, String inputValue,
+    public MatchRequest(List<ReferenceData> references,
             double candidateMinScore, double unstructuredMinScore,
             double structuredMinScore, int unstructuredRows, int structuredRows) {
-        this.inputType = inputType;
+        this.references = references;
         this.candidateMinScore = candidateMinScore;
         this.unstructuredMinScore = unstructuredMinScore;
         this.structuredMinScore = structuredMinScore;
-        this.inputValue = inputValue;
         this.unstructuredRows = unstructuredRows;
         this.structuredRows = structuredRows;
-    }
-
-    public InputType getInputType() {
-        return inputType;
-    }
-
-     public String getInputValue() {
-        return inputValue;
     }
 
     public double getCandidateMinScore() {
@@ -76,14 +63,6 @@ public class MatchRequest {
         this.structuredMinScore = structuredMinScore;
     }
 
-    public String getDataDelimiter() {
-        return dataDelimiter;
-    }
-
-    public void setDataDelimiter(String dataDelimiter) {
-        this.dataDelimiter = dataDelimiter;
-    }
-
     public int getUnstructuredRows() {
         return unstructuredRows;
     }
@@ -99,19 +78,20 @@ public class MatchRequest {
     public void setStructuredRows(int structuredRows) {
         this.structuredRows = structuredRows;
     }
-
-    public String getMailTo() {
-        return mailTo;
-    }
-
-    public void setMailTo(String mailTo) {
-        this.mailTo = mailTo;
-    }
     
+ /**
+     * Ad a header to be passed via the CR-API http client
+     * @param key
+     * @param value 
+     */
     public void addHeader(String key, String value) {
         this.headers.put(key, value);
     }
     
+    /**
+     * Set headers to be passed via the CR-API http client.
+     * @param headers Key/value pairs
+     */
     public void setHeaders(Map<String, String> headers) {
         this.headers.clear();
         if (headers != null) {
@@ -119,7 +99,19 @@ public class MatchRequest {
         }
     }
 
+    /**
+     * Get the headers to be passed via the CR-API client.
+     * @return A list of key/value pairs
+     */
     public Map<String, String> getHeaders() {
         return new HashMap<>(this.headers);
+    }
+    
+    /**
+     * Get the list of queries associated with the request.
+     * @return A list of query objects
+     */
+    public List<ReferenceData> getReferences() {
+        return references.subList(0, references.size());
     }
 }
