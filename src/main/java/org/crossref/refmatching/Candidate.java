@@ -132,14 +132,14 @@ public class Candidate {
         // weights for author
         if (getAuthor() != null) {
             String a = Utils.normalize(getAuthor());
-            String b = Utils.normalize(refString)
-                    .substring(0, Math.min(3 * a.length(), refString.length()));
+            String b = Utils.normalize(refString);
+            b = b.substring(0, Math.min(3 * a.length(), b.length()));
             similarity.update("author", 1.,
                               Utils.stringSimilarity(a, b, false, true));
         } else if (getEditor() != null) {
             String a = Utils.normalize(getEditor());
-            String b = Utils.normalize(refString)
-                    .substring(0, Math.min(3 * a.length(), refString.length()));
+            String b = Utils.normalize(refString);
+            b = b.substring(0, Math.min(3 * a.length(), b.length()));
             similarity.update("author", 1.,
                               Utils.stringSimilarity(a, b, false, true));
         }
