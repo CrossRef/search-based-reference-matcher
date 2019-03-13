@@ -119,19 +119,19 @@ public class ReferenceMatcherTest {
         
         Assert.assertEquals(5, response.getMatchedLinks().size());
         Assert.assertEquals("ref1",
-                response.getMatchedLinks().get(0).getQuery()
+                response.getMatchedLinks().get(0).getReferenceData()
                 .getReference().getFormattedString());
         Assert.assertEquals("ref2",
-                response.getMatchedLinks().get(1).getQuery()
+                response.getMatchedLinks().get(1).getReferenceData()
                 .getReference().getFormattedString());
         Assert.assertEquals("{\"ref\":\"3\"}",
-                response.getMatchedLinks().get(2).getQuery()
+                response.getMatchedLinks().get(2).getReferenceData()
                 .getReference().getMetadataAsJSON().toString());
         Assert.assertEquals("ref4",
-                response.getMatchedLinks().get(3).getQuery()
+                response.getMatchedLinks().get(3).getReferenceData()
                 .getReference().getFormattedString());
         Assert.assertEquals("ref5",
-                response.getMatchedLinks().get(4).getQuery()
+                response.getMatchedLinks().get(4).getReferenceData()
                 .getReference().getFormattedString());
     }
     

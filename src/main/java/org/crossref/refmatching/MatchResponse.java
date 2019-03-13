@@ -55,10 +55,10 @@ public class MatchResponse {
                 r -> {
                     JSONObject result = new JSONObject();
                     result.put("reference",
-                            r.getQuery().getReference().getType().equals(
+                            r.getReferenceData().getReference().getType().equals(
                                     ReferenceType.STRUCTURED) ?
-                            r.getQuery().getReference().getMetadataAsJSON() :
-                            r.getQuery().getReference().getFormattedString());
+                            r.getReferenceData().getReference().getMetadataAsJSON() :
+                            r.getReferenceData().getReference().getFormattedString());
                     result.put("DOI",
                             (r.getDOI() == null) ? JSONObject.NULL : r.getDOI());
                     result.put("score", r.getScore());
