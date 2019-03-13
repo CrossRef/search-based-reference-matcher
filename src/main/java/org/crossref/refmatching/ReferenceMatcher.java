@@ -83,7 +83,7 @@ public class ReferenceMatcher {
         MatchResponse response = new MatchResponse(request);
         
         // Process the references, which may be a mix of structured/unstructured
-        request.getReferences().parallelStream().forEach(q -> {
+        request.getReferences().parallelStream().forEachOrdered(q -> {
             response.addMatchedLink(
                     q.getReference().getType() == ReferenceType.STRUCTURED ? 
                     matchStructured(q, request) :

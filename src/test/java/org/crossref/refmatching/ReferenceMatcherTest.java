@@ -55,7 +55,7 @@ public class ReferenceMatcherTest {
         reference.put("year", "2015");
         reference.put("journal-title", "IJDAR");
         
-        MatchResponse response = invokeMockStringRequest(reference,
+        MatchResponse response = invokeMockStringRequest(reference.toString(),
                 "structured-ref-response-1.json");
         
         Assert.assertEquals(1, response.getMatchedLinks().size());
@@ -72,7 +72,7 @@ public class ReferenceMatcherTest {
         reference.put("journal-title",
                 "Communications in Computer and Information");
 
-        MatchResponse response = invokeMockStringRequest(reference,
+        MatchResponse response = invokeMockStringRequest(reference.toString(),
                 "structured-ref-response-2.json");
         
         Assert.assertEquals(1, response.getMatchedLinks().size());
@@ -203,7 +203,32 @@ public class ReferenceMatcherTest {
             candidate.getValidationSimilarity(reference) < STRUCTURED_VALID_TH);
     }
     
-    private MatchResponse invokeMockStringRequest(Object reference,
+    @Test
+    public void shouldPreserveReferenceOrder() {
+        String references = "ref1\nref2\n{\"ref\":\"3\"}\nref4\nref5";
+        
+        MatchResponse response = invokeMockStringRequest(references,
+                "unstructured-ref-response-1.json");
+        
+        Assert.assertEquals(5, response.getMatchedLinks().size());
+        Assert.assertEquals("ref1",
+                response.getMatchedLinks().get(0).getQuery()
+                .getReference().getFormattedString());
+        Assert.assertEquals("ref2",
+                response.getMatchedLinks().get(1).getQuery()
+                .getReference().getFormattedString());
+        Assert.assertEquals("{\"ref\":\"3\"}",
+                response.getMatchedLinks().get(2).getQuery()
+                .getReference().getMetadataAsJSON().toString());
+        Assert.assertEquals("ref4",
+                response.getMatchedLinks().get(3).getQuery()
+                .getReference().getFormattedString());
+        Assert.assertEquals("ref5",
+                response.getMatchedLinks().get(4).getQuery()
+                .getReference().getFormattedString());
+    }
+    
+    private MatchResponse invokeMockStringRequest(String reference,
             String mockJsonFileName) {
          try {
             when(apiTestClient.getWorks(any(), any()))
@@ -211,7 +236,7 @@ public class ReferenceMatcherTest {
             
             MatchRequest request = new MatchRequest(
                     Utils.parseInputReferences(InputType.STRING,
-                            reference.toString(), "\r?\n"));
+                            reference, "\r?\n"));
             
             return matcher.match(request);
         } catch (IOException ex) {
