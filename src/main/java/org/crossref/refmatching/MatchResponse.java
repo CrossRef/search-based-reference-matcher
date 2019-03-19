@@ -1,6 +1,7 @@
 package org.crossref.refmatching;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,20 +16,23 @@ import org.json.JSONObject;
 public class MatchResponse {
     
     private final MatchRequest request;
-    private final List<ReferenceLink> matchedLinks;
+    private final List<ReferenceLink> matchedLinks = new ArrayList<>();
     
     public MatchResponse(MatchRequest request) {
-        this.matchedLinks = new ArrayList<>();
         this.request = request;
     }
     
     /**
-     * Add a matched link to the result.
+     * Add a matched link to the result. Multiple reference matches
+     * may be executed per request, and are done so using a parallel
+     * stream. Because of this, their results can get added to the
+     * response simultaneously. Therefore, the list is wrapped in a
+     * call to synchronize its update.
      * 
      * @param matchedLink The matched link to add
      */
     public void addMatchedLink(ReferenceLink matchedLink) {
-        matchedLinks.add(matchedLink);
+        Collections.synchronizedList(matchedLinks).add(matchedLink);
     }
 
     /**
