@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.concurrent.Semaphore;
 import org.apache.commons.io.FileUtils;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.utils.ResourceUtils;
@@ -14,9 +14,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  *
@@ -30,6 +33,9 @@ public class ReferenceMatcherTest {
     ICrossRefApiClient apiTestClient;
     
     ReferenceMatcher matcher;
+    
+    @Mock
+    ReferenceMatcher matcherMock;
     
     @Before
     public void setupMock() {
@@ -135,6 +141,45 @@ public class ReferenceMatcherTest {
                 .getReference().getFormattedString());
     }
     
+    @Test(timeout = 60000)
+    public void shouldRunInParallel() throws IOException, InterruptedException {
+        Semaphore reportSem = new Semaphore(0);
+        Semaphore ackSem = new Semaphore(0);
+
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    String references = "ref1\n{\"ref\":\"2\"}\nref3";
+                    MatchRequest request = new MatchRequest(
+                            Utils.parseInputReferences(InputType.STRING,
+                                    references, "\r?\n"));
+
+                    when(matcherMock.match(eq(request))).thenCallRealMethod();
+                    Answer<ReferenceLink> answer =
+                            (InvocationOnMock invocation) -> {
+                        reportSem.release();
+                        ackSem.acquire();
+                        return null;
+                    };
+                    when(matcherMock.matchUnstructured(any(ReferenceData.class),
+                            eq(request)))
+                            .thenAnswer(answer);
+                    when(matcherMock.matchStructured(any(ReferenceData.class),
+                            eq(request)))
+                            .thenAnswer(answer);
+                    matcherMock.match(request);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+        };
+        t.start();
+
+        reportSem.acquire(3);
+        ackSem.release(3);
+    }
+    
     private MatchResponse invokeMockStringRequest(String reference,
             String mockJsonFileName) {
          try {
@@ -154,11 +199,6 @@ public class ReferenceMatcherTest {
     private JSONArray extractMockItems(String mockJsonFileName) {
         JSONObject json = new JSONObject(mockResponseMap.get(mockJsonFileName));
         return json.getJSONObject("message").optJSONArray("items");        
-    }
-    
-    private JSONObject extractFirstMockItem(String mockJsonFileName) {
-        JSONArray items = extractMockItems(mockJsonFileName);
-        return items.getJSONObject(0);
     }
     
     private void loadMockResponseMap() {

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.crossref.common.utils.LogUtils;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 
@@ -26,7 +27,7 @@ public class ReferenceMatcher {
     private final Map<String, String> journalAbbrevMap = new HashMap<>();
     private final CandidateSelector selector;
     private final CandidateValidator validator = new CandidateValidator();
-   
+
     /**
      * Constructor sets apiClient.
      * 
@@ -83,13 +84,14 @@ public class ReferenceMatcher {
         MatchResponse response = new MatchResponse(request);
         
         // Process the references, which may be a mix of structured/unstructured
-        request.getReferences().parallelStream().forEachOrdered(q -> {
-            response.addMatchedLink(
-                    q.getReference().getType() == ReferenceType.STRUCTURED ? 
-                    matchStructured(q, request) :
-                    matchUnstructured(q, request));
-        });
-                
+        List<ReferenceLink> links = request.getReferences()
+                .parallelStream().map(q ->
+                        q.getReference().getType() == ReferenceType.STRUCTURED ?
+                                matchStructured(q, request) :
+                                matchUnstructured(q, request))
+                .collect(Collectors.toList());
+        links.stream().forEachOrdered(q -> {response.addMatchedLink(q);});
+
         return response;
     }
         
@@ -100,7 +102,7 @@ public class ReferenceMatcher {
      * @param request Match request
      * @return Reference link
      */
-    private ReferenceLink matchUnstructured(ReferenceData query,
+    protected ReferenceLink matchUnstructured(ReferenceData query,
             MatchRequest request) {
         Reference ref = query.getReference();
         
@@ -124,7 +126,7 @@ public class ReferenceMatcher {
      * 
      * @return Reference link
      */
-    private ReferenceLink matchStructured(ReferenceData query,
+    protected ReferenceLink matchStructured(ReferenceData query,
             MatchRequest request) {
         Reference reference = query.getReference();
         
