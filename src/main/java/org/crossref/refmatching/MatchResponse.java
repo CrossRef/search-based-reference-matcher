@@ -26,13 +26,13 @@ public class MatchResponse {
      * Add a matched link to the result. Multiple reference matches
      * may be executed per request, and are done so using a parallel
      * stream. Because of this, their results can get added to the
-     * response simultaneously. Therefore, the list is wrapped in a
-     * call to synchronize its update.
+     * response simultaneously. Therefore, access to this method is
+     * synchronized.
      * 
      * @param matchedLink The matched link to add
      */
-    public void addMatchedLink(ReferenceLink matchedLink) {
-        Collections.synchronizedList(matchedLinks).add(matchedLink);
+    public synchronized void addMatchedLink(ReferenceLink matchedLink) {
+        matchedLinks.add(matchedLink);
     }
 
     /**
