@@ -168,7 +168,7 @@ public class ReferenceMatcherTest {
                             eq(request)))
                             .thenAnswer(answer);
                     matcherMock.match(request);
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -191,7 +191,7 @@ public class ReferenceMatcherTest {
                             reference, "\r?\n"));
             
             return matcher.match(request);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }

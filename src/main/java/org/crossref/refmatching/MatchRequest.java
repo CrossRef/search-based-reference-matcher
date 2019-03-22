@@ -15,6 +15,8 @@ public class MatchRequest {
     public static final double DEFAULT_STR_MIN_SCORE = 0.76;
     public static final int DEFAULT_STR_ROWS = 100;
     public static final int DEFAULT_UNSTR_ROWS = 20;
+    public static final int DEFAULT_NUM_THREADS = 4;
+    public static final int MAX_REASONABLE_THREADS = 30;
 
     private double candidateMinScore = DEFAULT_CAND_MIN_SCORE;
     private double unstructuredMinScore = DEFAULT_UNSTR_MIN_SCORE;
@@ -23,6 +25,7 @@ public class MatchRequest {
     private int structuredRows = DEFAULT_STR_ROWS;
     private final Map<String, String> headers = new HashMap<String, String>();
     private final List<ReferenceData> references;
+    private int numThreads = DEFAULT_NUM_THREADS;
 
     public MatchRequest(List<ReferenceData> references) {
         this.references = references;
@@ -78,8 +81,16 @@ public class MatchRequest {
     public void setStructuredRows(int structuredRows) {
         this.structuredRows = structuredRows;
     }
+
+    public int getNumThreads() {
+        return numThreads;
+    }
+
+    public void setNumThreads(int numThreads) {
+        this.numThreads = numThreads;
+    }
     
- /**
+    /**
      * Ad a header to be passed via the CR-API http client
      * @param key
      * @param value 
