@@ -57,12 +57,15 @@ public class RefMatchThreadPoolTest {
             MatchRequest request = new MatchRequest(references);
             MatchResponse response = matcher.match(request);
             
+            // Compare size
             Assert.assertTrue(response.getMatchedLinks().size() == references.size());
             
+            // Compare first
             Assert.assertTrue(
                 references.get(0).getReference().getFormattedString().equals(
                     response.getMatchedLinks().get(0).getReferenceData().getReference().getFormattedString()));
             
+            // Compare last
             Assert.assertTrue(
                 references.get(response.getMatchedLinks().size()).getReference().getFormattedString().equals(
                     response.getMatchedLinks().get(response.getMatchedLinks().size()).
