@@ -64,8 +64,9 @@ public class RefMatchThreadPoolTest {
                     response.getMatchedLinks().get(0).getReferenceData().getReference().getFormattedString()));
             
             Assert.assertTrue(
-                references.get(0).getReference().getFormattedString().equals(
-                    response.getMatchedLinks().get(0).getReferenceData().getReference().getFormattedString()));
+                references.get(response.getMatchedLinks().size()).getReference().getFormattedString().equals(
+                    response.getMatchedLinks().get(response.getMatchedLinks().size()).
+                        getReferenceData().getReference().getFormattedString()));
 
         } catch (Exception ex) {
             throw new RuntimeException(ex);
