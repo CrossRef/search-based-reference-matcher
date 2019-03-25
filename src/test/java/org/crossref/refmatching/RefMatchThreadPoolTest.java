@@ -57,8 +57,9 @@ public class RefMatchThreadPoolTest {
             MatchRequest request = new MatchRequest(references);
             MatchResponse response = matcher.match(request);
             
+            int sz = response.getMatchedLinks().size();
             // Compare size
-            Assert.assertTrue(response.getMatchedLinks().size() == references.size());
+            Assert.assertTrue(sz == references.size());
             
             // Compare first
             Assert.assertTrue(
@@ -67,8 +68,8 @@ public class RefMatchThreadPoolTest {
             
             // Compare last
             Assert.assertTrue(
-                references.get(response.getMatchedLinks().size()).getReference().getFormattedString().equals(
-                    response.getMatchedLinks().get(response.getMatchedLinks().size()).
+                references.get(sz-1).getReference().getFormattedString().equals(
+                    response.getMatchedLinks().get(sz-1).
                         getReferenceData().getReference().getFormattedString()));
 
         } catch (Exception ex) {
