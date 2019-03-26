@@ -29,7 +29,7 @@ public class ReferenceMatcher {
     private final Map<String, String> journalAbbrevMap = new HashMap<>();
     private final CandidateSelector selector;
     private final CandidateValidator validator = new CandidateValidator();
-    private static final Logger logger = LogUtils.getLogger();
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     /**
      * Constructor sets apiClient.
@@ -81,28 +81,30 @@ public class ReferenceMatcher {
      * 
      * @param request Request object
      * @return A match response
-     * @throws IOException 
+     * @throws org.crossref.refmatching.MatchException
      */
-    public MatchResponse match(MatchRequest request) throws IOException, InterruptedException, ExecutionException {
-        MatchResponse response = new MatchResponse(request);
-        
-        int numThreads = calcThreadCount(request.getNumThreads(), request.getReferences().size());
-
-        logger.debug(String.format("Performing match with %d threads.", numThreads));
-        
-        // Use our own thread pool
-        ForkJoinPool threadPool = new ForkJoinPool(numThreads);
-        
-        // Process the references, which may be a mix of structured/unstructured
-        List<ReferenceLink> links = threadPool.submit(() -> request.getReferences()
-                .parallelStream().map(q ->
+    public MatchResponse match(MatchRequest request) throws MatchException {
+        try {
+            LOGGER.debug(String.format("Performing match with %d threads.",
+                    request.getNumThreads()));
+            
+            // Use our own thread pool
+            ForkJoinPool threadPool = new ForkJoinPool(request.getNumThreads());
+            
+            // Process the references, which may be a mix of
+            // structured/unstructured
+            List<ReferenceLink> links = threadPool.submit(()
+                    -> request.getReferences()
+                    .parallelStream().map(q ->
                         q.getReference().getType() == ReferenceType.STRUCTURED ?
-                                matchStructured(q, request) :
-                                matchUnstructured(q, request))
-                .collect(Collectors.toList())).get();
-        links.stream().forEachOrdered(q -> {response.addMatchedLink(q);});
-
-        return response;
+                                    matchStructured(q, request) :
+                                    matchUnstructured(q, request))
+                    .collect(Collectors.toList())).get();
+            
+            return new MatchResponse(request, links);
+        } catch (InterruptedException | ExecutionException ex) {
+            throw new MatchException(ex);
+        }
     }
         
     /**
@@ -175,20 +177,5 @@ public class ReferenceMatcher {
             candidate == null ? null : candidate.getDOI(), 
             candidate == null ? 0.0 : candidate.getValidationScore());
     }
-  
-    /**
-     * Determine best thread count given the number requested, the size of
-     * the input, and the maximum reasonable size. The result is always a
-     * value between 1 and the maximum allowed, but may also be lowered
-     * if the input size is less than the number requested.
-     * 
-     * @param requested The number of threads requested by the user
-     * @param inputSize The size of the list of inputs to be processed
-     * 
-     * @return A thread count
-     */
-    private int calcThreadCount(int requested, int inputSize) {
-        return Math.min(Math.min(Math.max(1, requested), 
-            MatchRequest.MAX_REASONABLE_THREADS), inputSize);
-    }
+
 }

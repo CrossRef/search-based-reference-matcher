@@ -67,5 +67,9 @@ public class Reference {
     public JSONObject getMetadataAsJSON() {
         return new JSONObject(metadata);
     }
+
+    public Map<String, String> getMetadataAsMap() {
+        return new HashMap<>(metadata);
+    }
     
 }

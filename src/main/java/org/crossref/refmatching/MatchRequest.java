@@ -1,5 +1,6 @@
  package org.crossref.refmatching;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,18 +17,21 @@ public class MatchRequest {
     public static final int DEFAULT_STR_ROWS = 100;
     public static final int DEFAULT_UNSTR_ROWS = 20;
     public static final int DEFAULT_NUM_THREADS = 4;
-    public static final int MAX_REASONABLE_THREADS = 30;
+    public static final int MAX_THREADS = 30;
 
     private double candidateMinScore = DEFAULT_CAND_MIN_SCORE;
     private double unstructuredMinScore = DEFAULT_UNSTR_MIN_SCORE;
     private double structuredMinScore = DEFAULT_STR_MIN_SCORE;
     private int unstructuredRows = DEFAULT_UNSTR_ROWS;
     private int structuredRows = DEFAULT_STR_ROWS;
+    private int numThreads = DEFAULT_NUM_THREADS;
     private final Map<String, String> headers = new HashMap<String, String>();
     private final List<ReferenceData> references;
-    private int numThreads = DEFAULT_NUM_THREADS;
 
     public MatchRequest(List<ReferenceData> references) {
+        if (references == null) {
+            references = new ArrayList<>();
+        }
         this.references = references;
     }
 
@@ -87,7 +91,8 @@ public class MatchRequest {
     }
 
     public void setNumThreads(int numThreads) {
-        this.numThreads = numThreads;
+        this.numThreads = Math.min(Math.min(Math.max(1, numThreads), 
+            MatchRequest.MAX_THREADS), references.size());
     }
     
     /**
