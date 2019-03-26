@@ -7,7 +7,10 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
 import java.util.stream.Collectors;
+import org.apache.log4j.Logger;
 import org.crossref.common.utils.LogUtils;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 
@@ -22,11 +25,11 @@ import org.crossref.common.rest.api.ICrossRefApiClient;
  * @author Joe Aparo
  */
 public class ReferenceMatcher {
-
     private boolean cacheJournalAbbrevMap = true;
     private final Map<String, String> journalAbbrevMap = new HashMap<>();
     private final CandidateSelector selector;
     private final CandidateValidator validator = new CandidateValidator();
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     /**
      * Constructor sets apiClient.
@@ -78,21 +81,30 @@ public class ReferenceMatcher {
      * 
      * @param request Request object
      * @return A match response
-     * @throws IOException 
+     * @throws org.crossref.refmatching.MatchException
      */
-    public MatchResponse match(MatchRequest request) throws IOException {
-        MatchResponse response = new MatchResponse(request);
-        
-        // Process the references, which may be a mix of structured/unstructured
-        List<ReferenceLink> links = request.getReferences()
-                .parallelStream().map(q ->
+    public MatchResponse match(MatchRequest request) throws MatchException {
+        try {
+            LOGGER.debug(String.format("Performing match with %d threads.",
+                    request.getNumThreads()));
+            
+            // Use our own thread pool
+            ForkJoinPool threadPool = new ForkJoinPool(request.getNumThreads());
+            
+            // Process the references, which may be a mix of
+            // structured/unstructured
+            List<ReferenceLink> links = threadPool.submit(()
+                    -> request.getReferences()
+                    .parallelStream().map(q ->
                         q.getReference().getType() == ReferenceType.STRUCTURED ?
-                                matchStructured(q, request) :
-                                matchUnstructured(q, request))
-                .collect(Collectors.toList());
-        links.stream().forEachOrdered(q -> {response.addMatchedLink(q);});
-
-        return response;
+                                    matchStructured(q, request) :
+                                    matchUnstructured(q, request))
+                    .collect(Collectors.toList())).get();
+            
+            return new MatchResponse(request, links);
+        } catch (InterruptedException | ExecutionException ex) {
+            throw new MatchException(ex);
+        }
     }
         
     /**
@@ -165,5 +177,5 @@ public class ReferenceMatcher {
             candidate == null ? null : candidate.getDOI(), 
             candidate == null ? 0.0 : candidate.getValidationScore());
     }
-  
+
 }

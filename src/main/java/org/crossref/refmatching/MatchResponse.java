@@ -1,6 +1,5 @@
 package org.crossref.refmatching;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,18 +16,9 @@ public class MatchResponse {
     private final MatchRequest request;
     private final List<ReferenceLink> matchedLinks;
     
-    public MatchResponse(MatchRequest request) {
-        this.matchedLinks = new ArrayList<>();
+    public MatchResponse(MatchRequest request, List<ReferenceLink> matchedLinks) {
+        this.matchedLinks = matchedLinks;
         this.request = request;
-    }
-    
-    /**
-     * Add a matched link to the result.
-     * 
-     * @param matchedLink The matched link to add
-     */
-    public void addMatchedLink(ReferenceLink matchedLink) {
-        matchedLinks.add(matchedLink);
     }
 
     /**
@@ -57,8 +47,10 @@ public class MatchResponse {
                     result.put("reference",
                             r.getReferenceData().getReference().getType().equals(
                                     ReferenceType.STRUCTURED) ?
-                            r.getReferenceData().getReference().getMetadataAsJSON() :
-                            r.getReferenceData().getReference().getFormattedString());
+                            r.getReferenceData().getReference()
+                                    .getMetadataAsJSON() :
+                            r.getReferenceData().getReference()
+                                    .getFormattedString());
                     result.put("DOI",
                             (r.getDOI() == null) ? JSONObject.NULL : r.getDOI());
                     result.put("score", r.getScore());

@@ -3,8 +3,10 @@ package org.crossref.refmatching;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Semaphore;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.apache.commons.io.FileUtils;
 import org.crossref.common.rest.api.ICrossRefApiClient;
 import org.crossref.common.utils.ResourceUtils;
@@ -14,12 +16,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 /**
  *
@@ -34,8 +33,9 @@ public class ReferenceMatcherTest {
     
     ReferenceMatcher matcher;
     
-    @Mock
-    ReferenceMatcher matcherMock;
+    List<String> sampleRefsUnstructured;
+    List<Reference> sampleRefsStructured;
+    
     
     @Before
     public void setupMock() {
@@ -47,10 +47,21 @@ public class ReferenceMatcherTest {
         matcher = new ReferenceMatcher(apiTestClient);
         matcher.setCacheJournalAbbrevMap(true);
         matcher.initialize();
+        
+        sampleRefsUnstructured = ResourceUtils.readResourceAsLines(
+                "/test-inputs/sample-ref-strings-2000.txt");
+        JSONArray refArray = new JSONArray(ResourceUtils.readResourceAsString(
+                "/test-inputs/sample-refs-2000.json"));
+        sampleRefsStructured = IntStream.range(0, refArray.length())
+                .mapToObj(i -> refArray.get(i) instanceof String ?
+                        new Reference(refArray.getString(i)) :
+                        new Reference(refArray.getJSONObject(i)))
+                .collect(Collectors.toList());
     }
     
     @Test
-    public void shouldMatch_whenStructuredRefIsFound() {
+    public void shouldMatch_whenStructuredRefIsFound() throws IOException,
+            MatchException {
         JSONObject reference = new JSONObject();
         reference.put("author", "Tkaczyk");
         reference.put("volume", "18");
@@ -67,7 +78,8 @@ public class ReferenceMatcherTest {
     }
     
     @Test
-    public void shouldNotMatch_whenNoStructuredRefIsNotFound() {
+    public void shouldNotMatch_whenNoStructuredRefIsNotFound() throws IOException,
+            MatchException {
         JSONObject reference = new JSONObject();
         reference.put("author", "Tkaczyk");
         reference.put("volume", "93");
@@ -83,7 +95,8 @@ public class ReferenceMatcherTest {
     }
     
     @Test
-    public void shouldMatch_whenUnstructuredRefIsFound() {
+    public void shouldMatch_whenUnstructuredRefIsFound() throws IOException,
+            MatchException {
         
         String reference = 
             "[1]D. Tkaczyk, P. Szostek, M. Fedoryszak, P. J. Dendek, and "
@@ -101,7 +114,8 @@ public class ReferenceMatcherTest {
     }
     
     @Test
-    public void shouldNotMatch_whenUnstructuredRefIsNotFound() {
+    public void shouldNotMatch_whenUnstructuredRefIsNotFound() throws IOException,
+            MatchException {
         
         String reference = 
             "P. Szostek, M. Fedoryszak, P. J. Dendek, and Ł. Bolikowski,"
@@ -117,83 +131,63 @@ public class ReferenceMatcherTest {
     }
     
     @Test
-    public void shouldPreserveReferenceOrder() {
-        String references = "ref1\nref2\n{\"ref\":\"3\"}\nref4\nref5";
-        
-        MatchResponse response = invokeMockStringRequest(references,
-                "unstructured-ref-response-1.json");
-        
-        Assert.assertEquals(5, response.getMatchedLinks().size());
-        Assert.assertEquals("ref1",
-                response.getMatchedLinks().get(0).getReferenceData()
-                .getReference().getFormattedString());
-        Assert.assertEquals("ref2",
-                response.getMatchedLinks().get(1).getReferenceData()
-                .getReference().getFormattedString());
-        Assert.assertEquals("{\"ref\":\"3\"}",
-                response.getMatchedLinks().get(2).getReferenceData()
-                .getReference().getMetadataAsJSON().toString());
-        Assert.assertEquals("ref4",
-                response.getMatchedLinks().get(3).getReferenceData()
-                .getReference().getFormattedString());
-        Assert.assertEquals("ref5",
-                response.getMatchedLinks().get(4).getReferenceData()
-                .getReference().getFormattedString());
+    public void shouldPreserveReferenceOrder_whenUnstructured()
+            throws IOException, MatchException {
+        when(apiTestClient.getWorks(any(), any()))
+                .thenReturn(extractMockItems("single-doi-response-1.json"));
+
+        List<ReferenceData> references = sampleRefsUnstructured.stream().map(
+                r -> new ReferenceData(new Reference(r))
+            ).collect(Collectors.toList());
+
+        MatchRequest request = new MatchRequest(references);
+        MatchResponse response = matcher.match(request);
+
+        Assert.assertEquals(references.size(), response.getMatchedLinks().size());
+        IntStream.range(0, references.size()).forEach(i
+                -> Assert.assertEquals(
+                        references.get(i).getReference().getFormattedString(),
+                        response.getMatchedLinks().get(i).getReferenceData()
+                                .getReference().getFormattedString()));
     }
     
-    @Test(timeout = 60000)
-    public void shouldRunInParallel() throws IOException, InterruptedException {
-        Semaphore reportSem = new Semaphore(0);
-        Semaphore ackSem = new Semaphore(0);
+    @Test
+    public void shouldPreserveReferenceOrder_whenStructured()
+            throws IOException, MatchException {
+        when(apiTestClient.getWorks(any(), any()))
+                .thenReturn(extractMockItems("single-doi-response-1.json"));
 
-        Thread t = new Thread() {
-            public void run() {
-                try {
-                    String references = "ref1\n{\"ref\":\"2\"}\nref3";
-                    MatchRequest request = new MatchRequest(
-                            Utils.parseInputReferences(InputType.STRING,
-                                    references, "\r?\n"));
+        List<ReferenceData> references = sampleRefsStructured.stream().map(
+                r -> new ReferenceData(r)
+            ).collect(Collectors.toList());
 
-                    when(matcherMock.match(eq(request))).thenCallRealMethod();
-                    Answer<ReferenceLink> answer =
-                            (InvocationOnMock invocation) -> {
-                        reportSem.release();
-                        ackSem.acquire();
-                        return null;
-                    };
-                    when(matcherMock.matchUnstructured(any(ReferenceData.class),
-                            eq(request)))
-                            .thenAnswer(answer);
-                    when(matcherMock.matchStructured(any(ReferenceData.class),
-                            eq(request)))
-                            .thenAnswer(answer);
-                    matcherMock.match(request);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
+        MatchRequest request = new MatchRequest(references);
+        MatchResponse response = matcher.match(request);
 
-        };
-        t.start();
-
-        reportSem.acquire(3);
-        ackSem.release(3);
+        Assert.assertEquals(references.size(), response.getMatchedLinks().size());
+        IntStream.range(0, references.size()).forEach(i -> 
+        {
+            Assert.assertEquals(
+                    references.get(i).getReference().getFormattedString(),
+                    response.getMatchedLinks().get(i).getReferenceData()
+                            .getReference().getFormattedString());
+            Assert.assertEquals(
+                    references.get(i).getReference().getMetadataAsMap(),
+                    response.getMatchedLinks().get(i).getReferenceData()
+                            .getReference().getMetadataAsMap());
+        });
     }
     
     private MatchResponse invokeMockStringRequest(String reference,
-            String mockJsonFileName) {
-         try {
-            when(apiTestClient.getWorks(any(), any()))
-                    .thenReturn(extractMockItems(mockJsonFileName));
+            String mockJsonFileName) throws IOException, MatchException {
+        when(apiTestClient.getWorks(any(), any()))
+                .thenReturn(extractMockItems(mockJsonFileName));
             
-            MatchRequest request = new MatchRequest(
-                    Utils.parseInputReferences(InputType.STRING,
-                            reference, "\r?\n"));
+        MatchRequest request = new MatchRequest(
+                Utils.parseInputReferences(InputType.STRING,
+                        reference, "\r?\n"));
             
-            return matcher.match(request);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+        return matcher.match(request);
     }
     
     private JSONArray extractMockItems(String mockJsonFileName) {

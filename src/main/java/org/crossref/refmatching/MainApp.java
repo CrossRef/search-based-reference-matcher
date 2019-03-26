@@ -59,7 +59,7 @@ public class MainApp {
             
             // Get match results
             outputResults(matcher.match(request));
-        } catch (IOException ex) {
+        } catch (MatchException ex) {
             LOGGER.error("Error performing matching process: " + ex.getMessage(),
                     ex);
         }
@@ -109,6 +109,8 @@ public class MainApp {
         options.addOption("ak", "key-file", true, "CR API key file");
         options.addOption("d", "delim", true, "Textual data delimiter");
         options.addOption("o", "out-file", true, "Output file");
+        options.addOption("t", "threads", true,
+                "Number of threads used for matching");
         options.addOption("h", "help", false, "Print help");
       
         // Parse/validate given arguments against defined options
@@ -186,6 +188,19 @@ public class MainApp {
                         Integer.valueOf(cmd.getOptionValue("ur")));
             }
             
+            if (cmd.hasOption("t")) {
+                // Sanity check
+                int numThreads = Integer.valueOf(cmd.getOptionValue("t"));
+                if (numThreads <= 0 ||
+                        numThreads > MatchRequest.MAX_THREADS) {
+                    throw new ParseException(String.format(
+                            "Invalid number of threads specified: %d. " +
+                            "Must be between 1 and %d.",
+                            numThreads, MatchRequest.MAX_THREADS));
+                }
+                
+                request.setNumThreads(numThreads);
+            }
             /**
              * Optional process settings
              */
@@ -216,7 +231,7 @@ public class MainApp {
             // Return initialized request
             return request;
             
-        } catch (RuntimeException | ParseException | IOException ex) {
+        } catch (ParseException | IOException ex) {
             ex.printStackTrace(System.err);
             LOGGER.error("Error processing input arguments: " + ex);
             printHelp(options, 1);
